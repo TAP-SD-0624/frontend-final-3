@@ -1,5 +1,15 @@
+import useTheme from "./lib/hooks/useTheme";
+
 function App() {
-  return <div></div>;
+  const [theme, toggleTheme] = useTheme();
+
+  return (
+    <div style={{ background: "var(--accent)", color: "var(--dark)" }}>
+      <h1 style={{ color: "var(--primary)" }}>Hello, World!</h1>
+      <p>This is an example component.</p>
+      <button onClick={toggleTheme}>Toggle Theme</button>
+    </div>
+  );
 }
 
 export default App;

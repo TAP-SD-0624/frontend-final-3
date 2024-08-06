@@ -6,7 +6,15 @@ import ImageCarousel from "@components/shared/ImageCarousel";
 
 export default function Brands() {
   return (
-    <Box className={classes.brands}>
+    <Box
+      className={classes.brands}
+      sx={{
+        paddingBottom: {
+          xs: "40px",
+          sm: "88px",
+        },
+      }}
+    >
       <Container>
         <Title>Shop by Brands</Title>
         <Box

@@ -1,0 +1,62 @@
+.lifestyle {
+  position: relative;
+  width: 100%;
+  height: 400px;
+}
+.lifestyle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 24px;
+}
+
+.lifestyle .content {
+  position: absolute;
+  left: 38px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50%;
+}
+
+.lifestyle .content .title {
+  font-size: 30px;
+  color: #97451f;
+}
+
+.lifestyle .content .description {
+  font-size: 52px;
+  font-weight: 800;
+  color: #97451f;
+}
+
+.makeup .skincare {
+  flex: 1;
+  position: relative;
+  height: 228px;
+}
+
+.makeup .skincare img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 24px;
+}
+.makeup .skincare .content {
+  position: absolute;
+  right: 20px;
+  top: 26px;
+  width: 40%;
+  direction: rtl;
+}
+
+.skincare .content .title {
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.skin {
+  color: #a53f64;
+}
+.facepacks {
+  color: #1b4b66;
+}

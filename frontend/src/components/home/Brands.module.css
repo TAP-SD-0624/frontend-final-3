@@ -1,0 +1,21 @@
+.brands {
+  padding-bottom: 88px;
+  padding-top: 70px;
+}
+
+.brands .item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16px;
+  padding: 16px;
+  height: 168px;
+  background: #f4f4f4;
+  border-radius: 16px;
+}
+
+.item img {
+  object-fit: cover;
+  /* width: 110px; */
+  /* height: 48px; */
+}

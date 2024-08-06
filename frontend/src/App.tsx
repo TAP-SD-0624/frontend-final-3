@@ -1,16 +1,14 @@
-import useTheme from "./lib/hooks/useTheme";
-import Home from "./screens/Home";
+import Layout from "./components/Layout/Layout";
+import { ThemeProvider } from "@mui/material/styles";
+import theme from "./styles/customTheme";
 
 function App() {
-  const [theme, toggleTheme] = useTheme();
-
   return (
-    <div>
-      <Home />
-      <h1 style={{ color: "var(--primary)" }}>Hello, World!</h1>
-      <p>This is an example component.</p>
-      <button onClick={toggleTheme}>Toggle Theme</button>
-    </div>
+    <>
+      <ThemeProvider theme={theme}>
+        <Layout />
+      </ThemeProvider>
+    </>
   );
 }
 

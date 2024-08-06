@@ -12,18 +12,73 @@ export default function Makeup() {
       <Stack className={classes.makeup} spacing={3}>
         <Box className={classes.lifestyle}>
           <img src={makeup} alt="Makeup" />
-          <Box className={classes.content}>
-            <Typography className={classes.title}>LIFESTYLE</Typography>
-            <Typography className={classes.description}>
+          <Box
+            className={classes.content}
+            sx={{
+              width: {
+                xs: "90%",
+                sm: "70%",
+                md: "50%",
+              },
+            }}
+          >
+            <Typography
+              className={classes.title}
+              sx={{
+                fontSize: {
+                  xs: "16px",
+                  sm: "20px",
+                  md: "25px",
+                  lg: "30px",
+                },
+              }}
+            >
+              LIFESTYLE
+            </Typography>
+            <Typography
+              className={classes.description}
+              sx={{
+                fontSize: {
+                  xs: "24px",
+                  sm: "36px",
+                  md: "40px",
+                  lg: "52px",
+                },
+              }}
+            >
               Makeup Accessories from Top Brands
             </Typography>
           </Box>
         </Box>
-        <Stack direction="row" justifyContent="space-between" spacing={3}>
+        <Stack
+          direction={{
+            xs: "column",
+            sm: "row",
+          }}
+          justifyContent="space-between"
+          spacing={3}
+        >
           <Box className={classNames(classes.skincare, classes.skin)}>
             <img src={skincare} alt="Skincare" />
-            <Box className={classes.content}>
-              <Typography className={classes.title}>
+            <Box
+              className={classes.content}
+              sx={{
+                top: {
+                  xs: "16px !important",
+                  md: "26px !important",
+                },
+              }}
+            >
+              <Typography
+                className={classes.title}
+                sx={{
+                  fontSize: {
+                    xs: "18px",
+                    sm: "32px",
+                    md: "40px",
+                  },
+                }}
+              >
                 Skincare Essentials
               </Typography>
 
@@ -33,9 +88,13 @@ export default function Makeup() {
                 }}
               >
                 <ArrowForwardIcon
-                  fontSize="large"
                   sx={{
                     color: "#A53F64",
+                    fontSize: {
+                      xs: "small",
+                      sm: "medium",
+                      md: "large",
+                    },
                   }}
                 />
               </IconButton>
@@ -43,8 +102,25 @@ export default function Makeup() {
           </Box>
           <Box className={classNames(classes.skincare, classes.facepacks)}>
             <img src={facepacks} alt="Facepacks" />
-            <Box className={classes.content}>
-              <Typography className={classes.title}>
+            <Box
+              className={classes.content}
+              sx={{
+                top: {
+                  xs: "16px !important",
+                  md: "26px !importnat",
+                },
+              }}
+            >
+              <Typography
+                className={classes.title}
+                sx={{
+                  fontSize: {
+                    xs: "18px",
+                    sm: "32px",
+                    md: "40px",
+                  },
+                }}
+              >
                 Facepacks & Peels
               </Typography>
               <IconButton
@@ -53,9 +129,13 @@ export default function Makeup() {
                 }}
               >
                 <ArrowForwardIcon
-                  fontSize="large"
                   sx={{
                     color: "#1B4B66",
+                    fontSize: {
+                      xs: "small",
+                      sm: "medium",
+                      md: "large",
+                    },
                   }}
                 />
               </IconButton>

@@ -1,4 +1,4 @@
-import { Button, Stack } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import React from "react";
 import classes from "./Title.module.css";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -17,9 +17,20 @@ export default function Title({ viewAll, isBright, children }: TitleProps) {
       alignItems="center"
       className={classes.title}
     >
-      <h4 style={{ color: isBright ? "var(--bright)" : "var(--dark)" }}>
+      <Typography
+        variant="h4"
+        style={{ color: isBright ? "var(--bright)" : "var(--dark)" }}
+        sx={{
+          fontSize: {
+            xs: "18px",
+            sm: "24px",
+            md: "28px",
+            lg: "34px",
+          },
+        }}
+      >
         {children}
-      </h4>
+      </Typography>
       {viewAll && (
         <Button
           endIcon={
@@ -30,6 +41,12 @@ export default function Title({ viewAll, isBright, children }: TitleProps) {
             />
           }
           className={classes.button}
+          sx={{
+            fontSize: {
+              xs: "12px",
+              sm: "14px",
+            },
+          }}
         >
           View All
         </Button>

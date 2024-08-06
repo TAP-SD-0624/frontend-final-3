@@ -1,9 +1,9 @@
 .brands {
-  padding-bottom: 88px;
+  padding-bottom: 40px;
   padding-top: 70px;
 }
 
-.brands .item {
+.item {
   display: flex;
   justify-content: center;
   align-items: center;

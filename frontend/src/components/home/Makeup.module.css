@@ -15,16 +15,16 @@
   left: 38px;
   top: 50%;
   transform: translateY(-50%);
-  width: 50%;
+  /* width: 50%; */
 }
 
 .lifestyle .content .title {
-  font-size: 30px;
+  /* font-size: 30px; */
   color: #97451f;
 }
 
 .lifestyle .content .description {
-  font-size: 52px;
+  /* font-size: 52px; */
   font-weight: 800;
   color: #97451f;
 }
@@ -50,7 +50,7 @@
 }
 
 .skincare .content .title {
-  font-size: 40px;
+  /* font-size: 40px; */
   font-weight: 700;
 }
 

@@ -4,18 +4,21 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import classes from "./Product.module.css";
 interface ProductProps {
   product: productType;
+  style?: React.CSSProperties;
 }
 
-export default function Product({ product }: ProductProps) {
+export default function Product({ product, style }: ProductProps) {
   return (
-    <Box className={classes.product}>
+    <Stack className={classes.product} sx={style}>
       <img src={product.img} alt={product.name} />
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <h5>{product.name}</h5>
         <FavoriteBorderOutlinedIcon />
       </Stack>
-      <p className={classes.marka}>{product.marka}</p>
-      <p className={classes.price}>${product.price}</p>
-    </Box>
+      <Stack alignItems="start">
+        <p className={classes.marka}>{product.marka}</p>
+        <p className={classes.price}>${product.price}</p>
+      </Stack>
+    </Stack>
   );
 }

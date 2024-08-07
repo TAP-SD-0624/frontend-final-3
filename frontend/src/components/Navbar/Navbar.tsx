@@ -91,7 +91,7 @@ const Navbar = () => {
 
   return (
     <AppBar
-      position="fixed"
+      position="sticky"
       sx={{
         backgroundColor: "var(--bright)",
         height: NAVBAR_HEIGHT,

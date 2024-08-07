@@ -20,139 +20,30 @@ const Footer = () => {
   ];
 
   return (
-    <Container>
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-        position="fixed"
-        bottom="0"
-        padding="20px"
-        left="0"
-        width="100%"
-        sx={{
-          backgroundColor: "var(--icon)",
-        }}
-      >
-        <Box>
-          <Stack
-            sx={{
-              gap: "8px",
-              alignItems: "baseline",
-            }}
-          >
-            <Typography
-              noWrap
-              component="a"
-              href="#"
+    <Box
+      sx={{
+        backgroundColor: "var(--icon)",
+        marginTop: "32px",
+        paddingBottom: "30px",
+      }}
+    >
+      <Container>
+        <Stack
+          direction={{
+            xs: "column",
+            sm: "row",
+          }}
+          justifyContent="space-between"
+          alignItems="start"
+          paddingTop="30px"
+        >
+          <Box>
+            <Stack
               sx={{
-                color: "var(--bright)",
-                fontFamily: "Inter",
-                fontSize: "16px",
-                fontWeight: 500,
+                gap: "8px",
+                alignItems: "baseline",
               }}
             >
-              Shop by Category
-            </Typography>
-            {footerItems.map((item, index) => (
-              <Typography
-                key={index}
-                noWrap
-                component="a"
-                href="#"
-                sx={{
-                  color: "var(--footer-text)",
-                  fontFamily: "Inter",
-                  fontSize: "16px",
-                  fontWeight: 500,
-                }}
-              >
-                {item}
-              </Typography>
-            ))}
-          </Stack>
-        </Box>
-        <Box>
-          <Stack>
-            <Stack
-              direction="row"
-              gap="20px"
-              justifyContent="flex-end"
-              alignItems="center"
-            >
-              <IconButton
-                sx={{
-                  width: "38px",
-                  height: "38px",
-                  backgroundColor: "var(--footer-icon-bg)",
-                }}
-              >
-                <FacebookIcon
-                  sx={{
-                    color: "var(--icon)",
-                  }}
-                />
-              </IconButton>
-              <IconButton
-                sx={{
-                  width: "38px",
-                  height: "38px",
-                  backgroundColor: "var(--footer-icon-bg)",
-                }}
-              >
-                <InstagramIcon
-                  sx={{
-                    color: "var(--icon)",
-                  }}
-                />
-              </IconButton>
-              <IconButton
-                sx={{
-                  width: "38px",
-                  height: "38px",
-                  backgroundColor: "var(--footer-icon-bg)",
-                }}
-              >
-                <TwitterIcon
-                  sx={{
-                    color: "var(--icon)",
-                  }}
-                />
-              </IconButton>
-              <IconButton
-                sx={{
-                  width: "38px",
-                  height: "38px",
-                  backgroundColor: "var(--footer-icon-bg)",
-                }}
-              >
-                <YouTubeIcon
-                  sx={{
-                    color: "var(--icon)",
-                  }}
-                />
-              </IconButton>
-            </Stack>
-            <Stack
-              direction="row"
-              gap="20px"
-              justifyContent="flex-end"
-              alignItems="center"
-              paddingTop="20px"
-            >
-              <IconButton
-                sx={{
-                  width: "24px",
-                  height: "24px",
-                  backgroundColor: "var(--icon)",
-                }}
-              >
-                <LocationOnIcon
-                  sx={{
-                    color: "var(--bright)",
-                  }}
-                />
-              </IconButton>
               <Typography
                 noWrap
                 component="a"
@@ -160,51 +51,176 @@ const Footer = () => {
                 sx={{
                   color: "var(--bright)",
                   fontFamily: "Inter",
-                  fontSize: "14px",
+                  fontSize: "16px",
                   fontWeight: 500,
                 }}
               >
-                United States
+                Shop by Category
               </Typography>
-            </Stack>
-            <Stack
-              direction="row"
-              gap="20px"
-              justifyContent="flex-end"
-              alignItems="center"
-            >
-              <IconButton
-                sx={{
-                  width: "24px",
-                  height: "24px",
-                  backgroundColor: "var(--icon)",
-                }}
-              >
-                <CopyrightIcon
+              {footerItems.map((item, index) => (
+                <Typography
+                  key={index}
+                  noWrap
+                  component="a"
+                  href="#"
                   sx={{
                     color: "var(--footer-text)",
+                    fontFamily: "Inter",
+                    fontSize: "16px",
+                    fontWeight: 500,
                   }}
-                />
-              </IconButton>
-              <Typography
-                noWrap
-                component="a"
-                href="#"
-                sx={{
-                  color: "var(--footer-text)",
-                  fontFamily: "Inter",
-                  fontSize: "14px",
-                  fontWeight: 500,
-                  alignContent: "flex-end",
-                }}
-              >
-                2021 | Cora Leviene All Rights Reserved
-              </Typography>
+                >
+                  {item}
+                </Typography>
+              ))}
             </Stack>
-          </Stack>
-        </Box>
-      </Stack>
-    </Container>
+          </Box>
+          <Box
+            paddingTop="15px"
+            width={{
+              xs: "95%",
+              sm: "100%",
+            }}
+          >
+            <Stack gap="16px">
+              <Stack
+                direction="row"
+                gap="20px"
+                justifyContent={{
+                  xs: "flex-start",
+                  sm: "flex-end",
+                }}
+                alignItems="center"
+              >
+                <IconButton
+                  sx={{
+                    width: "38px",
+                    height: "38px",
+                    backgroundColor: "var(--footer-icon-bg)",
+                  }}
+                >
+                  <FacebookIcon
+                    sx={{
+                      color: "var(--icon)",
+                    }}
+                  />
+                </IconButton>
+                <IconButton
+                  sx={{
+                    width: "38px",
+                    height: "38px",
+                    backgroundColor: "var(--footer-icon-bg)",
+                  }}
+                >
+                  <InstagramIcon
+                    sx={{
+                      color: "var(--icon)",
+                    }}
+                  />
+                </IconButton>
+                <IconButton
+                  sx={{
+                    width: "38px",
+                    height: "38px",
+                    backgroundColor: "var(--footer-icon-bg)",
+                  }}
+                >
+                  <TwitterIcon
+                    sx={{
+                      color: "var(--icon)",
+                    }}
+                  />
+                </IconButton>
+                <IconButton
+                  sx={{
+                    width: "38px",
+                    height: "38px",
+                    backgroundColor: "var(--footer-icon-bg)",
+                  }}
+                >
+                  <YouTubeIcon
+                    sx={{
+                      color: "var(--icon)",
+                    }}
+                  />
+                </IconButton>
+              </Stack>
+              <Stack
+                direction="row"
+                gap="20px"
+                justifyContent={{
+                  xs: "flex-start",
+                  sm: "flex-end",
+                }}
+                alignItems="center"
+                paddingTop="20px"
+              >
+                <IconButton
+                  sx={{
+                    width: "24px",
+                    height: "24px",
+                    backgroundColor: "var(--icon)",
+                  }}
+                >
+                  <LocationOnIcon
+                    sx={{
+                      color: "var(--bright)",
+                    }}
+                  />
+                </IconButton>
+                <Typography
+                  noWrap
+                  component="a"
+                  href="#"
+                  sx={{
+                    color: "var(--bright)",
+                    fontFamily: "Inter",
+                    fontSize: "14px",
+                    fontWeight: 500,
+                  }}
+                >
+                  United States
+                </Typography>
+              </Stack>
+              <Stack
+                direction="row"
+                gap="20px"
+                justifyContent="flex-end"
+                alignItems="center"
+              >
+                <IconButton
+                  sx={{
+                    width: "24px",
+                    height: "24px",
+                    backgroundColor: "var(--icon)",
+                  }}
+                >
+                  <CopyrightIcon
+                    sx={{
+                      color: "var(--footer-text)",
+                    }}
+                  />
+                </IconButton>
+                <Typography
+                  noWrap
+                  component="a"
+                  href="#"
+                  sx={{
+                    color: "var(--footer-text)",
+                    fontFamily: "Inter",
+                    fontSize: "14px",
+                    fontWeight: 500,
+                    alignContent: "flex-end",
+                  }}
+                >
+                  2021 | Cora Leviene All Rights Reserved
+                </Typography>
+              </Stack>
+            </Stack>
+          </Box>
+        </Stack>
+      </Container>
+    </Box>
   );
 };
 

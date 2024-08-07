@@ -1,0 +1,12 @@
+.title {
+  margin-bottom: 28px;
+}
+.title h4 {
+  /* font-size: 34px; */
+  font-weight: 600;
+}
+
+.button {
+  color: var(--primary) !important;
+  font-weight: 600 !important;
+}

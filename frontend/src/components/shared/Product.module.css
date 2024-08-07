@@ -1,0 +1,24 @@
+.product img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 24px;
+}
+
+.product h5 {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--high-emphasis);
+}
+
+.product .marka {
+  font-size: 14px;
+  color: var(--low-emphasis);
+  padding: 0;
+  margin: 0;
+}
+
+.product .price {
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--high-emphasis);
+}

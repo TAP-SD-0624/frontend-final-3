@@ -17,6 +17,7 @@ import {
   Divider,
   ListItemIcon,
   Menu,
+  Badge,
 } from "@mui/material";
 import { NAVBAR_HEIGHT } from "../../constants/index";
 import SearchIcon from "@mui/icons-material/Search";
@@ -269,11 +270,25 @@ const Navbar = () => {
                 </MenuItem>
               </Menu>
               <IconButton sx={{ width: "24px", height: "24px" }}>
-                <WorkOutlineIcon
-                  sx={{
-                    color: "var(--icon)",
+                <Badge
+                  variant="dot"
+                  color="warning"
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
                   }}
-                />
+                  sx={{
+                    "& .MuiBadge-badge": {
+                      transform: "translate(20%, 50%)", 
+                    },
+                  }}
+                >
+                  <WorkOutlineIcon
+                    sx={{
+                      color: "var(--icon)",
+                    }}
+                  />{" "}
+                </Badge>
               </IconButton>
               {!isLGUp && (
                 <>

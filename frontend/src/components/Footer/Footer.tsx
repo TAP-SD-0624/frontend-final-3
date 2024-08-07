@@ -185,7 +185,10 @@ const Footer = () => {
               <Stack
                 direction="row"
                 gap="20px"
-                justifyContent="flex-end"
+                justifyContent={{
+                  xs: "flex-start",
+                  sm: "flex-end",
+                }}
                 alignItems="center"
               >
                 <IconButton

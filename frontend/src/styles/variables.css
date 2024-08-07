@@ -10,6 +10,10 @@
   --light-text: #b6b6b6;
   --high-emphasis: #171520;
   --low-emphasis: #626262;
+  --logo: #17494d;
+  --icon: #1b4b66;
+  --footer-text: #b6b6b6;
+  --footer-icon-bg: #639599;
   --background-less-opacity: #dededeb2;
 }
 
@@ -23,6 +27,12 @@
   --bright: #13101e;
   --grey: #626262;
   --light-text: #f4f4f4;
+  --high-emphasis: #f1f1f1;
+  --low-emphasis: #b6b6b6;
+  --logo: #a6d5db;
+  --icon: #a4cfe0;
+  --footer-text: #626262;
+  --footer-icon-bg: #2c3e50;
   --high-emphasis: #e6e1e5;
   --low-emphasis: #9e9e9e;
   --background-less-opacity: #2c2c2cb2;

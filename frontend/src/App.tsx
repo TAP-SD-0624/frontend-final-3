@@ -1,13 +1,11 @@
 import Layout from "./components/Layout/Layout";
-import { ThemeProvider } from "@mui/material/styles";
-import theme from "./styles/customTheme";
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <Layout />
-      </ThemeProvider>
+      {/* <Layout /> */}
+      <AppRoutes />
     </>
   );
 }

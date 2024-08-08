@@ -101,7 +101,7 @@ const SignIn: FC = () => {
               <Typography
                 noWrap
                 component="a"
-                href="#"
+                href="/signUp"
                 sx={{
                   color: "primary",
                   fontFamily: "Inter",
@@ -146,7 +146,7 @@ const SignIn: FC = () => {
                 }}
               >
                 <a
-                  href="#"
+                  href="/home"
                   style={{
                     textDecoration: "underline",
                     color: "inherit",

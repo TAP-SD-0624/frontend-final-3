@@ -1,16 +1,11 @@
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
-import Home from "@src/screens/Home";
-import SignIn from "@src/screens/SignIn/SignIn";
-import SignUp from "@src/screens/SignUp";
-
+import { Outlet } from "react-router-dom";
 const Layout = () => {
   return (
     <>
       <Navbar />
-      {/* <Home /> */}
-      {/* <SignIn /> */}
-      <SignUp />
+      <Outlet />
       <Footer />
     </>
   );

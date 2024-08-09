@@ -1,10 +1,14 @@
 import React, { FC, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import Layout from "@components/Layout";
-import Items from "@src/screens/Items";
-const SignIn = lazy(() => import("@src/screens/SignIn/SignIn"));
+
+const SignIn = lazy(() => import("@src/screens/SignIn"));
 const SignUp = lazy(() => import("@src/screens/SignUp"));
 const Home = lazy(() => import("@src/screens/Home"));
+const Items = lazy(() => import("@src/screens/Items"));
+const Checkout = lazy(() => import("@src/screens/Checkout"));
+const MyCart = lazy(() => import("@src/screens/MyCart"));
+const About = lazy(() => import("@src/screens/About"));
 
 const AppRoutes: FC = () => {
   return (
@@ -14,6 +18,9 @@ const AppRoutes: FC = () => {
         <Route path="home" element={<Home />} />
         <Route path="signUp" element={<SignUp />} />
         <Route path="items" element={<Items />} />
+        <Route path="checkout" element={<Checkout />} />
+        <Route path="myCart" element={<MyCart />} />
+        <Route path="about" element={<About />} />
       </Route>
     </Routes>
   );

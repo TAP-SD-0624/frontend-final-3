@@ -5,5 +5,8 @@ export interface productType {
   slug: string;
   marka: string;
   isFavorite: boolean;
-  rating?: number | string;
+  rating?: number;
+  numReviews?: number;
+  originalPrice: number;
+  discount: number;
 }

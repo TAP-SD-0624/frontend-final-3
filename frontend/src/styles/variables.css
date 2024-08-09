@@ -2,6 +2,7 @@
   --primary: #1b4b66;
   --primary-tint: #639599;
   --error: #b00020;
+  --error-tint: #e21d1d;
   --highlight: #ff8c4b;
   --accent: #f4f4f4;
   --dark: #13101e;
@@ -21,6 +22,7 @@
   --primary: #a4cfe0;
   --primary-tint: #1b4b66;
   --error: #ff8c4b;
+  --error-tint: #e21d1d;
   --highlight: #b00020;
   --accent: #171520;
   --dark: #ffffff;

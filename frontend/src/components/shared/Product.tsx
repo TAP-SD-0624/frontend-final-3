@@ -1,13 +1,14 @@
-import { Box, Stack } from "@mui/material";
+import { Box, Rating, Stack } from "@mui/material";
 import { productType } from "@src/types";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import classes from "./Product.module.css";
 interface ProductProps {
   product: productType;
   style?: React.CSSProperties;
+  showDetails?: boolean;
 }
 
-export default function Product({ product, style }: ProductProps) {
+export default function Product({ product, style, showDetails }: ProductProps) {
   return (
     <Stack className={classes.product} sx={style}>
       <img src={product.img} alt={product.name} />
@@ -17,7 +18,28 @@ export default function Product({ product, style }: ProductProps) {
       </Stack>
       <Stack alignItems="start">
         <p className={classes.marka}>{product.marka}</p>
-        <p className={classes.price}>${product.price}</p>
+        {showDetails && (
+          <Stack direction="row" alignItems="center" gap="16px">
+            <Rating
+              name="read-only"
+              value={product.rating}
+              readOnly
+              sx={{
+                color: "var(--highlight)",
+              }}
+            />
+            <p>{product.numReviews} Ratings</p>
+          </Stack>
+        )}
+        <Stack direction="row" alignItems="center" gap="6px">
+          <p className={classes.price}>${product.price}</p>
+          {showDetails && (
+            <p className={classes.originalPrice}>${product.originalPrice}</p>
+          )}
+          {showDetails && (
+            <p className={classes.discount}>{product.discount}% OFF</p>
+          )}
+        </Stack>
       </Stack>
     </Stack>
   );

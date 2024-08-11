@@ -1,17 +1,11 @@
-import Layout from "./components/Layout/Layout";
 import AppRoutes from "./routes/AppRoutes";
+import ProductSection from "@components/product/ProductSection";
 import BreadCrumbs from "@components/product/BreadCrumbs";
-import product from "@components/product/ProductSection";
-
 function App() {
   return (
     <>
-      {/* <Layout /> */}
-      {/* <AppRoutes /> */}
-
-      <Layout>
-        {/* <BreadCrumbs /> */}
-      </Layout>
+      <AppRoutes />
+      {/* <ProductSection /> */}
     </>
   );
 }

@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Box,
   Paper,
@@ -10,7 +9,6 @@ import {
   Button,
   TextField,
 } from "@mui/material";
-import theme from "../../styles/customTheme";
 import LockIcon from "@mui/icons-material/Lock";
 import CopyrightIcon from "@mui/icons-material/Copyright";
 import { FC } from "react";
@@ -56,7 +54,7 @@ const SignUp: FC = () => {
               sx={{
                 justifyContent: "space-between",
                 alignItems: "center",
-                width: "100%"
+                width: "100%",
               }}
             >
               <TextField

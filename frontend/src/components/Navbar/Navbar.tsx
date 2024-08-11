@@ -29,6 +29,10 @@ import useTheme from "../../lib/hooks/useTheme";
 import LanguageIcon from "@mui/icons-material/Language";
 import { Theme, useMediaQuery } from "@mui/material";
 
+interface NavbarProps {
+  onCartOpen: () => void;
+}
+
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   backgroundColor: "var(--grey)",
@@ -58,7 +62,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const Navbar = () => {
+const Navbar = ({ onCartOpen }: NavbarProps) => {
   const navItems = ["Handbags", "Watches", "Skincare", "Jewellery", "Apparels"];
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [anchorElCetagories, setAnchorElCetagories] =
@@ -106,6 +110,7 @@ const Navbar = () => {
             height: "100%",
             justifyContent: "space-between",
             alignItems: "center",
+            padding: "0 !important",
           }}
         >
           <Box
@@ -269,17 +274,20 @@ const Navbar = () => {
                   Logout
                 </MenuItem>
               </Menu>
-              <IconButton sx={{ width: "24px", height: "24px" }}>
+              <IconButton
+                sx={{ width: "24px", height: "24px" }}
+                onClick={onCartOpen}
+              >
                 <Badge
                   variant="dot"
                   color="warning"
                   anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
+                    vertical: "top",
+                    horizontal: "right",
                   }}
                   sx={{
                     "& .MuiBadge-badge": {
-                      transform: "translate(20%, 50%)", 
+                      transform: "translate(20%, 50%)",
                     },
                   }}
                 >

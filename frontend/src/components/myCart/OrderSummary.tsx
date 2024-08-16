@@ -26,7 +26,11 @@ const OrderSummary: React.FC<OrderDetailsProps> = ({
       >
         Order Summary
       </Typography>
-      <Divider />
+      <Divider
+        sx={{
+          background: "var(--divider)",
+        }}
+      />
       <OrderDetailsAmount
         subTotal={subTotal}
         discount={discount}

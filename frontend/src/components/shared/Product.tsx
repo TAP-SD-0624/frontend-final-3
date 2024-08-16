@@ -2,6 +2,8 @@ import { Box, Rating, Stack } from "@mui/material";
 import { productType } from "@src/types";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import classes from "./Product.module.css";
+import StarIcon from "@mui/icons-material/Star";
+
 interface ProductProps {
   product: productType;
   style?: React.CSSProperties;
@@ -27,6 +29,9 @@ export default function Product({ product, style, showDetails }: ProductProps) {
               sx={{
                 color: "var(--highlight)",
               }}
+              emptyIcon={
+                <StarIcon sx={{ color: "var(--grey)" }} fontSize="inherit" />
+              } // Color for unselected stars
             />
             <p>{product.numReviews} Ratings</p>
           </Stack>

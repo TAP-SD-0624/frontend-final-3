@@ -1,6 +1,6 @@
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import classes from "./HeroSection.module.css";
-import HeroImage from "@src/assets/blackfridayy.jpg";
+import HeroImage from "@src/assets/cosmetic-green-background.webp";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 export default function HeroSection() {

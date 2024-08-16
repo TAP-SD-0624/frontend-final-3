@@ -5,7 +5,9 @@ import upi from "@src/assets/upi.png";
 import credit from "@src/assets/credit.png";
 import applepay from "@src/assets/applePay.png";
 import amazonpay from "@src/assets/amazonpay.png";
-import googlepay from "@src/assets/googlepay.png";
+import googlepay from "@src/assets/gogolepay.png";
+import phonepe from "@src/assets/PhonePe-Logo.wine .png";
+import paytm from "@src/assets/paytm.png";
 import about from "@src/assets/about.png";
 import about1 from "@src/assets/about1.png";
 import about2 from "@src/assets/about2.png";
@@ -280,12 +282,12 @@ export const upiOptions = [
   {
     value: "phonePe",
     label: "Phone Pe",
-    icon: googlepay,
+    icon: phonepe,
   },
   {
     value: "paytm",
     label: "Paytm",
-    icon: googlepay,
+    icon: paytm,
   },
 ];
 

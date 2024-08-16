@@ -34,9 +34,11 @@ export default function CartModal({ open, onClose }: CartModalProps) {
       fullWidth
       PaperProps={{
         sx: {
-          position: "absolute",
-          top: 16,
-          right: 16,
+          position: { xs: "relative", sm: "absolute" },
+          top: { xs: 0, sm: 16 },
+          right: { xs: 0, sm: 16 },
+          margin: { xs: 0, sm: 8 },
+          width: { xs: "100%", sm: "460px" },
         },
       }}
     >

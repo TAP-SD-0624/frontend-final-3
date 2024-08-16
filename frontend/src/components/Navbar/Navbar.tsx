@@ -110,6 +110,7 @@ const Navbar = ({ onCartOpen }: NavbarProps) => {
             height: "100%",
             justifyContent: "space-between",
             alignItems: "center",
+            padding: "0 !important",
           }}
         >
           <Box

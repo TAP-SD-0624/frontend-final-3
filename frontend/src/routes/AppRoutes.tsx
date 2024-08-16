@@ -9,6 +9,7 @@ const Items = lazy(() => import("@src/screens/Items"));
 const Checkout = lazy(() => import("@src/screens/Checkout"));
 const MyCart = lazy(() => import("@src/screens/MyCart"));
 const About = lazy(() => import("@src/screens/About"));
+const Product = lazy(() => import("@src/screens/Product"));
 
 const AppRoutes: FC = () => {
   return (
@@ -21,6 +22,7 @@ const AppRoutes: FC = () => {
         <Route path="checkout" element={<Checkout />} />
         <Route path="myCart" element={<MyCart />} />
         <Route path="about" element={<About />} />
+        <Route path="product" element={<Product />} />
       </Route>
     </Routes>
   );

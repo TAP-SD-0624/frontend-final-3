@@ -5,7 +5,6 @@ export default function Items() {
   return (
     <div>
       <HeroSection />
-
       <ItemsSection />
     </div>
   );

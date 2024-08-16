@@ -229,10 +229,12 @@ export const brandsMock = [
 ];
 
 export const breadcrumbs = [
+  //@ts-ignore
   <Link underline="hover" key="1" color="inherit" href="/" onClick={() => {}}>
     MUI
   </Link>,
   <Link
+    //@ts-ignore
     underline="hover"
     key="2"
     color="inherit"

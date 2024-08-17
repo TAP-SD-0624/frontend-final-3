@@ -8,7 +8,6 @@ import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import ReorderIcon from "@mui/icons-material/Reorder";
 import {
-  InputBase,
   Container,
   Stack,
   Tooltip,
@@ -21,46 +20,18 @@ import {
 } from "@mui/material";
 import { NAVBAR_HEIGHT } from "../../constants/index";
 import SearchIcon from "@mui/icons-material/Search";
-import { styled, alpha } from "@mui/material/styles";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import { Logout } from "@mui/icons-material";
 import useTheme from "../../lib/hooks/useTheme";
 import LanguageIcon from "@mui/icons-material/Language";
 import { Theme, useMediaQuery } from "@mui/material";
+import { Search, StyledInputBase } from "@components/Search";
+import { useNavigate } from "react-router-dom";
 
 interface NavbarProps {
   onCartOpen: () => void;
 }
-
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  backgroundColor: "var(--grey)",
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.black, 0.25),
-  },
-  display: "flex",
-  margin: 0,
-  width: "362px",
-  padding: theme.spacing(1),
-  alignItems: "center",
-  justifyContent: "flex-start",
-  pointerEvents: "none",
-  gap: "8px",
-  borderRadius: "4px",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "var(--low-emphasis)",
-  width: "100%",
-  "& .MuiInputBase-input": {
-    fontFamily: "Inter",
-    fontSize: "14px",
-    fontWeight: 500,
-    textAlign: "left",
-    transition: theme.transitions.create("width"),
-  },
-}));
 
 const Navbar = ({ onCartOpen }: NavbarProps) => {
   const navItems = ["Handbags", "Watches", "Skincare", "Jewellery", "Apparels"];
@@ -90,6 +61,12 @@ const Navbar = ({ onCartOpen }: NavbarProps) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const navigate = useNavigate();
+  const handleCLickOnProfile = () => {
+    navigate("/user-profile");
+    handleClose();
+  }
 
   const [theme, toggleTheme] = useTheme();
   const isMdUp = useMediaQuery((theme: Theme) => theme.breakpoints.up("md"));
@@ -173,7 +150,7 @@ const Navbar = ({ onCartOpen }: NavbarProps) => {
             }}
           >
             {isMdUp && (
-              <Search>
+              <Search width={362}>
                 <SearchIcon
                   sx={{ height: "24px", width: "24px", color: "var(--dark)" }}
                 />
@@ -250,7 +227,7 @@ const Navbar = ({ onCartOpen }: NavbarProps) => {
                 transformOrigin={{ horizontal: "right", vertical: "top" }}
                 anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
               >
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={handleCLickOnProfile}>
                   <Avatar /> Profile
                 </MenuItem>
                 <MenuItem onClick={toggleTheme}>

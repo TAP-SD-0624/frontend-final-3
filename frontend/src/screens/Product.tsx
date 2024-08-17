@@ -2,8 +2,8 @@ import React from "react";
 import BreadCrumbs from "@components/product/BreadCrumbs";
 import ImageCarousel from "@components/product/ImageCarousel";
 import ProductInformation from "@components/product/ProductInformation";
-import TabsSection from "@components/product/TabsSection";
 import { Container, Box, Stack } from "@mui/material";
+import TabsPart from "@components/product/TabsPart";
 
 const Product = () => {
   return (
@@ -23,7 +23,7 @@ const Product = () => {
             <ProductInformation />
           </Stack>
 
-          <TabsSection />
+          <TabsPart />
         </Box>
       </Container>
     </>

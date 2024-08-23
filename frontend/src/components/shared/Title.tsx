@@ -7,9 +7,10 @@ interface TitleProps {
   isBright?: boolean;
   viewAll?: boolean;
   children: React.ReactNode;
+  onClick?: () => void;
 }
 
-export default function Title({ viewAll, isBright, children }: TitleProps) {
+export default function Title({ viewAll, isBright, children, onClick=()=>{} }: TitleProps) {
   return (
     <Stack
       direction="row"
@@ -33,6 +34,7 @@ export default function Title({ viewAll, isBright, children }: TitleProps) {
       </Typography>
       {viewAll && (
         <Button
+          onClick={onClick}
           endIcon={
             <ArrowForwardIosIcon
               sx={{

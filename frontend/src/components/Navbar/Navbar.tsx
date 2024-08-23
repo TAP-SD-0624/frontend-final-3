@@ -30,6 +30,7 @@ import { Search, StyledInputBase } from "@components/Search";
 import { useNavigate } from "react-router-dom";
 import useAccountContext from "@src/hooks/useAccountContext";
 import logout from "@src/api/logout";
+import useSnackbar from "@src/hooks/useSnackbar";
 
 interface NavbarProps {
   onCartOpen: () => void;
@@ -66,7 +67,13 @@ const Navbar = ({ onCartOpen }: NavbarProps) => {
     setAnchorEl(null);
   };
 
+  const handle = () => {
+    showSnackbar({ severity: "success", message: "Logout button clicked" })
+
+  }
+  const { showSnackbar } = useSnackbar();
   const handleLogout = () => {
+    showSnackbar({ severity: "success", message: "Logout button clicked" })
     logout();
     onLogout();
     handleClose();
@@ -255,8 +262,8 @@ const Navbar = ({ onCartOpen }: NavbarProps) => {
                   </ListItemIcon>
                   Switch Theme
                 </MenuItem>
-                <MenuItem>
-                  <ListItemIcon onClick={toggleTheme}>
+                <MenuItem onClick={handle}>
+                  <ListItemIcon>
                     <LanguageIcon fontSize="small" />
                   </ListItemIcon>
                   Switch Language{" "}

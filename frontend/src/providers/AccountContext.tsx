@@ -49,8 +49,8 @@ export const AccountProvider: FC<AccountProviderProps> = ({ children }) => {
         const { shouldNavigate } = options;
         setUser(user);
         if (shouldNavigate) {
-            const origin = location.state?.from || '/me';;
-            navigate(origin);
+            // const origin = location.state?.from || './welcome' ;
+            navigate("./home");
         }
     }
 

@@ -8,8 +8,8 @@ import TabsPart from "@components/product/TabsPart";
 const Product = () => {
   return (
     <>
-      <BreadCrumbs />
       <Container>
+      <BreadCrumbs />
         <Box sx={{ mt: "16px" }}>
           <Stack
             width="100%"

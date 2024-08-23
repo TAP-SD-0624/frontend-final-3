@@ -6,7 +6,7 @@ export interface ProtectedRouteProps {
     isAllowed?: boolean;
 }
 
-const ProtectedRoute: FC<PropsWithChildren<ProtectedRouteProps>> = ({ children, isAllowed = true,
+const ProtectedRoute: FC<PropsWithChildren<ProtectedRouteProps>> = ({ isAllowed = true,
 }) => {
     const location = useLocation();
     const { getUser } = useAccountContext();
@@ -15,9 +15,8 @@ const ProtectedRoute: FC<PropsWithChildren<ProtectedRouteProps>> = ({ children, 
     if (!user) return <Navigate to="/login" replace state={{ from: location.pathname }} />;
     // if (!children) return <Outlet />;
 
-    // if (!user) return <Navigate to="/access-denied" replace state={{from: location.pathname}}/>;
 
-    return (<>{children}</>);
+    return (<Outlet />);
 };
 
 export default ProtectedRoute;

@@ -26,22 +26,22 @@ const AppRoutes: FC = () => {
         <Route path="access-denied" element={<AccessDenied />} />
         <Route path="*" element={<NotFound />} />
         <Route path="" element={<SignIn />} />
-        <Route path="login" element={<SignIn />} />
+        <Route  path="login" element={<SignIn />} />
         <Route path="home" element={<Home />} />
         <Route path="signUp" element={<SignUp />} />
         <Route path="items" element={<Items />} />
+        <Route path="product" element={<Product />} />
 
-        <Route path="me" element={<ProtectedRoute />}>
-          <Route path="" element={<Welcome />} />
+        {/* <Route element={<ProtectedRoute />}> */}
+          <Route path="welcome" element={<Welcome />} />
           <Route path="checkout" element={<Checkout />} />
           <Route path="myCart" element={<MyCart />} />
-          <Route path="product" element={<Product />} />
 
           <Route path="user-profile" element={<Layoutwithsidebar />}>
             <Route path="profile" element={<Profile />} />
             <Route path="myOrders" element={<MyOrders />} />
             <Route path="order" element={<Order />} />
-          </Route>
+          {/* </Route> */}
         </Route>
       </Route>
     </Routes>

@@ -29,7 +29,7 @@ const SignIn: FC = () => {
   }
   const isLoggedIn = !isEmptyToken(accessToken);
 
-  if (isLoggedIn) return <Navigate to="/me" replace state={{ from: location.pathname }} />;
+  // if (isLoggedIn) return <Navigate to="/me" replace state={{ from: location.pathname }} />;
   
   return (
     <FormikProvider value={formikProps}>
@@ -68,7 +68,7 @@ const SignIn: FC = () => {
               </Stack>
               <TextField
                 name="email"
-                type="email"
+                // type="email"
                 label="Email Address"
                 fullWidth
                 sx={{ mb: 2.5 }}

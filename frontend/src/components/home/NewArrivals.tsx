@@ -4,12 +4,24 @@ import classes from "./NewArrivals.module.css";
 import { Box, Container, Stack } from "@mui/material";
 import { productsMock } from "@src/mocks";
 import ImageCarousel from "@components/shared/ImageCarousel";
+import { useNavigate } from "react-router-dom";
+import { productType } from "@src/types";
 
 export default function NewArrivals() {
+  const navigate = useNavigate();
+  const handleOnClickViewMore = () => {
+    navigate('/items');
+  }
+
+  const handleOnClickProduct = (product: productType) => {
+    console.log(product);
+    navigate('/product');
+  }
+
   return (
     <Box className={classes.newArrivels}>
       <Container>
-        <Title viewAll>New Arrivals</Title>
+        <Title onClick={handleOnClickViewMore} viewAll>New Arrivals</Title>
         <Box
           sx={{
             display: {
@@ -21,7 +33,8 @@ export default function NewArrivals() {
           }}
         >
           {productsMock.slice(0, 4).map((product) => (
-            <Product key={product.slug} product={product} />
+            <Product onClick={() => handleOnClickProduct(product)}
+              key={product.slug} product={product} />
           ))}
         </Box>
       </Container>
@@ -36,6 +49,7 @@ export default function NewArrivals() {
         <ImageCarousel>
           {productsMock.slice(0, 4).map((product) => (
             <Product
+              onClick={() => handleOnClickProduct(product)}
               key={product.slug}
               product={product}
               style={{

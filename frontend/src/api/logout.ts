@@ -1,5 +1,9 @@
 import React from "react";
-import axiosInstance from ".";
+import axiosInstance from "./index";
+
+interface LogoutRequest {
+  token: string;
+}
 
 const logout = async () => {
   const url = "/auth/logout";

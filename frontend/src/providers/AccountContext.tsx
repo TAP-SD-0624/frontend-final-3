@@ -15,8 +15,8 @@ interface OnLogoutOptions {
 }
 
 export interface AccountContextValues {
-    getUser: () => User | null;
-    onLogin: (user: User, options?: OnLoginOptions) => void;
+    getUser: () => string | null;
+    onLogin: (user: string, options?: OnLoginOptions) => void;
     onLogout: (options?: OnLogoutOptions) => void;
     isMobile: boolean;
 }
@@ -36,16 +36,16 @@ export const AccountProvider: FC<AccountProviderProps> = ({ children }) => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const [user, setUser] = useState<User | null>(null);
+    const [user, setUser] = useState<string | null>(null);
 
     const getUser = () => {
-        const userStr = localStorage.getItem("user");
+        const userStr = localStorage.getItem("user-token");
         if (userStr)
-            return JSON.parse(userStr) as User;
+            return userStr;
         return null;
     }
 
-    const handleLogin = (user: User, options: OnLoginOptions = { shouldNavigate: false }) => {
+    const handleLogin = (user: string, options: OnLoginOptions = { shouldNavigate: false }) => {
         const { shouldNavigate } = options;
         setUser(user);
         if (shouldNavigate) {
@@ -56,8 +56,7 @@ export const AccountProvider: FC<AccountProviderProps> = ({ children }) => {
 
     const handleLogout = () => {
         setUser(null);
-        localStorage.removeItem("user");
-        localStorage.removeItem("access-token");
+        localStorage.removeItem("user-token");
         navigate("login");
     }
 

@@ -20,7 +20,7 @@ import TextField from "@src/components/shared/TextField";
 
 const SignIn: FC = () => {
   const { formikProps, isPending } = useLoginForm();
-  const accessToken = localStorage.getItem("access-token");
+  const accessToken = localStorage.getItem("user-token");
   const { isValid, dirty, errors } = formikProps;
   console.log(errors);
 
@@ -29,8 +29,8 @@ const SignIn: FC = () => {
   }
   const isLoggedIn = !isEmptyToken(accessToken);
 
-  // if (isLoggedIn) return <Navigate to="/me" replace state={{ from: location.pathname }} />;
-  
+  if (isLoggedIn) return <Navigate to="/home" replace state={{ from: location.pathname }} />;
+
   return (
     <FormikProvider value={formikProps}>
       <Form autoComplete="off">
@@ -68,7 +68,7 @@ const SignIn: FC = () => {
               </Stack>
               <TextField
                 name="email"
-                // type="email"
+                type="email"
                 label="Email Address"
                 fullWidth
                 sx={{ mb: 2.5 }}
@@ -90,7 +90,7 @@ const SignIn: FC = () => {
                   color: "text.secondary",
                 }}
               />
-            <LoadingButton
+              <LoadingButton
                 type="submit"
                 fullWidth
                 variant="contained"
@@ -182,7 +182,7 @@ const SignIn: FC = () => {
             </Stack>
           </Paper>
         </Box>
-       
+
       </Form>
     </FormikProvider>
   );

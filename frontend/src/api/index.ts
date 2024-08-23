@@ -10,7 +10,7 @@ const defaultAxiosSettings: AxiosRequestConfig = {
 };
 
 const axiosInstance = axios.create({
-  baseURL: 'http://127.0.0.1:4000/api',
+  baseURL: "https://backend-final-g3-qngl.onrender.com/api",
   ...defaultAxiosSettings,
 });
 

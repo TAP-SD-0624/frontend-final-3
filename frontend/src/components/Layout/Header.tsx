@@ -1,5 +1,5 @@
 import { Logout } from '@mui/icons-material';
-import { Stack, Typography, IconButton } from '@mui/material';
+import { Stack, Typography, IconButton, Theme, useMediaQuery } from '@mui/material';
 import { Search, StyledInputBase } from '@components/Search';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import React from 'react'
@@ -11,6 +11,8 @@ interface HeaderProps {
 const Header = ({ pageName }: HeaderProps) => {
     let title = '';
     let button = <></>;
+    const isMyOrders = pageName === "/user-profile/myOrders" ? true : false;
+    const isXs = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
 
     switch (pageName) {
         case '/user-profile/order':
@@ -36,14 +38,22 @@ const Header = ({ pageName }: HeaderProps) => {
                     border: "1px solid var(--primary)",
                     borderRadius: "8px",
                     gap: "8px",
-                    width: "136px",
+                    width: {
+                        xs: "50px",
+                        sm: "100px",
+                        md: "120px",
+                        lg: "136px",
+                    }
                 }}
             >
                 <Logout
-                    sx={{ width: "24px", height: "24px", color: "var(--primary)" }}
+                    sx={{
+                        height: "24px", color: "var(--primary)", width: "24px",
+                    }}
                     fontSize="small"
                 />
                 <Typography
+                display={isXs ? "none" : "block"}
                     sx={{
                         fontFamily: "Inter",
                         fontWeight: "600",
@@ -67,7 +77,7 @@ const Header = ({ pageName }: HeaderProps) => {
         <Stack
             direction="row"
             alignItems="center"
-            justifyContent="space-between"
+            justifyContent= "space-between"
             width="100%"
         >
             <Typography

@@ -28,6 +28,8 @@ import LanguageIcon from "@mui/icons-material/Language";
 import { Theme, useMediaQuery } from "@mui/material";
 import { Search, StyledInputBase } from "@components/Search";
 import { useNavigate } from "react-router-dom";
+import useAccountContext from "@src/hooks/useAccountContext";
+import logout from "@src/api/logout";
 
 interface NavbarProps {
   onCartOpen: () => void;
@@ -41,6 +43,8 @@ const Navbar = ({ onCartOpen }: NavbarProps) => {
 
   const open = Boolean(anchorEl);
   const openCetagories = Boolean(anchorElCetagories);
+
+  const { onLogout } = useAccountContext();
 
   const handleClick = (event: {
     currentTarget: React.SetStateAction<HTMLElement | null>;
@@ -62,6 +66,12 @@ const Navbar = ({ onCartOpen }: NavbarProps) => {
     setAnchorEl(null);
   };
 
+  const handleLogout = () => {
+    logout();
+    onLogout();
+    handleClose();
+  }
+
   const navigate = useNavigate();
   const handleCLickOnProfile = () => {
     navigate("/user-profile");
@@ -71,6 +81,11 @@ const Navbar = ({ onCartOpen }: NavbarProps) => {
   const [theme, toggleTheme] = useTheme();
   const isMdUp = useMediaQuery((theme: Theme) => theme.breakpoints.up("md"));
   const isLGUp = useMediaQuery((theme: Theme) => theme.breakpoints.up("lg"));
+  const isEmptyToken = (token: string | null): boolean => {
+    return !token || token === "";
+  }
+  const accessToken = localStorage.getItem("access-token");
+  const isLoggedIn = !isEmptyToken(accessToken);
 
   return (
     <AppBar
@@ -192,6 +207,8 @@ const Navbar = ({ onCartOpen }: NavbarProps) => {
                   />
                 </IconButton>
               </Tooltip>
+              {/* } */}
+
               <Menu
                 anchorEl={anchorEl}
                 id="account-menu"
@@ -227,9 +244,11 @@ const Navbar = ({ onCartOpen }: NavbarProps) => {
                 transformOrigin={{ horizontal: "right", vertical: "top" }}
                 anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
               >
-                <MenuItem onClick={handleCLickOnProfile}>
-                  <Avatar /> Profile
-                </MenuItem>
+                {isLoggedIn &&
+                  <MenuItem onClick={handleCLickOnProfile}>
+                    <Avatar /> Profile
+                  </MenuItem>
+                }
                 <MenuItem onClick={toggleTheme}>
                   <ListItemIcon>
                     <DarkModeIcon fontSize="small" />
@@ -244,7 +263,7 @@ const Navbar = ({ onCartOpen }: NavbarProps) => {
                 </MenuItem>
 
                 <Divider />
-                <MenuItem>
+                <MenuItem onClick={handleLogout}>
                   <ListItemIcon>
                     <Logout fontSize="small" />
                   </ListItemIcon>

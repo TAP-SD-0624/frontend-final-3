@@ -7,6 +7,9 @@ import { initializeI18n } from "./i18n/locales.js";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./styles/customTheme";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { QueryClientProvider } from '@tanstack/react-query';
+import { queryClient } from "./queryClient";
+import AccountProvider from "./providers/AccountContext";
 
 initializeI18n();
 
@@ -14,9 +17,13 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
       <ThemeProvider theme={theme}>
-        <Routes>
-          <Route path="/*" element={<App />} />
-        </Routes>
+        <QueryClientProvider client={queryClient}>
+          <AccountProvider>
+            <Routes>
+              <Route path="/*" element={<App />} />
+            </Routes>
+          </AccountProvider>
+        </QueryClientProvider>
       </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>

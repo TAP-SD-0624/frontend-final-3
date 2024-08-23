@@ -1,10 +1,9 @@
 import React from 'react'
-import { Container, Drawer, List, ListItem, ListItemButton, ListItemText, Stack } from "@mui/material";
+import { Container, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, Stack, Theme, Toolbar, Typography, useMediaQuery } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const drawerWidth = 286;
-// const drawerHieght = 504;
 
 const Sidebar = () => {
   const arr = ['Personal Information', 'Refer and Earn', 'My Orders', 'My Wishlist', 'My Reviews', 'My Address Book', 'My Saved Cards'];
@@ -17,6 +16,7 @@ const Sidebar = () => {
         navigate('/user-profile/order');
   }
 
+
   return (
     <Drawer
       variant="permanent"
@@ -24,10 +24,12 @@ const Sidebar = () => {
         width: drawerWidth,
         flexShrink: 0,
         height: '100vh', // Occupies the full height of the viewport
-        [`& .MuiDrawer-paper`]: { width: drawerWidth, height: "100%", boxSizing: 'border-box',position: 'relative', backgroundColor: 'var(--grey)', border: "none", borderRadius: "8px" },
+        [`& .MuiDrawer-paper`]: { width: drawerWidth, height: "100%", boxSizing: 'border-box', position: 'relative', backgroundColor: 'var(--grey)', border: "none", borderRadius: "8px" },
       }}
     >
       <Container>
+
+
         <Stack overflow="auto">
           <List>
             {arr.map((text, index) => (
@@ -40,8 +42,7 @@ const Sidebar = () => {
                       fontWeight: "500",
                       color: "var(--dark)",
                     }}
-                    primary={text}
-                  />
+                    primary={text} />
                   <ArrowForwardIosIcon sx={{ width: "24px", height: "15px", color: "var(--low-emphasis)" }} />
                 </ListItemButton>
               </ListItem>

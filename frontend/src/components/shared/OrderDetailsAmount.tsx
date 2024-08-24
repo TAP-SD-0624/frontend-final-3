@@ -15,7 +15,7 @@ export default function OrderDetailsAmount({
   grandTotal,
 }: OrderDetailsProps) {
   return (
-    <Box mt={2}>
+    <Box mt= {2}>
       <Box display="flex" justifyContent="space-between" mb={1}>
         <Typography variant="body2" color="var(--low-emphasis)">
           Sub Total

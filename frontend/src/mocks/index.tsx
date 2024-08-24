@@ -371,3 +371,43 @@ export const mockAboutData = [
     imageUrl: about3,
   },
 ];
+
+export const mockOrders = [
+  {
+    id: 1,
+    orderId: "#874522648",
+    date: "September 5, 2020",
+    price: "$218.50",
+    status: "Paid"
+  },
+  {
+    id: 2,
+    orderId: "#874522648",
+    date: "September 5, 2020",
+    price: "$218.50",
+    status: "Paid"
+  }, {
+    id: 3,
+    orderId: "#874522648",
+    date: "September 5, 2020",
+    price: "$218.50",
+    status: "Paid"
+  }, {
+    id: 4,
+    orderId: "#874522648",
+    date: "September 5, 2020",
+    price: "$218.50",
+    status: "Paid"
+  },
+];
+
+export const order = [
+  {
+    id: 1,
+    name: "Leather Coach Bag",
+    brand: "Coach",
+    price: 54.69,
+    qty: 1,
+    imageUrl: bagImage,
+  },
+];

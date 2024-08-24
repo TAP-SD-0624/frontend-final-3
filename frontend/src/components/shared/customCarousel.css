@@ -1,0 +1,30 @@
+/* Override the arrow styles */
+.carousel .control-arrow {
+    background: none; /* Remove default background */
+    border: none; /* Remove default border */
+    z-index: 1000;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 30px;
+    color: black; /* Set your desired arrow color */
+  }
+  
+  /* Left arrow */
+  .carousel .control-prev.control-arrow {
+    left: -60px; /* Adjust this value to move it outside the carousel */
+  }
+  
+  /* Right arrow */
+  .carousel .control-next.control-arrow {
+    right: -60px; /* Adjust this value to move it outside the carousel */
+  }
+  
+  /* Optionally, you can add custom hover effects */
+  .carousel .control-arrow:hover {
+    color: var(--primary); /* Example of changing color on hover */
+  }
+  

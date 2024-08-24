@@ -8,11 +8,12 @@ interface ProductProps {
   product: productType;
   style?: React.CSSProperties;
   showDetails?: boolean;
+  onClick?: () => void;
 }
 
-export default function Product({ product, style, showDetails }: ProductProps) {
+export default function Product({ product, style, showDetails, onClick = () => {} }: ProductProps) {
   return (
-    <Stack className={classes.product} sx={style}>
+    <Stack className={classes.product} sx={style} onClick={onClick}>
       <img src={product.img} alt={product.name} />
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <h5>{product.name}</h5>

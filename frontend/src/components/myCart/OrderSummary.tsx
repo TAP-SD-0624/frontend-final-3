@@ -7,6 +7,7 @@ interface OrderDetailsProps {
   discount: number;
   deliveryFee: number;
   grandTotal: number;
+  onClick?: () => void;
 }
 
 const OrderSummary: React.FC<OrderDetailsProps> = ({
@@ -14,6 +15,7 @@ const OrderSummary: React.FC<OrderDetailsProps> = ({
   discount,
   deliveryFee,
   grandTotal,
+  onClick = () => {},
 }) => {
   return (
     <Box p={2}>
@@ -44,6 +46,7 @@ const OrderSummary: React.FC<OrderDetailsProps> = ({
         mt="40px"
       >
         <Button
+          onClick={onClick}
           variant="contained"
           sx={{
             background: "var(--primary)",

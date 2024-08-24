@@ -1,3 +1,5 @@
+import {AxiosError, AxiosResponse} from "axios";
+
 export interface productType {
   img: string;
   name: string;
@@ -10,3 +12,22 @@ export interface productType {
   originalPrice: number;
   discount: number;
 }
+
+export interface BaseResponse {
+  success: boolean;
+  status: number;
+  message: string;
+  data: any;
+}
+
+export interface AxiosBaseError extends AxiosError<BaseResponse> {}
+
+export interface User {
+  userId?: string;
+  name?: string;
+  username?: string;
+  email?: string;
+  roleId?: number;
+  permissions?: any[];
+}
+

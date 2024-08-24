@@ -3,7 +3,6 @@ import Handpicked from "@components/home/Handpicked";
 import HeroSection from "@components/home/HeroSection";
 import Makeup from "@components/home/Makeup";
 import NewArrivals from "@components/home/NewArrivals";
-import { Box, Container } from "@mui/material";
 import React from "react";
 
 export default function Home() {

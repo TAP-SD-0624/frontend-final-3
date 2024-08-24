@@ -47,7 +47,6 @@ const BreadCrumbs = () => {
   ];
 
   return (
-    <Container>
       <Stack gap="8px">
         <Breadcrumbs
           separator={
@@ -65,7 +64,6 @@ const BreadCrumbs = () => {
           {breadcrumbs}
         </Breadcrumbs>
       </Stack>
-    </Container>
   );
 };
 

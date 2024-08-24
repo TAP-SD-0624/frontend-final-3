@@ -1,0 +1,11 @@
+.MuiTableContainer-root {
+    box-shadow: none;
+  }
+  
+  .MuiTable-root{
+    border-collapse: separate;
+    border-spacing: 0 17px;
+    border: transparent;
+  }
+  
+  

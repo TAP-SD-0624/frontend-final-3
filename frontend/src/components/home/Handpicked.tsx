@@ -3,8 +3,18 @@ import { Box, Container } from "@mui/material";
 import { productsMock } from "@src/mocks";
 import classes from "./Handpicked.module.css";
 import ImageCarousel from "@components/shared/ImageCarousel";
+import { productType } from "@src/types";
+import useCategories from "@src/screens/hooks/useCategories";
+import useCategory from "@src/screens/hooks/useCategory";
+import { useNavigate } from "react-router-dom";
 
 export default function Handpicked() {
+  const { categoriesData } = useCategories();
+  const navigate = useNavigate();
+  const handleOnClickCategory = (category: productType) => {
+    navigate("/items", { state: { categoryId: category.slug } });
+  }
+
   return (
     <Box className={classes.handpicked}>
       <Container>
@@ -20,7 +30,7 @@ export default function Handpicked() {
           }}
         >
           {productsMock.slice(0, 4).map((product) => (
-            <Box key={product.slug} className={classes.item}>
+            <Box key={product.slug} className={classes.item} onClick={() => handleOnClickCategory(product)}>
               <img src={product.img} alt={product.name} />
               <p>{product.name}</p>
             </Box>
@@ -38,6 +48,7 @@ export default function Handpicked() {
         <ImageCarousel>
           {productsMock.map((product) => (
             <Box
+              onClick={() => handleOnClickCategory(product)}
               key={product.slug}
               className={classes.item}
               sx={{

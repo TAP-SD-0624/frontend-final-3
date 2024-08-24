@@ -28,7 +28,7 @@ const TabsSection: React.FC<TabsInterface> = ({ tab, tabPanel }) => {
         sx={{
           bgcolor: "var(--grey)",
           borderRadius: "12px",
-          width: "100%",
+          width: '100%',
         }}
       >
         {tab.map((topic: string) => (

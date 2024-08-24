@@ -5,6 +5,7 @@ import {
   Button,
   Container,
   Divider,
+  Grid,
   IconButton,
   Stack,
   Typography,
@@ -13,8 +14,12 @@ import { Logout } from "@mui/icons-material";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import avatar from "../assets/avatar.png";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import TextField from "@src/components/shared/TextField";
+import { FormikProvider, Form } from "formik";
+import useLoginForm from "./SignIn/useLoginForm";
 
 const Profile = () => {
+  const { formikProps, isPending } = useLoginForm();
   return (
     <Box>
       <Typography
@@ -85,330 +90,377 @@ const Profile = () => {
         </Stack>
       </Stack>
 
-      <form autoComplete="off">
-        <Box
-          sx={{
-            justifyContent: "center",
-            alignItems: "center",
-            pt: "8px",
-            width: "100%",
-          }}
-        >
-          <Stack alignItems="center" sx={{ position: "relative" }}>
-            <Stack
-              direction={{
-                xs: "column",
-                sm: "row",
-              }}
-              sx={{
-                alignItems: "center",
-                width: "100%",
-                mt: "16px",
-              }}
-            >
-              <Stack gap="8px">
-                <label
-                  style={{
-                    fontFamily: "Inter",
-                    fontSize: "16px",
-                    fontWeight: "500",
-                    color: "var(--high-emphasis)",
-                  }}
-                >
-                  First Name
-                </label>
-                <input
-                  name="firstName"
-                  placeholder="John"
-                  type="text"
-                  id="firstName"
-                  style={{
-                    fontFamily: "Inter",
-                    fontSize: "16px",
-                    fontWeight: "500",
-                    color: "var(--low-emphasis)",
-                    backgroundColor: "var(--grey)",
-                    margin: "0px",
-                    borderColor: "var(--grey)",
-                    borderTopRightRadius: "0px",
-                    borderBottomRightRadius: "0px",
-                    borderRight: "none",
-                  }}
-                />
-              </Stack>
-
-              <Stack gap="8px">
-                <label
-                  style={{
-                    fontFamily: "Inter",
-                    fontSize: "16px",
-                    fontWeight: "500",
-                    color: "var(--high-emphasis)",
-                  }}
-                >
-                  Last Name
-                </label>
-                <input
-                  name="firstName"
-                  placeholder="Doe"
-                  type="text"
-                  id="firstName"
-                  style={{
-                    fontFamily: "Inter",
-                    fontSize: "16px",
-                    fontWeight: "500",
-                    color: "var(--low-emphasis)",
-                    backgroundColor: "var(--grey)",
-                    margin: "0px",
-                    borderColor: "var(--grey)",
-                    borderTopLeftRadius: "0px",
-                    borderBottomLeftRadius: "0px",
-                    borderLeft: "none",
-                  }}
-                />
-              </Stack>
-            </Stack>
-          </Stack>
-          <Stack gap="8px" mt="8px">
-            <label
-              style={{
-                fontFamily: "Inter",
-                fontSize: "16px",
-                fontWeight: "500",
-                color: "var(--high-emphasis)",
-              }}
-            >
-              Email
-            </label>
-            <input
-              name="email"
-              placeholder="Johndoe@johndoe.com"
-              type="email"
-              id="email"
-              style={{
-                fontFamily: "Inter",
-                fontSize: "16px",
-                fontWeight: "500",
-                color: "var(--low-emphasis)",
-                backgroundColor: "var(--grey)",
-                margin: "0px",
-                width: 'fit-content',
-                borderColor: "var(--grey)",
-              }}
-            />
-          </Stack>
-          <Stack gap="8px" mt="8px">
-            <label
-              style={{
-                fontFamily: "Inter",
-                fontSize: "16px",
-                fontWeight: "500",
-                color: "var(--high-emphasis)",
-              }}
-            >
-              Mobile Number
-            </label>
-            <Stack direction="row" gap="8px">
-              <input
-                name="mobile"
-                placeholder="+11"
-                type="tel"
-                id="email"
-                style={{
-                  fontFamily: "Inter",
-                  fontSize: "16px",
-                  fontWeight: "500",
-                  color: "var(--low-emphasis)",
-                  backgroundColor: "var(--grey)",
-                  margin: "0px",
-                  borderColor: "var(--grey)",
-                  width: "60%",
-                }}
-              />
-              <input
-                name="mobile"
-                placeholder="202-555-0114"
-                type="tel"
-                id="email"
-                style={{
-                  fontFamily: "Inter",
-                  fontSize: "16px",
-                  fontWeight: "500",
-                  color: "var(--low-emphasis)",
-                  backgroundColor: "var(--grey)",
-                  margin: "0px",
-                  borderColor: "var(--grey)",
-                  width: 'fit-content'
-                }}
-              />
-            </Stack>
-          </Stack>
-          <Stack gap="8px" mt="8px">
-            <label
-              style={{
-                fontFamily: "Inter",
-                fontSize: "16px",
-                fontWeight: "500",
-                color: "var(--high-emphasis)",
-              }}
-            >
-              Date of birth
-            </label>
-            <input
-              name="date"
-              placeholder="DD/MM/YYYY"
-              type="date"
-              id="date"
-              style={{
-                fontFamily: "Inter",
-                fontSize: "16px",
-                fontWeight: "500",
-                color: "var(--low-emphasis)",
-                backgroundColor: "var(--grey)",
-                margin: "0px",
-                width: 'fit-content',
-                textTransform: "uppercase",
-                borderColor: "var(--grey)",
-              }}
-            />
-          </Stack>
-          <Stack marginTop="40px" width="inhirit"></Stack>
-          <Typography
+      <FormikProvider value={formikProps}>
+        <Form autoComplete="off">
+          <Box
             sx={{
-              fontFamily: "Inter",
-              fontWeight: "600",
-              color: "var(--dark)",
-              fontSize: {
-                xs: "10px",
-                sm: "13px",
-                md: "17px",
-                lg: "20px",
-              },
+              justifyContent: "center",
+              alignItems: "center",
+              pt: "8px",
+              width: "100%",
             }}
           >
-            Change Password
-          </Typography>
-          <Divider />
-          <Stack mt="37px" gap="8px">
-            <label
-              style={{
-                fontFamily: "Inter",
-                fontSize: "16px",
-                fontWeight: "500",
-                color: "var(--high-emphasis)",
-              }}
-            >
-              Current Password
-            </label>
-            <input
-              name="password"
-              placeholder="********"
-              type="password"
-              id="password"
-              style={{
-                fontFamily: "Inter",
-                fontSize: "16px",
-                fontWeight: "500",
-                color: "var(--low-emphasis)",
-                backgroundColor: "var(--grey)",
-                margin: "0px",
-                borderColor: "var(--grey)",
-                width: 'fit-content',
-              }}
-            />
-          </Stack>
-          <Stack mt="16px" gap="8px">
-            <label
-              style={{
-                fontFamily: "Inter",
-                fontSize: "16px",
-                fontWeight: "500",
-                color: "var(--high-emphasis)",
-              }}
-            >
-              New Password
-            </label>
-            <Stack
-              direction="row"
-              alignItems="center"
-              justifyContent="space-between"
-              sx={{
-                backgroundColor: "var(--grey)",
-                borderColor: "var(--grey)",
-                width: 'fit-content',
-              }}
-            >
-              <input
-                name="newPassword"
-                placeholder="******"
-                type="password"
-                id="newPassword"
+
+            <Stack sx={{
+              position: "relative"
+            }}>
+              <Grid container>
+                <Stack
+                  direction={{
+                    xs: "column",
+                    sm: "row",
+                  }}
+                  sx={{
+                    width: "100%",
+                    mt: "16px",
+                    alignItems: {
+                      xs: "flex-start",
+                      sm: "flex-start",
+                    }
+                  }}
+                >
+                  <Grid item xs={12} sm={6}>
+                    <Stack gap="8px">
+                      <label
+                        style={{
+                          fontFamily: "Inter",
+                          fontSize: "16px",
+                          fontWeight: "500",
+                          color: "var(--high-emphasis)",
+                        }}
+                      >
+                        First Name
+                      </label>
+                      <TextField
+                        name="firstName"
+                        type="text"
+                        placeholder="John"
+                        fullWidth
+                        id="firstName"
+                        sx={{
+                          fontFamily: "Inter",
+                          fontSize: "16px",
+                          fontWeight: "500",
+                          color: "var(--low-emphasis)",
+                          backgroundColor: "var(--grey)",
+                          margin: "0px",
+                          borderColor: "var(--grey)",
+                          borderTopRightRadius: "0px",
+                          borderBottomRightRadius: "0px",
+                          borderRight: "none",
+                        }}
+                      />
+
+                    </Stack>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <Stack gap="8px">
+                      <label
+                        style={{
+                          fontFamily: "Inter",
+                          fontSize: "16px",
+                          fontWeight: "500",
+                          color: "var(--high-emphasis)",
+                        }}
+                      >
+                        Last Name
+                      </label>
+                      <TextField
+                        name="lastName"
+                        type="text"
+                        placeholder="Doe"
+                        fullWidth
+                        id="lastName"
+                        sx={{
+                          fontFamily: "Inter",
+                          fontSize: "16px",
+                          fontWeight: "500",
+                          color: "var(--low-emphasis)",
+                          backgroundColor: "var(--grey)",
+                          margin: "0px",
+                          borderColor: "var(--grey)",
+                          borderTopLeftRadius: "0px",
+                          borderBottomLeftRadius: "0px",
+                          borderLeft: "none",
+                        }}
+                      />
+                    </Stack>
+                  </Grid>
+                </Stack>
+              </Grid>
+            </Stack>
+            <Grid container>
+              <Grid item xs={12} sm={6}>
+                <Stack gap="8px" mt="8px">
+                  <label
+                    style={{
+                      fontFamily: "Inter",
+                      fontSize: "16px",
+                      fontWeight: "500",
+                      color: "var(--high-emphasis)",
+                    }}
+                  >
+                    Email
+                  </label>
+                  <TextField
+                    name="email"
+                    type="email"
+                    placeholder="Johndoe@johndoe.com"
+                    fullWidth
+                    id="email"
+                    sx={{
+                      fontFamily: "Inter",
+                      fontSize: "16px",
+                      fontWeight: "500",
+                      color: "var(--low-emphasis)",
+                      backgroundColor: "var(--grey)",
+                      margin: "0px",
+                      borderColor: "var(--grey)",
+                    }}
+                  />
+                </Stack>
+              </Grid>
+            </Grid>
+            <Stack gap="8px" mt="8px">
+
+              <label
                 style={{
                   fontFamily: "Inter",
                   fontSize: "16px",
                   fontWeight: "500",
-                  color: "var(--low-emphasis)",
-                  margin: "0px",
-                  backgroundColor: "var(--grey)",
-                  border: "none",
+                  color: "var(--high-emphasis)",
                 }}
-              />
-              <IconButton>
-                <VisibilityIcon
-                  sx={{ width: "24px", height: "24px", color: "var(--dark)" }}
-                />
-              </IconButton>
+              >
+                Mobile Number
+              </label>
+
+              <Stack direction="row">
+                <Grid container gap="8px">
+                  <Grid item xs={3} sm={2}>
+                    <TextField
+                      name="mobile"
+                      placeholder="+11"
+                      type="tel"
+                      id="email"
+                      fullWidth
+                      sx={{
+                        fontFamily: "Inter",
+                        fontSize: "16px",
+                        fontWeight: "500",
+                        color: "var(--low-emphasis)",
+                        backgroundColor: "var(--grey)",
+                        margin: "0px",
+                        borderColor: "var(--grey)",
+                      }}
+                    />
+                  </Grid>
+                  <Grid item xs={8} sm={6}>
+
+                    <TextField
+                      name="mobile"
+                      placeholder="202-555-0114"
+                      type="tel"
+                      id="nobile"
+                      fullWidth
+                      sx={{
+                        fontFamily: "Inter",
+                        fontSize: "16px",
+                        fontWeight: "500",
+                        color: "var(--low-emphasis)",
+                        backgroundColor: "var(--grey)",
+                        margin: "0px",
+                        borderColor: "var(--grey)",
+                      }}
+                    />
+                  </Grid>
+                </Grid>
+              </Stack>
             </Stack>
-          </Stack>
-          <Stack mt="16px" gap="8px">
-            <label
-              style={{
-                fontFamily: "Inter",
-                fontSize: "16px",
-                fontWeight: "500",
-                color: "var(--high-emphasis)",
-              }}
-            >
-              Confirm Password
-            </label>
-            <input
-              name="confirmPassword"
-              placeholder="******"
-              type="password"
-              id="confirmPassword"
-              style={{
-                fontFamily: "Inter",
-                fontSize: "16px",
-                fontWeight: "500",
-                color: "var(--low-emphasis)",
-                backgroundColor: "var(--grey)",
-                margin: "0px",
-                borderColor: "var(--grey)",
-                width: 'fit-content',
-              }}
-            />
-          </Stack>
-          <Stack direction="row" justifyContent="flex-end" marginTop="28px">
-            <Button
+            <Grid container>
+              <Grid item xs={12} sm={6}>
+                <Stack gap="8px" mt="8px">
+                  <label
+                    style={{
+                      fontFamily: "Inter",
+                      fontSize: "16px",
+                      fontWeight: "500",
+                      color: "var(--high-emphasis)",
+                    }}
+                  >
+                    Date of birth
+                  </label>
+                  <TextField
+                    name="date"
+                    placeholder="DD/MM/YYYY"
+                    type="date"
+                    id="date"
+                    fullWidth
+                    sx={{
+                      fontFamily: "Inter",
+                      fontSize: "16px",
+                      fontWeight: "500",
+                      color: "var(--low-emphasis)",
+                      backgroundColor: "var(--grey)",
+                      margin: "0px",
+                      textTransform: "uppercase",
+                      borderColor: "var(--grey)",
+                    }}
+                  />
+
+                </Stack>
+              </Grid>
+            </Grid>
+            <Stack marginTop="40px" width="inhirit"></Stack>
+            <Typography
               sx={{
                 fontFamily: "Inter",
-                fontSize: "16px",
-                fontWeight: "500",
-                color: "var(--bright)",
-                backgroundColor: "var(--primary)",
-                width: "136px",
-                height: "36px",
-                borderRadius: "8px",
-                padding: "8px",
-                textTransform: "none",
-                alignItems: "center",
+                fontWeight: "600",
+                color: "var(--dark)",
+                fontSize: {
+                  xs: "16px",
+                  sm: "17px",
+                  md: "18px",
+                  lg: "20px",
+                },
               }}
             >
-              Save Changes
-            </Button>
-          </Stack>
-        </Box>
-      </form>
+              Change Password
+            </Typography>
+            <Divider />
+            <Grid container>
+              <Grid item xs={12} sm={6}>
+                <Stack mt="37px" gap="8px">
+                  <label
+                    style={{
+                      fontFamily: "Inter",
+                      fontSize: "16px",
+                      fontWeight: "500",
+                      color: "var(--high-emphasis)",
+                    }}
+                  >
+                    Current Password
+                  </label>
+                  <TextField
+                    name="password"
+                    placeholder="********"
+                    type="password"
+                    id="password"
+                    fullWidth
+                    sx={{
+                      fontFamily: "Inter",
+                      fontSize: "16px",
+                      fontWeight: "500",
+                      color: "var(--low-emphasis)",
+                      backgroundColor: "var(--grey)",
+                      margin: "0px",
+                      borderColor: "var(--grey)",
+                    }}
+                  />
+                </Stack>
+              </Grid>
+            </Grid>
+            <Grid container>
+              <Grid item xs={12} sm={6}>
+                <Stack mt="16px" gap="8px">
+                  <label
+                    style={{
+                      fontFamily: "Inter",
+                      fontSize: "16px",
+                      fontWeight: "500",
+                      color: "var(--high-emphasis)",
+                    }}
+                  >
+                    New Password
+                  </label>
+                  <Stack
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="space-between"
+                    sx={{
+                      backgroundColor: "var(--grey)",
+                      borderColor: "var(--grey)",
+                    }}
+                  >
+                    <TextField
+                      name="newPassword"
+                      placeholder="******"
+                      type="password"
+                      id="newPassword"
+                      fullWidth
+                      sx={{
+                        fontFamily: "Inter",
+                        fontSize: "16px",
+                        fontWeight: "500",
+                        color: "var(--low-emphasis)",
+                        margin: "0px",
+                        backgroundColor: "var(--grey)",
+                        border: "none",
+                      }}
+                    />
+
+                    <IconButton>
+                      <VisibilityIcon
+                        sx={{ width: "24px", height: "24px", color: "var(--dark)" }}
+                      />
+                    </IconButton>
+                  </Stack>
+                </Stack>
+              </Grid>
+            </Grid>
+            <Grid container>
+              <Grid item xs={12} sm={6}>
+                <Stack mt="16px" gap="8px">
+                  <label
+                    style={{
+                      fontFamily: "Inter",
+                      fontSize: "16px",
+                      fontWeight: "500",
+                      color: "var(--high-emphasis)",
+                    }}
+                  >
+                    Confirm Password
+                  </label>
+                  <TextField
+                    name="confirmPassword"
+                    placeholder="******"
+                    type="password"
+                    id="confirmPassword"
+                    fullWidth
+                    sx={{
+                      fontFamily: "Inter",
+                      fontSize: "16px",
+                      fontWeight: "500",
+                      color: "var(--low-emphasis)",
+                      backgroundColor: "var(--grey)",
+                      margin: "0px",
+                      borderColor: "var(--grey)",
+                    }}
+                  />
+                </Stack>
+              </Grid>
+            </Grid>
+            <Stack direction="row" justifyContent="flex-end" marginTop="28px">
+              <Button
+                sx={{
+                  fontFamily: "Inter",
+                  fontSize: "16px",
+                  fontWeight: "500",
+                  color: "var(--bright)",
+                  backgroundColor: "var(--primary)",
+                  width: "136px",
+                  height: "36px",
+                  borderRadius: "8px",
+                  padding: "8px",
+                  textTransform: "none",
+                  alignItems: "center",
+                }}
+              >
+                Save Changes
+              </Button>
+            </Stack>
+          </Box>
+        </Form>
+      </FormikProvider>
     </Box>
   );
 };

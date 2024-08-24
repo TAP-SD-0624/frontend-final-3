@@ -3,8 +3,11 @@ import { Box, Container } from "@mui/material";
 import { brandsMock } from "@src/mocks";
 import classes from "./Brands.module.css";
 import ImageCarousel from "@components/shared/ImageCarousel";
+import useBrands from "@src/screens/hooks/useBrands";
 
 export default function Brands() {
+  const { brandsData } = useBrands();
+  
   return (
     <Box
       className={classes.brands}

@@ -37,7 +37,7 @@ const useLogic = () => {
 
     const handleLogout = () => {
         logout();
-        showSnackbar({ severity: "success", message: "Logged out successfully" })
+        showSnackbar({ severity: "success", message: "Successfully logged out" })
         onLogout();
         handleClose();
     }

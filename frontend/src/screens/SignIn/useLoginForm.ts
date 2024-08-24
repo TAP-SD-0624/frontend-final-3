@@ -31,7 +31,7 @@ const useLoginForm = () => {
       return loginMutate(values);
     },
     validationSchema,
-    // validateOnMount: true,
+    validateOnMount: true,
   });
 
   return {

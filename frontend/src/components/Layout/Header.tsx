@@ -71,7 +71,7 @@ const Header = ({ pageName }: HeaderProps) => {
             </IconButton>;
             break;
         default:
-            title = 'Page Not Found';
+            title = '';
     }
     return (
         <Stack

@@ -8,13 +8,13 @@ export interface SignUpRequestBody {
   email: string;
   password: string;
   confirmPassword: string;
+  dateOfBirth?: string;
 }
 
-export interface AccessTokenData extends User {}
 
-export interface SignUpResponse extends BaseResponse {
-  data: AccessTokenData;
-  accessToken: string;
+export interface SignUpResponse{
+  message: string;
+  status: string;
 }
 
 export const signup = async (body: SignUpRequestBody) => {

@@ -12,6 +12,7 @@ import { mockCartItems } from "@src/mocks";
 import Item from "./Item";
 import PriceDetails from "./PriceDetails";
 import AppleCode from "./AppleCode";
+import useCartContext from "@src/hooks/useCartContext";
 
 interface CartModalProps {
   open: boolean;
@@ -19,7 +20,10 @@ interface CartModalProps {
 }
 
 export default function CartModal({ open, onClose }: CartModalProps) {
-  const subtotal = mockCartItems.reduce(
+  const {getCart} = useCartContext();
+  const cart = getCart();
+
+  const subtotal = cart.reduce(
     (acc, item) => acc + item.price * item.qty,
     0
   );
@@ -65,7 +69,7 @@ export default function CartModal({ open, onClose }: CartModalProps) {
           px: "32px",
         }}
       >
-        {mockCartItems.map((item) => (
+        {cart.map((item) => (
           <>
             <Item item={item} />
             <Divider

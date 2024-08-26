@@ -1,13 +1,13 @@
 import { Typography } from '@mui/material'
-import React from 'react'
+import React, { FC } from 'react'
 
-const Logo = () => {
+const Logo:FC = () => {
     return (
         <Typography
             variant="h3"
             noWrap
             component="a"
-            href="#"
+            href="/home"
             sx={{
                 color: "var(--logo)",
                 width: "108px",

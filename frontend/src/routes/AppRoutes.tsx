@@ -30,12 +30,12 @@ const AppRoutes: FC = () => {
           <Route path="login" element={<SignIn />} />
           <Route path="home" element={<Home />} />
           <Route path="signUp" element={<SignUp />} />
+          <Route path="items" element={<Items />} />
+          <Route path="product" element={<Product />} />
 
 
           <Route element={<ProtectedRoute />}>
             <Route path="welcome" element={<Welcome />} />
-            <Route path="items" element={<Items />} />
-            <Route path="product" element={<Product />} />
             <Route path="checkout" element={<Checkout />} />
             <Route path="myCart" element={<MyCart />} />
 

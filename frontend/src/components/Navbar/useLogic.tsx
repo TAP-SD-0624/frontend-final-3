@@ -32,6 +32,10 @@ const useLogic = () => {
         setAnchorEl(null);
     };
 
+    const handleCLickLogin = () => {
+        navigate("/login");
+    }
+
 
     const { showSnackbar } = useSnackbar();
 
@@ -70,6 +74,7 @@ const useLogic = () => {
         handleCloseCetagories,
         navItems,
         openCetagories,
+        handleCLickLogin,
     }
 }
 

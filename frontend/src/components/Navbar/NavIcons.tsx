@@ -1,5 +1,5 @@
-import React, { FC} from 'react'
-import { Stack, IconButton, Badge } from '@mui/material'
+import React, { FC } from 'react'
+import { Stack, IconButton, Badge, Tooltip } from '@mui/material'
 import AccountMenu from './AccountMenu'
 import CetagoriesSmScreens from './CetagoriesSmScreens'
 import CetegoriesSmMenu from './CetegoriesSmMenu'
@@ -7,14 +7,22 @@ import Settings from './Settings'
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import useLogic from './useLogic'
+import LoginIcon from '@mui/icons-material/Login';
+import { useNavigate } from 'react-router-dom'
 
 interface NavIconsProps {
     onCartOpen: () => void;
 }
 
 const NavIcons: FC<NavIconsProps> = ({ onCartOpen }) => {
+    const navigate = useNavigate();
+    const handleClickCart = () => {
+        onCartOpen();
+        navigate("/myCart");
+    }
+
     const { handleCLickOnProfile, handleLogout, handleClick, open, isLGUp, isLoggedIn, anchorEl,
-        anchorElCetagories, handleClose, toggleTheme, handleClickCetagories, handleCloseCetagories, navItems, openCetagories } = useLogic();
+        anchorElCetagories, handleClose,handleCLickLogin ,toggleTheme, handleClickCetagories, handleCloseCetagories, navItems, openCetagories } = useLogic();
 
     return (
         <Stack
@@ -23,6 +31,17 @@ const NavIcons: FC<NavIconsProps> = ({ onCartOpen }) => {
             justifyContent="space-between"
             alignItems="center"
         >
+            {!isLoggedIn &&
+                <Tooltip title="Login">
+                    <IconButton onClick={handleCLickLogin} sx={{ width: "24px", height: "24px" }}>
+                        <LoginIcon
+                            sx={{
+                                color: "var(--icon)",
+                            }}
+                        />
+                    </IconButton>
+                </Tooltip>
+            }
             <IconButton sx={{ width: "24px", height: "24px" }}>
                 <FavoriteBorderIcon
                     sx={{
@@ -44,7 +63,7 @@ const NavIcons: FC<NavIconsProps> = ({ onCartOpen }) => {
 
             <IconButton
                 sx={{ width: "24px", height: "24px" }}
-                onClick={onCartOpen}
+                onClick={handleClickCart}
             >
                 <Badge
                     variant="dot"

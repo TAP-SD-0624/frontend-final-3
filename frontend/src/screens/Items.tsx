@@ -8,7 +8,7 @@ export default function Items() {
   const categoryId = location?.state?.categoryId;
   console.log(categoryId);
 
-  const { categoryData } = useCategory("9554252e-27f8-4be0-bde9-b50913443e65");
+  const { categoryData } = useCategory("5d04caf2-d94e-47de-b9f5-60030fac13e1");
   console.log(categoryData);
 
   return (

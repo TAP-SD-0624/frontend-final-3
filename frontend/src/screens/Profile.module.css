@@ -1,0 +1,22 @@
+.header {
+  font-family: Inter;
+  font-weight: 600;
+  color: var(--dark);
+}
+
+.label {
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--high-emphasis);
+}
+
+.textField{
+    font-family: 'Inter';
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--low-emphasis);
+    background-color: var(--grey);
+    margin: 0px;
+    border-color: var(--grey);
+}

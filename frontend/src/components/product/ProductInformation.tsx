@@ -11,8 +11,22 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
+import useCartContext from "@src/hooks/useCartContext";
+import { CartItem } from "@src/types";
+import bagImage from "@src/assets/product-image.png";
 
 const ProductInformation = () => {
+  const initialCart: CartItem =
+  {
+    id: '5',
+    name: "Leather Coach Bag",
+    brand: "Desil",
+    price: 60.80,
+    qty: 1,
+    imageUrl: bagImage, 
+  }
+
+  const { addToCart } = useCartContext();
   return (
     <Stack
       spacing={2}
@@ -184,6 +198,7 @@ const ProductInformation = () => {
         gap="24px"
       >
         <Button
+         onClick={() => addToCart(initialCart)}
           variant="contained"
           sx={{
             backgroundColor: "var(--primary)",

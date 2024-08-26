@@ -7,7 +7,7 @@ import { useLocation } from "react-router-dom";
 import useCartContext from "@src/hooks/useCartContext";
 
 export default function Item({ item }) {
-  const {decreaseQuantity, increaseQuantity} = useCartContext();
+  const {decreaseQuantity, increaseQuantity, removeFromCart} = useCartContext();
 
   return (
     <Box key={item.id} display="flex" alignItems="flex-start" mb={2} pb="16px">
@@ -30,7 +30,7 @@ export default function Item({ item }) {
           >
             Coatch
           </Typography>
-          <IconButton size="small" sx={{ ml: 2, color: "var(--low-emphasis)" }}>
+          <IconButton onClick={() => removeFromCart(item.id)} size="small" sx={{ ml: 2, color: "var(--low-emphasis)" }}>
             <CloseIcon />
           </IconButton>
         </Stack>

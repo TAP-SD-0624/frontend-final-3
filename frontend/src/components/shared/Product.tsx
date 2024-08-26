@@ -3,6 +3,7 @@ import { productType } from "@src/types";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import classes from "./Product.module.css";
 import StarIcon from "@mui/icons-material/Star";
+import useCartContext from "@src/hooks/useCartContext";
 
 interface ProductProps {
   product: productType;
@@ -12,6 +13,7 @@ interface ProductProps {
 }
 
 export default function Product({ product, style, showDetails, onClick = () => {} }: ProductProps) {
+  const {addToCart} = useCartContext();
   return (
     <Stack className={classes.product} sx={style} onClick={onClick}>
       <img src={product.img} alt={product.name} />

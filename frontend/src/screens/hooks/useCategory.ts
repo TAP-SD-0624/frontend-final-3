@@ -2,10 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import category from "@src/api/category";
 import React from "react";
 
-const useCategory = (id: string) => {
+
+const useCategory = (name: string) => {
   const { data: categoryData } = useQuery({
-    queryKey: ["Category", id],
-    queryFn: () => category(id),
+    queryKey: ["Category", name],
+    queryFn: () => category(name),
   });
 
   return {

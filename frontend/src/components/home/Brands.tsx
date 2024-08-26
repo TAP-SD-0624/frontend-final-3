@@ -3,11 +3,22 @@ import { Box, Container } from "@mui/material";
 import { brandsMock } from "@src/mocks";
 import classes from "./Brands.module.css";
 import ImageCarousel from "@components/shared/ImageCarousel";
-import useBrands from "@src/screens/hooks/useBrands";
+import { productType } from "@src/types";
+import { useLocation, useNavigate } from "react-router-dom";
+
+interface product {
+  img: string;
+  name: string;
+}
 
 export default function Brands() {
-  const { brandsData } = useBrands();
-  
+  const navigate = useNavigate();
+  const handleOnClickBrand = (brand: product) => {
+    navigate("/items", { state: { brandName: brand.name } });
+  }
+
+
+
   return (
     <Box
       className={classes.brands}
@@ -31,7 +42,7 @@ export default function Brands() {
           }}
         >
           {brandsMock.slice(0, 6).map((product) => (
-            <Box key={product.name} className={classes.item}>
+            <Box key={product.name} className={classes.item} onClick={() => handleOnClickBrand(product)}>
               <img src={product.img} alt={product.name} />
             </Box>
           ))}
@@ -48,6 +59,7 @@ export default function Brands() {
         <ImageCarousel>
           {brandsMock.slice(0, 6).map((product) => (
             <Box
+              onClick={() => handleOnClickBrand(product)}
               key={product.name}
               className={classes.item}
               sx={{

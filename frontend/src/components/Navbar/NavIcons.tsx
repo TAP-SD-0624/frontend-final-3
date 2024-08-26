@@ -9,6 +9,7 @@ import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import useLogic from './useLogic'
 import LoginIcon from '@mui/icons-material/Login';
 import { useNavigate } from 'react-router-dom'
+import useCartContext from '@src/hooks/useCartContext'
 
 interface NavIconsProps {
     onCartOpen: () => void;
@@ -16,13 +17,14 @@ interface NavIconsProps {
 
 const NavIcons: FC<NavIconsProps> = ({ onCartOpen }) => {
     const navigate = useNavigate();
-    const handleClickCart = () => {
-        onCartOpen();
-        navigate("/myCart");
-    }
 
     const { handleCLickOnProfile, handleLogout, handleClick, open, isLGUp, isLoggedIn, anchorEl,
-        anchorElCetagories, handleClose,handleCLickLogin ,toggleTheme, handleClickCetagories, handleCloseCetagories, navItems, openCetagories } = useLogic();
+        anchorElCetagories, handleClose, handleCLickLogin, toggleTheme, handleClickCetagories, handleCloseCetagories, navItems, openCetagories } = useLogic();
+
+    const { getCart } = useCartContext();
+    const cart = getCart();
+    const length = cart.length;
+    console.log(length)
 
     return (
         <Stack
@@ -61,30 +63,33 @@ const NavIcons: FC<NavIconsProps> = ({ onCartOpen }) => {
                 toggleTheme={toggleTheme}
             />
 
-            <IconButton
-                sx={{ width: "24px", height: "24px" }}
-                onClick={handleClickCart}
-            >
-                <Badge
-                    variant="dot"
-                    color="warning"
-                    anchorOrigin={{
-                        vertical: "top",
-                        horizontal: "right",
-                    }}
-                    sx={{
-                        "& .MuiBadge-badge": {
-                            transform: "translate(20%, 50%)",
-                        },
-                    }}
+            {isLoggedIn &&
+                <IconButton
+                    sx={{ width: "24px", height: "24px" }}
+                    onClick={onCartOpen}
                 >
-                    <WorkOutlineIcon
-                        sx={{
-                            color: "var(--icon)",
+                    <Badge
+                        badgeContent={length}
+                        // variant="dot"
+                        color="warning"
+                        anchorOrigin={{
+                            vertical: "top",
+                            horizontal: "right",
                         }}
-                    />{" "}
-                </Badge>
-            </IconButton>
+                        sx={{
+                            "& .MuiBadge-badge": {
+                                transform: "translate(60%, -50%)",
+                            },
+                        }}
+                    >
+                        <WorkOutlineIcon
+                            sx={{
+                                color: "var(--icon)",
+                            }}
+                        />{" "}
+                    </Badge>
+                </IconButton>
+            }
 
             {!isLGUp && (
                 <>

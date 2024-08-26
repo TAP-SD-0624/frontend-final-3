@@ -5,10 +5,10 @@ export default function PriceDetails() {
   const { getCart } = useCartContext();
   const cart = getCart();
   const subtotal = cart.reduce(
-    (acc, item) => acc + item.price * item.qty, 0);
+    (acc, item) => acc + item.price * item.qty, 0).toFixed(2);
   const tax = 2.0;
-  const total = subtotal + tax;
-
+  const total = (parseFloat(subtotal) + tax).toFixed(2);
+  
   return (
     <Box>
       <Stack direction="row" justifyContent="space-between" alignItems="center">

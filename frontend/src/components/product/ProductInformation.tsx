@@ -23,10 +23,14 @@ const ProductInformation = () => {
     brand: "Desil",
     price: 60.80,
     qty: 1,
-    imageUrl: bagImage, 
+    imageUrl: bagImage,
   }
 
-  const { addToCart } = useCartContext();
+  const { addToCart, increaseQuantity, decreaseQuantity, getCart } = useCartContext();
+  const cart = getCart();
+  const cartItem = cart.find((item) => item.id === initialCart.id);
+  console.log(cartItem);
+
   return (
     <Stack
       spacing={2}
@@ -156,6 +160,7 @@ const ProductInformation = () => {
           }}
         >
           <IconButton
+            onClick={() => decreaseQuantity(initialCart.id)}
             sx={{
               width: "24px",
               height: "24px",
@@ -175,9 +180,10 @@ const ProductInformation = () => {
               color: "var(--q-black)",
             }}
           >
-            1
+            {cartItem?.qty}
           </Typography>
           <IconButton
+            onClick={() => increaseQuantity(initialCart.id)}
             sx={{
               width: "24px",
               height: "24px",
@@ -198,7 +204,7 @@ const ProductInformation = () => {
         gap="24px"
       >
         <Button
-         onClick={() => addToCart(initialCart)}
+          onClick={() => addToCart(initialCart)}
           variant="contained"
           sx={{
             backgroundColor: "var(--primary)",

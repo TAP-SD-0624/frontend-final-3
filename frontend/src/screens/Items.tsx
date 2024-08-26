@@ -2,14 +2,20 @@ import HeroSection from "@components/items/HeroSection";
 import ItemsSection from "@components/items/ItemsSection";
 import { useLocation } from "react-router-dom";
 import useCategory from "./hooks/useCategory";
+import useBrand from "./hooks/useBrand";
 
 export default function Items() {
   const location = useLocation();
-  const categoryId = location?.state?.categoryId;
-  console.log(categoryId);
+  const categoryName = location?.state?.categoryName;
+  const brandName = location?.state?.brandName;
 
-  const { categoryData } = useCategory("5d04caf2-d94e-47de-b9f5-60030fac13e1");
-  console.log(categoryData);
+  if (categoryName) {
+    const { categoryData } = useCategory("shirts");
+  }
+
+  if (brandName) {
+    const { brandData } = useBrand("Zara");
+  }
 
   return (
     <div>

@@ -13,18 +13,9 @@ export default function MyCart() {
   }
   return (
     <Container>
-      <Breadcrumbs
-        separator={<NavigateNextIcon fontSize="small" />}
-        aria-label="breadcrumb"
-        sx={{
-          marginBottom: "24px",
-          marginTop: "44px",
-        }}
-      >
-        {breadcrumbs}
-      </Breadcrumbs>
       <Typography
         variant="h4"
+        mt="24px"
         gutterBottom
         color="var(--primary)"
         sx={{

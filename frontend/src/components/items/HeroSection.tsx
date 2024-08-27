@@ -7,6 +7,7 @@ export default function HeroSection() {
   return (
     <Container>
       <Box
+        mt="24px"
         className={classes.heroSection}
         sx={{
           height: {

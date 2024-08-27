@@ -13,7 +13,7 @@ export default function NewArrivals() {
     navigate('/items');
   }
   const handleOnClickProduct = (product: productType) => {
-    navigate("/product", { state: { ProductId: product.slug } });
+    navigate("/product", { state: { productName: product.name } });
   }
 
 

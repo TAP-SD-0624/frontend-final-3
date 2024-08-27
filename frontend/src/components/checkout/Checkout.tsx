@@ -42,18 +42,7 @@ export default function Checkout() {
 
   return (
     <Container>
-      <Breadcrumbs
-        separator={<NavigateNextIcon fontSize="small" />}
-        aria-label="breadcrumb"
-        sx={{
-          marginBottom: "24px",
-          marginTop: "44px",
-          color: "var(--primary)",
-        }}
-      >
-        {breadcrumbs}
-      </Breadcrumbs>
-      <Typography variant="h4" gutterBottom color={"var(--primary)"}>
+      <Typography mt="24px" variant="h4" gutterBottom color={"var(--primary)"}>
         Checkout
       </Typography>
 

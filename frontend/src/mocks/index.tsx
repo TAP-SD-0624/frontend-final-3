@@ -43,7 +43,7 @@ export const productsMock: productType[] = [
   },
   {
     img: bagImage,
-    name: "Grande Blossom Pouch",
+    name: "Grande Blossom",
     price: 25.0,
     slug: "grande-blossom-pouch-2",
     marka: "Grande",

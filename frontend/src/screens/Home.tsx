@@ -7,11 +7,14 @@ import React from "react";
 import useCategories from "./hooks/useCategories";
 import useBrands from "./hooks/useBrands";
 import useProducts from "./hooks/useProducts";
+import useOrders from "./hooks/useOrders";
 
 export default function Home() {
   const { categoriesData } = useCategories();
   const { brandsData } = useBrands();
   const { productsData } = useProducts();
+  const { } = useOrders();
+  
   return (
     <>
       <HeroSection />

@@ -12,12 +12,12 @@ const Checkout = lazy(() => import("@src/screens/Checkout"));
 const MyCart = lazy(() => import("@src/screens/MyCart"));
 const About = lazy(() => import("@src/screens/About"));
 const Product = lazy(() => import("@src/screens/Product"));
-const Welcome = lazy(() => import("@src/screens/Welcome"));
 const NotFound = lazy(() => import('@src/screens/NotFound'));
 const Layoutwithsidebar = lazy(() => import("@components/Layout/Layoutwithsidebar"));
 const Profile = lazy(() => import('@src/screens/Profile'));
 const MyOrders = lazy(() => import('@src/screens/MyOrders'));
 const Order = lazy(() => import('@src/screens/Order'));
+const Welcome = lazy(() => import('@src/screens/Welcome'));
 
 const AppRoutes: FC = () => {
   const { breadcrumbs } = useBreadcrumbs();
@@ -31,12 +31,11 @@ const AppRoutes: FC = () => {
           <Route path="login" element={<SignIn />} />
           <Route path="signUp" element={<SignUp />} />
           <Route path="home" element={<Home />} />
-          <Route path="items" element={<Items />} /> 
+          <Route path="items" element={<Items />} />
           <Route path="product" element={<Product />} />
-
+      
           {/* Protected routes */}
           <Route element={<ProtectedRoute />}>
-            <Route path="welcome" element={<Welcome />} />
             <Route path="checkout" element={<Checkout />} />
             <Route path="myCart" element={<MyCart />} />
             <Route path="user-profile" element={<Layoutwithsidebar />}>

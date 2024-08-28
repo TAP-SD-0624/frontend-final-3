@@ -14,6 +14,9 @@ import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import useCartContext from "@src/hooks/useCartContext";
 import { CartItem } from "@src/types";
 import bagImage from "@src/assets/product-image.png";
+import Remove from "@mui/icons-material/Remove";
+import Item from "@components/cardModal/Item";
+import useLogic from "@components/Navbar/useLogic";
 
 const ProductInformation = () => {
   const initialCart: CartItem =
@@ -23,11 +26,12 @@ const ProductInformation = () => {
     brand: "Desil",
     price: 60.80,
     qty: 1,
-    stock: 1,
+    stock: 5,
     imageUrl: bagImage,
   }
 
-  const { addToCart, increaseQuantity, decreaseQuantity, getCart } = useCartContext();
+  const { isLoggedIn } = useLogic();
+  const { addToCart, increaseQuantity, decreaseQuantity, getCart, removeFromCart } = useCartContext();
   const cart = getCart();
   const cartItem = cart.find((item) => item.id === initialCart.id);
   console.log(cartItem);
@@ -161,6 +165,7 @@ const ProductInformation = () => {
           }}
         >
           <IconButton
+            disabled={!isLoggedIn}
             onClick={() => decreaseQuantity(initialCart.id)}
             sx={{
               width: "24px",
@@ -181,9 +186,10 @@ const ProductInformation = () => {
               color: "var(--q-black)",
             }}
           >
-            {cartItem ? cartItem?.qty : 0}
+            {cartItem ? cartItem?.qty : 1}
           </Typography>
           <IconButton
+            disabled={!isLoggedIn}
             onClick={() => increaseQuantity(initialCart.id)}
             sx={{
               width: "24px",
@@ -205,24 +211,31 @@ const ProductInformation = () => {
         gap="24px"
       >
         <Button
-          onClick={() => addToCart(initialCart)}
+          disabled={initialCart.stock === 0 || !isLoggedIn}
+          onClick={!cartItem ? () => addToCart(initialCart) : () => removeFromCart(initialCart.id)}
           variant="contained"
           sx={{
-            backgroundColor: "var(--primary)",
+            backgroundColor: cartItem ? "var(--error)" : "var(--primary)",
             color: "var(--bright)",
             gap: "8px",
-
             flex: "1",
             display: "flex",
             alignItems: "center",
+            '&:hover': {
+              backgroundColor: cartItem ? "var(--error)" : "var(--primary)",
+            },
           }}
         >
-          <WorkOutlineIcon
+          {cartItem ? <Remove sx={{
+            width: "24px",
+            height: "24px",
+          }} /> : <WorkOutlineIcon
             sx={{
               width: "24px",
               height: "24px",
             }}
-          />
+          />}
+
           <Typography
             sx={{
               fontFamily: "Inter",
@@ -235,11 +248,12 @@ const ProductInformation = () => {
               },
             }}
           >
-            Add to bag
+            {cartItem ? "Remove from bag" : "Add to bag"}
           </Typography>
         </Button>
 
         <Button
+          disabled={!isLoggedIn}
           variant="outlined"
           sx={{
             backgroundColor: "var(--bright)",

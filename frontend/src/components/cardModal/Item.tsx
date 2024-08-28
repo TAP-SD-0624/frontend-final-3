@@ -28,7 +28,7 @@ export default function Item({ item }) {
             fontWeight="bold"
             color="var(--high-emphasis)"
           >
-            Coatch
+            {item.brand}
           </Typography>
           <IconButton onClick={() => removeFromCart(item.id)} size="small" sx={{ ml: 2, color: "var(--low-emphasis)" }}>
             <CloseIcon />

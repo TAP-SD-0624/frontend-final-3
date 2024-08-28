@@ -17,7 +17,6 @@ const Header = ({ pageName }: HeaderProps) => {
     switch (pageName) {
         case '/user-profile/order':
             title = 'Order#874522648';
-
             break;
         case '/user-profile/myOrders':
             title = 'My Orders';
@@ -31,7 +30,7 @@ const Header = ({ pageName }: HeaderProps) => {
                 </Search>
             </Stack>
             break;
-        case '/user-profile/profile':
+        case '/user-profile':
             title = 'Personal Information';
             button = <IconButton
                 sx={{
@@ -53,7 +52,7 @@ const Header = ({ pageName }: HeaderProps) => {
                     fontSize="small"
                 />
                 <Typography
-                    display={isXs ? "none" : "block"}
+                display={isXs ? "none" : "block"}
                     sx={{
                         fontFamily: "Inter",
                         fontWeight: "600",
@@ -77,9 +76,8 @@ const Header = ({ pageName }: HeaderProps) => {
         <Stack
             direction="row"
             alignItems="center"
-            justifyContent="space-between"
+            justifyContent= "space-between"
             width="100%"
-            mt="24px"
         >
             <Typography
                 sx={{

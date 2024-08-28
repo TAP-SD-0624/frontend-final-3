@@ -8,7 +8,7 @@ const initialCart: CartItem[] = [
   {
     id: '1',
     name: "Leather Coach Bag",
-    brand: "Coach",
+    brand: "Channel",
     price: 54.69,
     qty: 1,
     stock: 7,
@@ -32,6 +32,7 @@ export interface CartContextValues {
   decreaseQuantity: (id: string) => void;
   removeFromCart: (id: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
+  clearCart: () => void;
 }
 
 export const CartContext = createContext<CartContextValues>({
@@ -41,6 +42,7 @@ export const CartContext = createContext<CartContextValues>({
   decreaseQuantity: noop,
   removeFromCart: noop,
   updateQuantity: noop,
+  clearCart: noop,
 });
 
 interface CartProviderProps {
@@ -136,13 +138,18 @@ export const CartProvider: FC<CartProviderProps> = ({ children }) => {
     );
   };
 
+  const clearCart = () => {
+    setCart([]);
+  };
+
   const contextValues: CartContextValues = {
     addToCart: addToCart,
     decreaseQuantity: decreaseQuantity,
     increaseQuantity: increaseQuantity,
     removeFromCart: removeFromCart,
     updateQuantity: updateQuantity,
-    getCart: getCart
+    getCart: getCart,
+    clearCart: clearCart,
   }
 
   return (

@@ -14,6 +14,7 @@ import { useMediaQuery } from "@mui/material";
 import { mockOrders } from '@src/mocks';
 import TabsSection from '@components/TabsSection';
 import "./table.css"
+import { useNavigate } from 'react-router-dom';
 const MyOrders = () => {
     const [tabIndex, setTabIndex] = useState(0);
 
@@ -24,11 +25,15 @@ const MyOrders = () => {
 
     //@ts-ignore
     const isXs = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
+    const navigate = useNavigate();
+    const handleOnClick = () => {
+        navigate("/user-profile/order")
+    }
 
     const orderTabs = ["Completed", "Processing", "Cancelled"];
     const orderTabPanels = [<Grid container spacing={10}>
         <Grid item xs={6} sm={12}>
-            <Table sx={{ width: "100%"}}>
+            <Table sx={{ width: "100%" }}>
                 <TableHead>
 
                     <TableRow sx={{ width: "100%" }}>
@@ -86,7 +91,7 @@ const MyOrders = () => {
 
                             </TableCell>
                             <TableCell sx={{ verticalAlign: "top", borderBottom: "none", backgroundColor: "var(--grey)" }}>
-                                <IconButton sx={{ width: "24px", height: "24px" }}>
+                                <IconButton onClick={handleOnClick} sx={{ width: "24px", height: "24px" }}>
                                     <ArrowForwardIosIcon sx={{ width: "fit-content", height: "15px", color: "var(--low-emphasis)" }} />
                                 </IconButton>
 

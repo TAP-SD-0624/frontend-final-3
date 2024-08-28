@@ -8,7 +8,6 @@ import {
   Divider,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { mockCartItems } from "@src/mocks";
 import Item from "./Item";
 import PriceDetails from "./PriceDetails";
 import AppleCode from "./AppleCode";
@@ -23,13 +22,6 @@ interface CartModalProps {
 export default function CartModal({ open, onClose }: CartModalProps) {
   const { getCart } = useCartContext();
   const cart = getCart();
-
-  const subtotal = cart.reduce(
-    (acc, item) => acc + item.price * item.qty,
-    0
-  );
-  const tax = 2.0;
-  const total = subtotal + tax;
   const navigat = useNavigate();
   const handleOnClick = () => {
     navigat("/checkout");
@@ -48,6 +40,7 @@ export default function CartModal({ open, onClose }: CartModalProps) {
           right: { xs: 0, sm: 16 },
           margin: { xs: 0, sm: 8 },
           width: { xs: "100%", sm: "460px" },
+          maxHeight: "85vh",
         },
       }}
     >
@@ -72,47 +65,54 @@ export default function CartModal({ open, onClose }: CartModalProps) {
         sx={{
           background: "var(--bright)",
           px: "32px",
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between"
         }}
       >
-        {cart.map((item) => (
-          <>
-            <Item item={item} />
-            <Divider
-              sx={{
-                my: "24px",
-                background: "var(--divider)",
-              }}
-            />
-          </>
-        ))}
-
-        <PriceDetails />
-        <AppleCode />
-
-        <Box mt={3} display="flex" justifyContent="center">
-          <Button
-            onClick={handleOnClick}
-            variant="contained"
-            sx={{
-              background: "var(--primary)",
-              color: "var(--bright)",
-            }}
-            size="large"
-            fullWidth
-          >
-            Place Order
-          </Button>
+        <Box sx={{flex: 1, overflowY: "scroll"}}>
+          {cart.map((item) => (
+            <>
+              <Item item={item} />
+              <Divider
+                sx={{
+                  my: "24px",
+                  background: "var(--divider)",
+                }}
+              />
+            </>
+          ))}
         </Box>
-        <Box mt={2} textAlign="center">
-          <Button
-            variant="text"
-            sx={{
-              color: "var(--primary)",
-              textDecoration: "underline",
-            }}
-          >
-            Continue Shopping
-          </Button>
+        <Box>
+          <PriceDetails />
+          <AppleCode />
+
+          <Box mt={3} display="flex" justifyContent="center">
+            <Button
+              onClick={handleOnClick}
+              variant="contained"
+              sx={{
+                background: "var(--primary)",
+                color: "var(--bright)",
+              }}
+              size="large"
+              fullWidth
+            >
+              Place Order
+            </Button>
+          </Box>
+          <Box mt={2} textAlign="center">
+            <Button
+              variant="text"
+              sx={{
+                color: "var(--primary)",
+                textDecoration: "underline",
+              }}
+            >
+              Continue Shopping
+            </Button>
+          </Box>
         </Box>
       </DialogContent>
     </Dialog>

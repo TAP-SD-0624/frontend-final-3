@@ -3,6 +3,8 @@ import { Menu, MenuItem, Avatar, ListItemIcon, Divider } from '@mui/material'
 import React, { FC } from 'react'
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LanguageIcon from "@mui/icons-material/Language";
+import { ShoppingBagOutlined } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 interface AccountMenuProps {
     anchorEl: HTMLElement | null;
@@ -12,9 +14,10 @@ interface AccountMenuProps {
     handleLogout: () => void;
     open: boolean;
     toggleTheme: () => void;
+    handleClickOnCart: () => void;
 }
 
-const AccountMenu: FC<AccountMenuProps> = ({ anchorEl, toggleTheme, handleCLickOnProfile, handleLogout, isLoggedIn, handleClose, open }) => {
+const AccountMenu: FC<AccountMenuProps> = ({ anchorEl, toggleTheme, handleClickOnCart, handleCLickOnProfile, handleLogout, isLoggedIn, handleClose, open }) => {
     return (
         <Menu
             anchorEl={anchorEl}
@@ -62,13 +65,12 @@ const AccountMenu: FC<AccountMenuProps> = ({ anchorEl, toggleTheme, handleCLickO
                 </ListItemIcon>
                 Switch Theme
             </MenuItem>
-            <MenuItem>
+            <MenuItem onClick={handleClickOnCart}>
                 <ListItemIcon>
-                    <LanguageIcon fontSize="small" />
+                    <ShoppingBagOutlined fontSize="small" />
                 </ListItemIcon>
-                Switch Language{" "}
+                My Cart{" "}
             </MenuItem>
-
             {isLoggedIn &&
                 <><Divider /><MenuItem onClick={handleLogout}>
                     <ListItemIcon>

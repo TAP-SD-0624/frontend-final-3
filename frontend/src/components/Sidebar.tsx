@@ -10,10 +10,10 @@ const Sidebar = () => {
   const navigate = useNavigate();
 
   const handleClick = (destination: String) => {
+    if (destination === "Personal Information")
+      navigate('/user-profile')
     if (destination === "My Orders")
       navigate('/user-profile/myOrders')
-    else if (destination === "Refer and Earn")
-      navigate('/user-profile/order');
   }
 
 

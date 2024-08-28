@@ -19,7 +19,7 @@ const NavIcons: FC<NavIconsProps> = ({ onCartOpen }) => {
     const navigate = useNavigate();
 
     const { handleCLickOnProfile, handleLogout, handleClick, open, isLGUp, isLoggedIn, anchorEl,
-        anchorElCetagories, handleClose, handleCLickLogin, toggleTheme, handleClickCetagories, handleCloseCetagories, navItems, openCetagories } = useLogic();
+        anchorElCetagories, handleClickOnCart, handleClose, handleCLickLogin, toggleTheme, handleClickCetagories, handleCloseCetagories, navItems, openCetagories } = useLogic();
 
     const { getCart } = useCartContext();
     const cart = getCart();
@@ -61,6 +61,7 @@ const NavIcons: FC<NavIconsProps> = ({ onCartOpen }) => {
                 isLoggedIn={isLoggedIn}
                 open={open}
                 toggleTheme={toggleTheme}
+                handleClickOnCart={handleClickOnCart}
             />
 
             {isLoggedIn &&

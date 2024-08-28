@@ -24,7 +24,7 @@ export default function PriceDetails() {
           Tax:
         </Typography>
         <Typography variant="body1" color="var(--high-emphasis)">
-          $2
+          $2.00
         </Typography>
       </Stack>
       <Stack direction="row" justifyContent="space-between" alignItems="center">

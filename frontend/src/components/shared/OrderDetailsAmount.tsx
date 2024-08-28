@@ -37,7 +37,7 @@ export default function OrderDetailsAmount({
           Delivery Fee
         </Typography>
         <Typography variant="body2" color="var(--high-emphasis)">
-          -${deliveryFee.toFixed(2)}
+          ${deliveryFee.toFixed(2)}
         </Typography>
       </Box>
       <Box display="flex" justifyContent="space-between" fontWeight="medium">

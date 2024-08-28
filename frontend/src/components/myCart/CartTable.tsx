@@ -11,6 +11,7 @@ import {
   Link,
 } from "@mui/material";
 import { mockCartItems } from "@src/mocks";
+import useCartContext from "@src/hooks/useCartContext";
 
 interface CartItemProps {
   id: number;
@@ -22,6 +23,9 @@ interface CartItemProps {
 }
 
 const CartTable = () => {
+  const { getCart, removeFromCart } = useCartContext();
+  const cart = getCart();
+
   return (
     <TableContainer>
       <Table>
@@ -38,7 +42,7 @@ const CartTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {mockCartItems.map((item) => (
+          {cart.map((item) => (
             <TableRow key={item.id} sx={{ borderBottom: "none" }}>
               <TableCell sx={{ verticalAlign: "top", borderBottom: "none" }}>
                 <Box display="flex" alignItems="flex-start">
@@ -90,7 +94,7 @@ const CartTable = () => {
                     mt: 1,
                     fontSize: "14px",
                   }}
-                  onClick={() => console.log("Remove item", item.id)}
+                  onClick={() => removeFromCart(item.id)}
                 >
                   Remove
                 </Link>

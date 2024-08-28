@@ -186,7 +186,7 @@ const ProductInformation = () => {
               color: "var(--q-black)",
             }}
           >
-            {cartItem ? cartItem?.qty : 1}
+            {cartItem && isLoggedIn ? cartItem?.qty : 1}
           </Typography>
           <IconButton
             disabled={!isLoggedIn}

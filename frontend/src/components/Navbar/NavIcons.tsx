@@ -1,5 +1,5 @@
-import React, { FC} from 'react'
-import { Stack, IconButton, Badge } from '@mui/material'
+import React, { FC } from 'react'
+import { Stack, IconButton, Badge, Tooltip } from '@mui/material'
 import AccountMenu from './AccountMenu'
 import CetagoriesSmScreens from './CetagoriesSmScreens'
 import CetegoriesSmMenu from './CetegoriesSmMenu'
@@ -7,14 +7,24 @@ import Settings from './Settings'
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import useLogic from './useLogic'
+import LoginIcon from '@mui/icons-material/Login';
+import { useNavigate } from 'react-router-dom'
+import useCartContext from '@src/hooks/useCartContext'
 
 interface NavIconsProps {
     onCartOpen: () => void;
 }
 
 const NavIcons: FC<NavIconsProps> = ({ onCartOpen }) => {
+    const navigate = useNavigate();
+
     const { handleCLickOnProfile, handleLogout, handleClick, open, isLGUp, isLoggedIn, anchorEl,
-        anchorElCetagories, handleClose, toggleTheme, handleClickCetagories, handleCloseCetagories, navItems, openCetagories } = useLogic();
+        anchorElCetagories, handleClickOnCart, handleClose, handleCLickLogin, toggleTheme, handleClickCetagories, handleCloseCetagories, navItems, openCetagories } = useLogic();
+
+    const { getCart } = useCartContext();
+    const cart = getCart();
+    const length = cart.length;
+    console.log(length)
 
     return (
         <Stack
@@ -23,6 +33,17 @@ const NavIcons: FC<NavIconsProps> = ({ onCartOpen }) => {
             justifyContent="space-between"
             alignItems="center"
         >
+            {!isLoggedIn &&
+                <Tooltip title="Login">
+                    <IconButton onClick={handleCLickLogin} sx={{ width: "24px", height: "24px" }}>
+                        <LoginIcon
+                            sx={{
+                                color: "var(--icon)",
+                            }}
+                        />
+                    </IconButton>
+                </Tooltip>
+            }
             <IconButton sx={{ width: "24px", height: "24px" }}>
                 <FavoriteBorderIcon
                     sx={{
@@ -40,32 +61,36 @@ const NavIcons: FC<NavIconsProps> = ({ onCartOpen }) => {
                 isLoggedIn={isLoggedIn}
                 open={open}
                 toggleTheme={toggleTheme}
+                handleClickOnCart={handleClickOnCart}
             />
 
-            <IconButton
-                sx={{ width: "24px", height: "24px" }}
-                onClick={onCartOpen}
-            >
-                <Badge
-                    variant="dot"
-                    color="warning"
-                    anchorOrigin={{
-                        vertical: "top",
-                        horizontal: "right",
-                    }}
-                    sx={{
-                        "& .MuiBadge-badge": {
-                            transform: "translate(20%, 50%)",
-                        },
-                    }}
+            {isLoggedIn &&
+                <IconButton
+                    sx={{ width: "24px", height: "24px" }}
+                    onClick={onCartOpen}
                 >
-                    <WorkOutlineIcon
-                        sx={{
-                            color: "var(--icon)",
+                    <Badge
+                        badgeContent={length}
+                        // variant="dot"
+                        color="warning"
+                        anchorOrigin={{
+                            vertical: "top",
+                            horizontal: "right",
                         }}
-                    />{" "}
-                </Badge>
-            </IconButton>
+                        sx={{
+                            "& .MuiBadge-badge": {
+                                transform: "translate(60%, -50%)",
+                            },
+                        }}
+                    >
+                        <WorkOutlineIcon
+                            sx={{
+                                color: "var(--icon)",
+                            }}
+                        />{" "}
+                    </Badge>
+                </IconButton>
+            }
 
             {!isLGUp && (
                 <>

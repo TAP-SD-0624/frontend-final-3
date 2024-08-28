@@ -2,7 +2,6 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import { Box, Container, IconButton, Stack, Theme, Typography, useMediaQuery } from "@mui/material";
 import Sidebar from "@components/Sidebar";
-import BreadCrumbs from "@components/product/BreadCrumbs";
 import MobileDrawer from "@components/MobileDrawer";
 import { useLocation } from 'react-router-dom';
 import Header from "./Header";
@@ -17,7 +16,6 @@ const Layoutwithsidebar = () => {
     return (
         <>
             <Container>
-                <BreadCrumbs />
                 <Header pageName={path} />
                 <Stack
                     width="100%"

@@ -33,10 +33,10 @@ export default function MobileDrawer() {
     const navigate = useNavigate();
 
     const handleClick = (destination: String) => {
-        destination === "Personal Information" ?
-            navigate('/user-profile/profile') :
-            destination === "My Orders" ? navigate('/user-profile/myOrders') :
-                navigate('/user-profile/order');
+        if (destination === "My Orders")
+            navigate('/user-profile/myOrders')
+        else if (destination === "Refer and Earn")
+            navigate('/user-profile/order');
     }
 
 

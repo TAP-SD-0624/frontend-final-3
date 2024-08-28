@@ -54,28 +54,7 @@ ol {
   padding: 0 1em;
 }
 
-button {
-  display: inline-block;
-  padding: 0.5em 1em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #007bff;
-  color: #ffffff;
-  border: none;
-  border-radius: 0.25em;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
 
-button:hover {
-  background-color: #0056b3;
-}
-
-button:focus {
-  outline: 2px solid #0056b3;
-  outline-offset: 2px;
-}
 
 input,
 textarea {
@@ -93,38 +72,3 @@ textarea:focus {
   outline: none;
 }
 
-/* @media (prefers-color-scheme: dark) {
-  body {
-    background-color: #121212;
-    color: #e0e0e0;
-  }
-
-  a {
-    color: #8ab4f8;
-  }
-
-  a:hover {
-    color: #669df6;
-  }
-
-  button {
-    background-color: #1a73e8;
-    color: #ffffff;
-  }
-
-  button:hover {
-    background-color: #0056b3;
-  }
-
-  input,
-  textarea {
-    background-color: #333;
-    color: #e0e0e0;
-    border: 1px solid #555;
-  }
-
-  input:focus,
-  textarea:focus {
-    border-color: #1a73e8;
-  }
-} */

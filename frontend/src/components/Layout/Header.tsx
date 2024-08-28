@@ -17,7 +17,6 @@ const Header = ({ pageName }: HeaderProps) => {
     switch (pageName) {
         case '/user-profile/order':
             title = 'Order#874522648';
-
             break;
         case '/user-profile/myOrders':
             title = 'My Orders';
@@ -31,7 +30,7 @@ const Header = ({ pageName }: HeaderProps) => {
                 </Search>
             </Stack>
             break;
-        case '/user-profile/profile':
+        case '/user-profile':
             title = 'Personal Information';
             button = <IconButton
                 sx={{

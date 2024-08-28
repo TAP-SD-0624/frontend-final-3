@@ -13,6 +13,16 @@ export interface productType {
   discount: number;
 }
 
+export interface CartItem {
+  id: string;
+  name: string;
+  brand: string;
+  price: number;
+  imageUrl: string;
+  qty: number;
+  stock: number;
+ }
+
 export interface BaseResponse {
   success: boolean;
   status: number;

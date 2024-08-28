@@ -4,15 +4,12 @@ import { productsMock } from "@src/mocks";
 import classes from "./Handpicked.module.css";
 import ImageCarousel from "@components/shared/ImageCarousel";
 import { productType } from "@src/types";
-import useCategories from "@src/screens/hooks/useCategories";
-import useCategory from "@src/screens/hooks/useCategory";
 import { useNavigate } from "react-router-dom";
 
 export default function Handpicked() {
-  const { categoriesData } = useCategories();
   const navigate = useNavigate();
   const handleOnClickCategory = (category: productType) => {
-    navigate("/items", { state: { categoryId: category.slug } });
+    navigate("/items", { state: { categoryName: category.name } });
   }
 
   return (

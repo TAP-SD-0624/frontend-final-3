@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Typography, Divider, Stack, Button } from "@mui/material";
 import OrderDetailsAmount from "@components/shared/OrderDetailsAmount";
+import useCartContext from "@src/hooks/useCartContext";
 
 interface OrderDetailsProps {
   subTotal: number;

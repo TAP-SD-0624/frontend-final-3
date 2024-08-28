@@ -4,33 +4,77 @@ import * as Yup from "yup";
 import { Button, Grid, Typography, Collapse, IconButton } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CustomTextField from "@components/shared/CustomTextField"; // Import your shared component
+import { useMutation } from "@tanstack/react-query";
+import useSnackbar from "@src/hooks/useSnackbar";
+import order from "@src/api/order";
+import useCartContext from "@src/hooks/useCartContext";
 
 const validationSchema = Yup.object({
-  fullName: Yup.string().required("Full Name is required"),
-  mobileNumber: Yup.string().required("Mobile Number is required"),
-  streetAddress: Yup.string().required("Street Address is required"),
+  orderOwner: Yup.string().required("Order Owner Name is required"),
+  phoneNumber: Yup.string().required("Mobile Number is required"),
+  street: Yup.string().required("Street Address is required"),
   city: Yup.string().required("City is required"),
   state: Yup.string().required("State is required"),
-  pinCode: Yup.string().required("Pin Code is required"),
+  pin: Yup.string().required("Pin Code is required"),
 });
+
+export const OrderMutationKey = ["Order"];
 
 export default function AddressForm() {
   const [open, setOpen] = React.useState(true);
+  const { showSnackbar } = useSnackbar();
+  const { clearCart, getCart } = useCartContext();
+  const cart = getCart();
+  const itemsList = cart.map(item => ({
+    id: item.id,
+    quantity: item.qty,
+  }));
+
+  const { mutate: orderMutate } = useMutation({
+    mutationKey: OrderMutationKey,
+    mutationFn: order,
+    onSuccess: (data) => {
+      showSnackbar({ severity: "success", message: data.message });
+      clearCart();
+    },
+    onError: () => {
+      showSnackbar({ severity: "error", message: "Somthing wrong!" });
+    },
+  });
+
 
   const formik = useFormik({
     initialValues: {
-      fullName: "",
-      mobileNumber: "",
-      streetAddress: "",
+      itemsList, // Pass itemsList here
+      orderOwner: "",
+      phoneNumber: "",
+      street: "",
       city: "",
       state: "",
-      pinCode: "",
+      pin: "",
+      cardNumber: "", // Add cardNumber field
     },
     validationSchema,
     onSubmit: (values) => {
-      console.log(values);
+      const requestBody = {
+        itemsList: values.itemsList,
+        address: {
+          state: values.state,
+          city: values.city,
+          street: values.street,
+          pin: values.pin,
+        },
+        phoneNumber: values.phoneNumber,
+        orderOwner: values.orderOwner,
+        cardNumber: values.cardNumber,
+      };
+
+      orderMutate(requestBody);
     },
   });
+
+
+
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -38,29 +82,29 @@ export default function AddressForm() {
         <Grid item xs={12} sm={6}>
           <CustomTextField
             id="fullName"
-            name="fullName"
+            name="orderOwner"
             label="Full Name"
             placeholder="Enter Name"
-            value={formik.values.fullName}
+            value={formik.values.orderOwner}
             onChange={formik.handleChange}
-            error={formik.touched.fullName && Boolean(formik.errors.fullName)}
-            helperText={formik.touched.fullName && formik.errors.fullName}
+            error={formik.touched.orderOwner && Boolean(formik.errors.orderOwner)}
+            helperText={formik.touched.orderOwner && formik.errors.orderOwner}
             variant="outlined"
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <CustomTextField
             id="mobileNumber"
-            name="mobileNumber"
+            name="phoneNumber"
             label="Mobile Number"
             placeholder="+11"
-            value={formik.values.mobileNumber}
+            value={formik.values.phoneNumber}
             onChange={formik.handleChange}
             error={
-              formik.touched.mobileNumber && Boolean(formik.errors.mobileNumber)
+              formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)
             }
             helperText={
-              formik.touched.mobileNumber && formik.errors.mobileNumber
+              formik.touched.phoneNumber && formik.errors.phoneNumber
             }
             variant="outlined"
           />
@@ -68,17 +112,17 @@ export default function AddressForm() {
         <Grid item xs={12} sm={6}>
           <CustomTextField
             id="streetAddress"
-            name="streetAddress"
+            name="street"
             label="Street Address"
             placeholder="Enter Address"
-            value={formik.values.streetAddress}
+            value={formik.values.street}
             onChange={formik.handleChange}
             error={
-              formik.touched.streetAddress &&
-              Boolean(formik.errors.streetAddress)
+              formik.touched.street &&
+              Boolean(formik.errors.street)
             }
             helperText={
-              formik.touched.streetAddress && formik.errors.streetAddress
+              formik.touched.street && formik.errors.street
             }
             variant="outlined"
           />
@@ -112,13 +156,13 @@ export default function AddressForm() {
         <Grid item xs={12} sm={6}>
           <CustomTextField
             id="pinCode"
-            name="pinCode"
+            name="pin"
             label="Pin Code"
             placeholder="Enter Pin Code"
-            value={formik.values.pinCode}
+            value={formik.values.pin}
             onChange={formik.handleChange}
-            error={formik.touched.pinCode && Boolean(formik.errors.pinCode)}
-            helperText={formik.touched.pinCode && formik.errors.pinCode}
+            error={formik.touched.pin && Boolean(formik.errors.pin)}
+            helperText={formik.touched.pin && formik.errors.pin}
             variant="outlined"
           />
         </Grid>

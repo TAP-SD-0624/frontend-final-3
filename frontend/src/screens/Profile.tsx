@@ -17,16 +17,14 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import TextField from "@src/components/shared/TextField";
 import { FormikProvider, Form } from "formik";
 import useLoginForm from "./SignIn/useLoginForm";
-
+import classes from "./Profile.module.css"
 const Profile = () => {
   const { formikProps, isPending } = useLoginForm();
   return (
     <Box>
       <Typography
+        className={classes.header}
         sx={{
-          fontFamily: "Inter",
-          fontWeight: "600",
-          color: "var(--dark)",
           fontSize: {
             xs: "16px",
             sm: "17px",
@@ -122,12 +120,7 @@ const Profile = () => {
                   <Grid item xs={12} sm={6}>
                     <Stack gap="8px">
                       <label
-                        style={{
-                          fontFamily: "Inter",
-                          fontSize: "16px",
-                          fontWeight: "500",
-                          color: "var(--high-emphasis)",
-                        }}
+                        className={classes.label}
                       >
                         First Name
                       </label>
@@ -156,12 +149,7 @@ const Profile = () => {
                   <Grid item xs={12} sm={6}>
                     <Stack gap="8px">
                       <label
-                        style={{
-                          fontFamily: "Inter",
-                          fontSize: "16px",
-                          fontWeight: "500",
-                          color: "var(--high-emphasis)",
-                        }}
+                        className={classes.label}
                       >
                         Last Name
                       </label>
@@ -193,44 +181,24 @@ const Profile = () => {
               <Grid item xs={12} sm={6}>
                 <Stack gap="8px" mt="8px">
                   <label
-                    style={{
-                      fontFamily: "Inter",
-                      fontSize: "16px",
-                      fontWeight: "500",
-                      color: "var(--high-emphasis)",
-                    }}
+                    className={classes.label}
                   >
                     Email
                   </label>
                   <TextField
+                    className={classes.textField}
                     name="email"
                     type="email"
                     placeholder="Johndoe@johndoe.com"
                     fullWidth
                     id="email"
-                    sx={{
-                      fontFamily: "Inter",
-                      fontSize: "16px",
-                      fontWeight: "500",
-                      color: "var(--low-emphasis)",
-                      backgroundColor: "var(--grey)",
-                      margin: "0px",
-                      borderColor: "var(--grey)",
-                    }}
                   />
                 </Stack>
               </Grid>
             </Grid>
             <Stack gap="8px" mt="8px">
 
-              <label
-                style={{
-                  fontFamily: "Inter",
-                  fontSize: "16px",
-                  fontWeight: "500",
-                  color: "var(--high-emphasis)",
-                }}
-              >
+              <label className={classes.label}              >
                 Mobile Number
               </label>
 
@@ -238,20 +206,12 @@ const Profile = () => {
                 <Grid container gap="8px">
                   <Grid item xs={3} sm={2}>
                     <TextField
+                      className={classes.textField}
                       name="mobile"
                       placeholder="+11"
                       type="tel"
-                      id="email"
+                      id="tel"
                       fullWidth
-                      sx={{
-                        fontFamily: "Inter",
-                        fontSize: "16px",
-                        fontWeight: "500",
-                        color: "var(--low-emphasis)",
-                        backgroundColor: "var(--grey)",
-                        margin: "0px",
-                        borderColor: "var(--grey)",
-                      }}
                     />
                   </Grid>
                   <Grid item xs={8} sm={6}>
@@ -262,15 +222,7 @@ const Profile = () => {
                       type="tel"
                       id="nobile"
                       fullWidth
-                      sx={{
-                        fontFamily: "Inter",
-                        fontSize: "16px",
-                        fontWeight: "500",
-                        color: "var(--low-emphasis)",
-                        backgroundColor: "var(--grey)",
-                        margin: "0px",
-                        borderColor: "var(--grey)",
-                      }}
+                      className={classes.textField}
                     />
                   </Grid>
                 </Grid>
@@ -279,14 +231,7 @@ const Profile = () => {
             <Grid container>
               <Grid item xs={12} sm={6}>
                 <Stack gap="8px" mt="8px">
-                  <label
-                    style={{
-                      fontFamily: "Inter",
-                      fontSize: "16px",
-                      fontWeight: "500",
-                      color: "var(--high-emphasis)",
-                    }}
-                  >
+                  <label className={classes.label}>
                     Date of birth
                   </label>
                   <TextField
@@ -294,14 +239,10 @@ const Profile = () => {
                     placeholder="DD/MM/YYYY"
                     type="date"
                     id="date"
+                    className={classes.textField}
                     fullWidth
                     sx={{
-                      fontFamily: "Inter",
-                      fontSize: "16px",
-                      fontWeight: "500",
-                      color: "var(--low-emphasis)",
-                      backgroundColor: "var(--grey)",
-                      margin: "0px",
+
                       textTransform: "uppercase",
                       borderColor: "var(--grey)",
                     }}
@@ -312,10 +253,8 @@ const Profile = () => {
             </Grid>
             <Stack marginTop="40px" width="inhirit"></Stack>
             <Typography
+              className={classes.header}
               sx={{
-                fontFamily: "Inter",
-                fontWeight: "600",
-                color: "var(--dark)",
                 fontSize: {
                   xs: "16px",
                   sm: "17px",
@@ -330,14 +269,7 @@ const Profile = () => {
             <Grid container>
               <Grid item xs={12} sm={6}>
                 <Stack mt="37px" gap="8px">
-                  <label
-                    style={{
-                      fontFamily: "Inter",
-                      fontSize: "16px",
-                      fontWeight: "500",
-                      color: "var(--high-emphasis)",
-                    }}
-                  >
+                  <label className={classes.label}>
                     Current Password
                   </label>
                   <TextField
@@ -362,14 +294,7 @@ const Profile = () => {
             <Grid container>
               <Grid item xs={12} sm={6}>
                 <Stack mt="16px" gap="8px">
-                  <label
-                    style={{
-                      fontFamily: "Inter",
-                      fontSize: "16px",
-                      fontWeight: "500",
-                      color: "var(--high-emphasis)",
-                    }}
-                  >
+                  <label className={classes.label}>
                     New Password
                   </label>
                   <Stack
@@ -410,14 +335,7 @@ const Profile = () => {
             <Grid container>
               <Grid item xs={12} sm={6}>
                 <Stack mt="16px" gap="8px">
-                  <label
-                    style={{
-                      fontFamily: "Inter",
-                      fontSize: "16px",
-                      fontWeight: "500",
-                      color: "var(--high-emphasis)",
-                    }}
-                  >
+                  <label className={classes.label}>
                     Confirm Password
                   </label>
                   <TextField

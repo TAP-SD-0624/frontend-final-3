@@ -12,11 +12,10 @@ export default function NewArrivals() {
   const handleOnClickViewMore = () => {
     navigate('/items');
   }
-
   const handleOnClickProduct = (product: productType) => {
-    console.log(product);
-    navigate('/product');
+    navigate("/product", { state: { productName: product.name } });
   }
+
 
   return (
     <Box className={classes.newArrivels}>

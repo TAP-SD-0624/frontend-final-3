@@ -20,6 +20,11 @@ const useLogic = () => {
         setAnchorEl(event.currentTarget);
     };
 
+    const handleClickOnCart = () => {
+        handleClose();
+        navigate("/myCart");
+    }
+
     const handleCloseCetagories = () => {
         setAnchorElCetagories(null);
     };
@@ -29,8 +34,21 @@ const useLogic = () => {
     };
 
     const handleClose = () => {
-        setAnchorEl(null);
+        console.log(anchorEl)
+        setAnchorEl(prev => {
+            // If prev is not null, close the menu
+            if (prev) {
+                return null;
+            }
+            // If prev is already null, do nothing
+            return prev;
+        });
     };
+    ;
+
+    const handleCLickLogin = () => {
+        navigate("/login");
+    }
 
 
     const { showSnackbar } = useSnackbar();
@@ -70,6 +88,8 @@ const useLogic = () => {
         handleCloseCetagories,
         navItems,
         openCetagories,
+        handleCLickLogin,
+        handleClickOnCart,
     }
 }
 

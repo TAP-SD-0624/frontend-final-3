@@ -11,8 +11,7 @@ interface TabsInterface {
 const TabsSection: React.FC<TabsInterface> = ({ tab, tabPanel }) => {
   const [tabIndex, setTabIndex] = useState(0);
 
-  //@ts-ignore
-  const handleChange = (event, newValue) => {
+  const handleChange = (_, newValue: number) => {
     setTabIndex(newValue);
   };
 

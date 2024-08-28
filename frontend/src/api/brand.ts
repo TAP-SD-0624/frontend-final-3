@@ -1,7 +1,7 @@
 import React from "react";
 import axiosInstance from "./index";
 
-interface CategoryResponse {
+interface BrandResponse {
   products: [
     {
       isLimitedEdition: boolean;
@@ -26,9 +26,9 @@ interface CategoryResponse {
   ];
 }
 
-const category = async (name: string) => {
-  const url = `/products?category=${name}`;
-  return axiosInstance.get<CategoryResponse>(url).then((res) => res.data);
+const brand = async (name: string) => {
+  const url = `/products?brand=${name}`;
+  return axiosInstance.get<BrandResponse>(url).then((res) => res.data);
 };
 
-export default category;
+export default brand;

@@ -23,6 +23,7 @@ const ProductInformation = () => {
     brand: "Desil",
     price: 60.80,
     qty: 1,
+    stock: 1,
     imageUrl: bagImage,
   }
 
@@ -180,7 +181,7 @@ const ProductInformation = () => {
               color: "var(--q-black)",
             }}
           >
-            {cartItem?.qty}
+            {cartItem ? cartItem?.qty : 0}
           </Typography>
           <IconButton
             onClick={() => increaseQuantity(initialCart.id)}

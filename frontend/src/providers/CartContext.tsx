@@ -2,6 +2,7 @@ import React, { ReactNode, useState, createContext, FC, useEffect } from 'react'
 import { CartItem } from '../types'
 import { noop } from '@src/utils';
 import bagImage from "@src/assets/pink-bag-small.png";
+import useSnackbar from '@src/hooks/useSnackbar';
 
 const initialCart: CartItem[] = [
   {
@@ -10,7 +11,8 @@ const initialCart: CartItem[] = [
     brand: "Coach",
     price: 54.69,
     qty: 1,
-    imageUrl: bagImage, // Replace 'path_to_bag_image' with the actual image path or variable
+    stock: 7,
+    imageUrl: bagImage,
   },
   {
     id: '2',
@@ -18,7 +20,8 @@ const initialCart: CartItem[] = [
     brand: "Coach",
     price: 54.69,
     qty: 3,
-    imageUrl: bagImage, // Replace 'path_to_bag_image' with the actual image path or variable
+    stock: 10,
+    imageUrl: bagImage,
   },
 ];
 
@@ -66,20 +69,33 @@ export const CartProvider: FC<CartProviderProps> = ({ children }) => {
   }, [cart]);
 
   const getCart = () => {
-      return cart;
+    return cart;
   }
+
+  const { showSnackbar } = useSnackbar();
 
   const addToCart = (item: CartItem) => {
     setCart((prevCart: CartItem[]) => {
       const existingItem = prevCart.find(cartItem => cartItem.id === item.id);
+      const beginning = item.stock === 0;
       if (existingItem) {
-        return prevCart.map(cartItem =>
-          cartItem.id === item.id
-            ? { ...cartItem, quantity: cartItem.qty + 1 }
-            : cartItem
-        );
+        if (existingItem.qty < existingItem.stock) {
+          return prevCart.map(cartItem =>
+            cartItem.id === item.id
+              ? { ...cartItem, qty: cartItem.qty + 1 }
+              : cartItem
+          );
+        } else {
+          showSnackbar({ severity: "warning", message: `Cannot add more. Only ${existingItem.stock} in stock.` })
+          return prevCart;
+        }
       }
-      return [...prevCart, { ...item, quantity: 1 }];
+      if (beginning) {
+        showSnackbar({ severity: "warning", message: `Cannot add to cart. Only ${item.stock} in stock.` })
+        return [...prevCart];
+
+      }
+      return [...prevCart, { ...item, qty: 1 }];
     });
   };
 
@@ -97,9 +113,16 @@ export const CartProvider: FC<CartProviderProps> = ({ children }) => {
 
   const increaseQuantity = (id: string) => {
     setCart(prevCart =>
-      prevCart.map(item =>
-        item.id === id ? { ...item, qty: item.qty + 1 } : item
-      )
+      prevCart.map(item => {
+        if (item.id === id) {
+          if (item.qty < item.stock) {
+            return { ...item, qty: item.qty + 1 };
+          } else {
+            showSnackbar({ severity: "warning", message: `Cannot add more. Only ${item.stock} in stock.` })
+          }
+        }
+        return item;
+      })
     );
   };
 

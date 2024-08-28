@@ -20,6 +20,7 @@ export interface CartItem {
   price: number;
   imageUrl: string;
   qty: number;
+  stock: number;
  }
 
 export interface BaseResponse {

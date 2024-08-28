@@ -11,6 +11,8 @@ const Layout = ({ breadcrumbs }) => {
   const location = useLocation();
   const isHomePage = location.pathname === '/home';
   const isAboutPage = location.pathname === '/about';
+  const isLoginPage = location.pathname === '/login';
+  const isSignupPage = location.pathname === '/signUp';
 
 
   return (
@@ -38,7 +40,7 @@ const Layout = ({ breadcrumbs }) => {
                 }
                 aria-label="breadcrumb"
               >
-                {!isHomePage && !isAboutPage && breadcrumbs.map(({ breadcrumb }, index) => (
+                {!isHomePage && !isAboutPage && !isLoginPage && !isSignupPage && breadcrumbs.map(({ breadcrumb }, index) => (
                   <Typography sx={{
                     color: "var(--primary)",
                     fontFamily: "Inter",

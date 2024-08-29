@@ -10,10 +10,10 @@ import { productType } from "@src/types";
 export default function NewArrivals() {
   const navigate = useNavigate();
   const handleOnClickViewMore = () => {
-    navigate('/items');
+    navigate('/items?newArrivals= New Arrivals', { state: { newArrivals: "New Arrivals" } });
   }
   const handleOnClickProduct = (product: productType) => {
-    navigate("/product", { state: { productName: product.name } });
+    navigate(`/product?Id= ${product.slug} && Name=${product.name}`, { state: { productName: product.name } });
   }
 
 

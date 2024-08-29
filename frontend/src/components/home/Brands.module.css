@@ -14,7 +14,7 @@
 }
 
 .item img {
-  object-fit: cover;
-  /* width: 110px; */
-  /* height: 48px; */
+  width: 100%;
+  height: auto;
+  object-fit: cover;  
 }

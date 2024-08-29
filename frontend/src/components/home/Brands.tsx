@@ -5,19 +5,23 @@ import classes from "./Brands.module.css";
 import ImageCarousel from "@components/shared/ImageCarousel";
 import { productType } from "@src/types";
 import { useLocation, useNavigate } from "react-router-dom";
+import useBrands from "@src/screens/hooks/useBrands";
 
 interface product {
-  img: string;
+  id: string;
   name: string;
+  imagePath: string;
 }
 
 export default function Brands() {
   const navigate = useNavigate();
   const handleOnClickBrand = (brand: product) => {
-    navigate("/items", { state: { brandName: brand.name } });
+    navigate(`/items?brand= ${brand.name}`, { state: { brandName: brand.name } });
   }
 
-
+  const { brandsData } = useBrands();
+  const data = brandsData?.brands;
+  console.log(data)
 
   return (
     <Box
@@ -41,9 +45,9 @@ export default function Brands() {
             gap: 3,
           }}
         >
-          {brandsMock.slice(0, 6).map((product) => (
+          {data?.map((product) => (
             <Box key={product.name} className={classes.item} onClick={() => handleOnClickBrand(product)}>
-              <img src={product.img} alt={product.name} />
+              <img src={product.imagePath} alt={product.name} />
             </Box>
           ))}
         </Box>
@@ -57,7 +61,7 @@ export default function Brands() {
         }}
       >
         <ImageCarousel>
-          {brandsMock.slice(0, 6).map((product) => (
+          {data?.map((product: product) => (
             <Box
               onClick={() => handleOnClickBrand(product)}
               key={product.name}
@@ -69,7 +73,7 @@ export default function Brands() {
               }}
             >
               <img
-                src={product.img}
+                src={product.imagePath}
                 alt={product.name}
                 style={{
                   width: "60%",

@@ -7,13 +7,44 @@ import usePagination from "@mui/material/usePagination";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import UsePagination from "@components/shared/Pagination";
 import { useLocation } from "react-router-dom";
+import useBrand from "@src/screens/hooks/useBrand";
+import useLimitedEdition from "@src/screens/hooks/useLimitedEdition";
+import useNewArrivals from "@src/screens/hooks/useNewArrivals";
+import useCategory from "@src/screens/hooks/useCategory";
+import usePopularProducts from "@src/screens/hooks/usePopularProducts";
+import usedDiscountedProducts from "@src/screens/hooks/usedDiscountedProducts";
 
 export default function ItemsSection() {
   const location = useLocation();
   const categoryName = location?.state?.categoryName;
   const brandName = location?.state?.brandName;
+  const newArrivals = location?.state?.newArrivals;
+  const limitedEdition = location?.state?.limitedEdition;
+  const discountedProducts = location?.state?.discountedProducts;
+  const popularProducts = location?.state?.popularProducts;
 
-  let name = categoryName ? categoryName : brandName;
+  const { categoryData } = useCategory(categoryName);
+  const { newArrivalsData } = useNewArrivals();
+  const { discountedProductsData } = usedDiscountedProducts();
+  const { popularProductsData } = usePopularProducts();
+  const { brandData } = useBrand(brandName);
+  const { limitedEditionData } = useLimitedEdition();
+
+
+  let name = categoryName ? categoryName
+    : brandName ? brandName
+      : newArrivals ? newArrivals
+        : limitedEdition ? limitedEdition
+          : discountedProducts ? discountedProducts
+            : popularProducts;
+
+  let data = categoryName ? categoryData
+    : brandName ? brandData
+      : newArrivals ? newArrivalsData
+        : limitedEdition ? limitedEditionData
+          : discountedProducts ? discountedProductsData
+            : popularProductsData;
+
 
   return (
     <>

@@ -18,8 +18,13 @@ import TextField from "@src/components/shared/TextField";
 import { FormikProvider, Form } from "formik";
 import useLoginForm from "./SignIn/useLoginForm";
 import classes from "./Profile.module.css"
+import { useLocation } from "react-router-dom";
+import useUserData from "./hooks/useUserData";
+
 const Profile = () => {
-  const { formikProps, isPending } = useLoginForm();
+  const { formikProps, id } = useLoginForm();
+  const { userData } = useUserData("b78222e0-64db-49bc-8fb4-e26a6bde4d57");
+
   return (
     <Box>
       <Typography
@@ -127,7 +132,7 @@ const Profile = () => {
                       <TextField
                         name="firstName"
                         type="text"
-                        placeholder="John"
+                        placeholder={userData?.user?.firstName}
                         fullWidth
                         id="firstName"
                         sx={{
@@ -156,7 +161,7 @@ const Profile = () => {
                       <TextField
                         name="lastName"
                         type="text"
-                        placeholder="Doe"
+                        placeholder={userData?.user.lastName}
                         fullWidth
                         id="lastName"
                         sx={{
@@ -189,7 +194,7 @@ const Profile = () => {
                     className={classes.textField}
                     name="email"
                     type="email"
-                    placeholder="Johndoe@johndoe.com"
+                    placeholder={userData?.user.email}
                     fullWidth
                     id="email"
                   />
@@ -208,7 +213,7 @@ const Profile = () => {
                     <TextField
                       className={classes.textField}
                       name="mobile"
-                      placeholder="+11"
+                      placeholder={userData?.user.mobileNumber.substring(0,4)}
                       type="tel"
                       id="tel"
                       fullWidth
@@ -218,7 +223,7 @@ const Profile = () => {
 
                     <TextField
                       name="mobile"
-                      placeholder="202-555-0114"
+                      placeholder={userData?.user.mobileNumber.substring(4)}
                       type="tel"
                       id="nobile"
                       fullWidth

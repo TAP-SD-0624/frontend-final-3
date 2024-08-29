@@ -6,11 +6,15 @@ import facepacks from "@src/assets/skincare101.png";
 import classes from "./Makeup.module.css";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import classNames from "classnames";
+import { useNavigate } from "react-router-dom";
 export default function Makeup() {
+  const navigate = useNavigate();
   return (
     <Container>
       <Stack className={classes.makeup} spacing={3}>
-        <Box className={classes.lifestyle}>
+        <Box
+          onClick={() => navigate('/items?limitedEdition= Limited Edition', { state: { limitedEdition: "Limited Edition" } })}
+          className={classes.lifestyle}>
           <img src={makeup} alt="Makeup" />
           <Box
             className={classes.content}
@@ -58,7 +62,9 @@ export default function Makeup() {
           justifyContent="space-between"
           spacing={3}
         >
-          <Box className={classNames(classes.skincare, classes.skin)}>
+          <Box
+            onClick={() => navigate('/items?discountedProducts= Discounted Products', { state: { discountedProducts: "Discounted Products" } })}
+            className={classNames(classes.skincare, classes.skin)}>
             <img src={skincare} alt="Skincare" />
             <Box
               className={classes.content}
@@ -100,7 +106,9 @@ export default function Makeup() {
               </IconButton>
             </Box>
           </Box>
-          <Box className={classNames(classes.skincare, classes.facepacks)}>
+          <Box
+            onClick={() => navigate('/items?popularProducts= Popular Products', { state: { popularProducts: "Popular Products" } })}
+            className={classNames(classes.skincare, classes.facepacks)}>
             <img src={facepacks} alt="Facepacks" />
             <Box
               className={classes.content}

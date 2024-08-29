@@ -31,6 +31,7 @@ const AppRoutes: FC = () => {
           <Route path="login" element={<SignIn />} />
           <Route path="signUp" element={<SignUp />} />
           <Route path="home" element={<Home />} />
+          {/* <Route path="" element={<Home />} /> */}
           <Route path="items" element={<Items />} />
           <Route path="product" element={<Product />} />
       

@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 export default function Handpicked() {
   const navigate = useNavigate();
   const handleOnClickCategory = (category: productType) => {
-    navigate("/items", { state: { categoryName: category.name } });
+    navigate(`/items?category= ${category.name}`, { state: { categoryName: category.name } });
   }
 
   return (

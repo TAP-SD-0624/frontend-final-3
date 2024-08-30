@@ -20,7 +20,8 @@ const useLoginForm = () => {
     },
     onError: (error) => {
       //@ts-ignore
-      const errorMessage = error.response?.data?.message || error.message || "An error occurred";
+      const errorMessage =
+        error.response?.data?.message || error.message || "An error occurred";
       showSnackbar({ severity: "warning", message: errorMessage });
     },
   });
@@ -34,9 +35,10 @@ const useLoginForm = () => {
       // Add the dare field to the values object
       const updatedValues = {
         ...values,
-        dateOfBirth: "1990-01-01T00:00:00.000Z", // Replace with the actual value you want to add
+        // dateOfBirth: "1990-01-01T00:00:00.000Z", // Replace with the actual value you want to add
+        phoneNumber: "1234567890",
       };
-      resetForm();
+      // resetForm();
       return signupMutate(updatedValues);
     },
     validationSchema,

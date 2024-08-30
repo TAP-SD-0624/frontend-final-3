@@ -17,7 +17,6 @@ import { Navigate } from "react-router-dom";
 import LoadingButton from "@mui/lab/LoadingButton";
 import TextField from "@src/components/shared/TextField";
 
-
 const SignIn: FC = () => {
   const { formikProps, isPending } = useLoginForm();
   const accessToken = localStorage.getItem("user-token");
@@ -26,10 +25,11 @@ const SignIn: FC = () => {
 
   const isEmptyToken = (token: string | null): boolean => {
     return !token || token === "";
-  }
+  };
   const isLoggedIn = !isEmptyToken(accessToken);
 
-  if (isLoggedIn) return <Navigate to="/home" replace state={{ from: location.pathname }} />;
+  if (isLoggedIn)
+    return <Navigate to="/home" replace state={{ from: location.pathname }} />;
 
   return (
     <FormikProvider value={formikProps}>
@@ -61,7 +61,11 @@ const SignIn: FC = () => {
               >
                 <LockIcon />
               </Avatar>
-              <Stack direction="row" gap={2} sx={{ alignItems: "center", mb: 3 }}>
+              <Stack
+                direction="row"
+                gap={2}
+                sx={{ alignItems: "center", mb: 3 }}
+              >
                 <Typography component="h1" variant="h5">
                   Sign in
                 </Typography>
@@ -182,7 +186,6 @@ const SignIn: FC = () => {
             </Stack>
           </Paper>
         </Box>
-
       </Form>
     </FormikProvider>
   );

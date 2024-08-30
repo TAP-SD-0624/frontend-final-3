@@ -17,7 +17,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import TextField from "@src/components/shared/TextField";
 import { FormikProvider, Form } from "formik";
 import useLoginForm from "./SignIn/useLoginForm";
-import classes from "./Profile.module.css"
+import classes from "./Profile.module.css";
 import { useLocation } from "react-router-dom";
 import useUserData from "./hooks/useUserData";
 
@@ -56,7 +56,7 @@ const Profile = () => {
               color: "var(--bright)",
               backgroundColor: "var(--primary)",
               width: {
-                lg: '136px',
+                lg: "136px",
               },
               height: "38px",
               borderRadius: "8px",
@@ -75,8 +75,9 @@ const Profile = () => {
               color: "var(--error)",
               backgroundColor: "var(--bright)",
               width: {
-                lg: '136px',
-              }, height: "44px",
+                lg: "136px",
+              },
+              height: "44px",
               border: "2px solid var(--error)",
               borderRadius: "8px",
               textTransform: "none",
@@ -100,96 +101,85 @@ const Profile = () => {
               justifyContent: "center",
               alignItems: "center",
               pt: "8px",
+              pr: "8px",
               width: "100%",
             }}
           >
-
-            <Stack sx={{
-              position: "relative"
-            }}>
+            <Stack
+              sx={{
+                position: "relative",
+              }}
+            >
               <Grid container>
-                <Stack
-                  direction={{
-                    xs: "column",
-                    sm: "row",
-                  }}
-                  sx={{
-                    width: "100%",
-                    mt: "16px",
-                    alignItems: {
-                      xs: "flex-start",
-                      sm: "flex-start",
-                    }
-                  }}
-                >
-                  <Grid item xs={12} sm={6}>
-                    <Stack gap="8px">
-                      <label
-                        className={classes.label}
-                      >
-                        First Name
-                      </label>
-                      <TextField
-                        name="firstName"
-                        type="text"
-                        placeholder={userData?.user?.firstName}
-                        fullWidth
-                        id="firstName"
-                        sx={{
+                <Grid item xs={12} sm={6} md={5}>
+                  <Stack gap="8px">
+                    <label className={classes.label}>First Name</label>
+                    <TextField
+                      name="firstName"
+                      type="text"
+                      placeholder={userData?.user?.firstName}
+                      fullWidth
+                      id="firstName"
+                      InputProps={{
+                        sx: {
                           fontFamily: "Inter",
                           fontSize: "16px",
                           fontWeight: "500",
                           color: "var(--low-emphasis)",
                           backgroundColor: "var(--grey)",
                           margin: "0px",
-                          borderColor: "var(--grey)",
                           borderTopRightRadius: "0px",
                           borderBottomRightRadius: "0px",
-                          borderRight: "none",
-                        }}
-                      />
-
-                    </Stack>
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <Stack gap="8px">
-                      <label
-                        className={classes.label}
-                      >
-                        Last Name
-                      </label>
-                      <TextField
-                        name="lastName"
-                        type="text"
-                        placeholder={userData?.user.lastName}
-                        fullWidth
-                        id="lastName"
-                        sx={{
+                          "& .MuiOutlinedInput-notchedOutline": {
+                            border: "transparent",
+                          },
+                          "& .MuiInputBase-input": {
+                            borderTopRightRadius: "0px",
+                            borderBottomRightRadius: "0px",
+                          },
+                        },
+                      }}
+                    />
+                  </Stack>
+                </Grid>
+                <Grid item xs={12} sm={6} md={5}>
+                  <Stack gap="8px">
+                    <label className={classes.label}>Last Name</label>
+                    <TextField
+                      name="lastName"
+                      type="text"
+                      placeholder={userData?.user.lastName}
+                      fullWidth
+                      id="lastName"
+                      InputProps={{
+                        sx: {
                           fontFamily: "Inter",
                           fontSize: "16px",
                           fontWeight: "500",
                           color: "var(--low-emphasis)",
                           backgroundColor: "var(--grey)",
                           margin: "0px",
-                          borderColor: "var(--grey)",
                           borderTopLeftRadius: "0px",
                           borderBottomLeftRadius: "0px",
-                          borderLeft: "none",
-                        }}
-                      />
-                    </Stack>
-                  </Grid>
-                </Stack>
+                          "& .MuiOutlinedInput-notchedOutline": {
+                            border: "transparent",
+                          },
+                          "& .MuiInputBase-input": {
+                            borderTopLeftRadius: "0px",
+                            borderBottomLeftRadius: "0px",
+                          },
+                        },
+                      }}
+                    />
+                  </Stack>
+                </Grid>
+                {/* </Stack> */}
               </Grid>
             </Stack>
             <Grid container>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={8} md={8}>
                 <Stack gap="8px" mt="8px">
-                  <label
-                    className={classes.label}
-                  >
-                    Email
-                  </label>
+                  <label className={classes.label}>Email</label>
                   <TextField
                     className={classes.textField}
                     name="email"
@@ -197,48 +187,61 @@ const Profile = () => {
                     placeholder={userData?.user.email}
                     fullWidth
                     id="email"
+                    InputProps={{
+                      sx: {
+                        "& .MuiOutlinedInput-notchedOutline": {
+                          border: "transparent",
+                        },
+                      },
+                    }}
                   />
                 </Stack>
               </Grid>
             </Grid>
             <Stack gap="8px" mt="8px">
+              <label className={classes.label}>Mobile Number</label>
 
-              <label className={classes.label}              >
-                Mobile Number
-              </label>
-
-              <Stack direction="row">
-                <Grid container gap="8px">
-                  <Grid item xs={3} sm={2}>
-                    <TextField
-                      className={classes.textField}
-                      name="mobile"
-                      placeholder={userData?.user.mobileNumber.substring(0,4)}
-                      type="tel"
-                      id="tel"
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid item xs={8} sm={6}>
-
-                    <TextField
-                      name="mobile"
-                      placeholder={userData?.user.mobileNumber.substring(4)}
-                      type="tel"
-                      id="nobile"
-                      fullWidth
-                      className={classes.textField}
-                    />
-                  </Grid>
+              <Grid container spacing={1}>
+                <Grid item xs={3} sm={2} md={1.5}>
+                  <TextField
+                    className={classes.textField}
+                    name="mobile"
+                    placeholder={userData?.user.mobileNumber.substring(0, 4)}
+                    type="tel"
+                    id="tel"
+                    fullWidth
+                    InputProps={{
+                      sx: {
+                        "& .MuiOutlinedInput-notchedOutline": {
+                          border: "transparent",
+                        },
+                      },
+                    }}
+                  />
                 </Grid>
-              </Stack>
+                <Grid item xs={9} sm={6}>
+                  <TextField
+                    name="mobile"
+                    placeholder={userData?.user.mobileNumber.substring(4)}
+                    type="tel"
+                    id="nobile"
+                    fullWidth
+                    className={classes.textField}
+                    InputProps={{
+                      sx: {
+                        "& .MuiOutlinedInput-notchedOutline": {
+                          border: "transparent",
+                        },
+                      },
+                    }}
+                  />
+                </Grid>
+              </Grid>
             </Stack>
             <Grid container>
               <Grid item xs={12} sm={6}>
                 <Stack gap="8px" mt="8px">
-                  <label className={classes.label}>
-                    Date of birth
-                  </label>
+                  <label className={classes.label}>Date of birth</label>
                   <TextField
                     name="date"
                     placeholder="DD/MM/YYYY"
@@ -247,12 +250,17 @@ const Profile = () => {
                     className={classes.textField}
                     fullWidth
                     sx={{
-
                       textTransform: "uppercase",
                       borderColor: "var(--grey)",
                     }}
+                    InputProps={{
+                      sx: {
+                        "& .MuiOutlinedInput-notchedOutline": {
+                          border: "transparent",
+                        },
+                      },
+                    }}
                   />
-
                 </Stack>
               </Grid>
             </Grid>
@@ -274,9 +282,7 @@ const Profile = () => {
             <Grid container>
               <Grid item xs={12} sm={6}>
                 <Stack mt="37px" gap="8px">
-                  <label className={classes.label}>
-                    Current Password
-                  </label>
+                  <label className={classes.label}>Current Password</label>
                   <TextField
                     name="password"
                     placeholder="********"
@@ -292,6 +298,13 @@ const Profile = () => {
                       margin: "0px",
                       borderColor: "var(--grey)",
                     }}
+                    InputProps={{
+                      sx: {
+                        "& .MuiOutlinedInput-notchedOutline": {
+                          border: "transparent",
+                        },
+                      },
+                    }}
                   />
                 </Stack>
               </Grid>
@@ -299,9 +312,7 @@ const Profile = () => {
             <Grid container>
               <Grid item xs={12} sm={6}>
                 <Stack mt="16px" gap="8px">
-                  <label className={classes.label}>
-                    New Password
-                  </label>
+                  <label className={classes.label}>New Password</label>
                   <Stack
                     direction="row"
                     alignItems="center"
@@ -326,11 +337,22 @@ const Profile = () => {
                         backgroundColor: "var(--grey)",
                         border: "none",
                       }}
+                      InputProps={{
+                        sx: {
+                          "& .MuiOutlinedInput-notchedOutline": {
+                            border: "transparent",
+                          },
+                        },
+                      }}
                     />
 
                     <IconButton>
                       <VisibilityIcon
-                        sx={{ width: "24px", height: "24px", color: "var(--dark)" }}
+                        sx={{
+                          width: "24px",
+                          height: "24px",
+                          color: "var(--dark)",
+                        }}
                       />
                     </IconButton>
                   </Stack>
@@ -340,9 +362,7 @@ const Profile = () => {
             <Grid container>
               <Grid item xs={12} sm={6}>
                 <Stack mt="16px" gap="8px">
-                  <label className={classes.label}>
-                    Confirm Password
-                  </label>
+                  <label className={classes.label}>Confirm Password</label>
                   <TextField
                     name="confirmPassword"
                     placeholder="******"
@@ -357,6 +377,13 @@ const Profile = () => {
                       backgroundColor: "var(--grey)",
                       margin: "0px",
                       borderColor: "var(--grey)",
+                    }}
+                    InputProps={{
+                      sx: {
+                        "& .MuiOutlinedInput-notchedOutline": {
+                          border: "transparent",
+                        },
+                      },
                     }}
                   />
                 </Stack>

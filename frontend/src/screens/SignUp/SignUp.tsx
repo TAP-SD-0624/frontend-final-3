@@ -18,13 +18,12 @@ import TextField from "@src/components/shared/TextField";
 import useSignupForm from "./useSignupForm";
 import LoadingButton from "@mui/lab/LoadingButton";
 
-
 const SignUp: FC = () => {
   const { formikProps, isPending } = useSignupForm();
   const { isValid, dirty, values } = formikProps;
   const { password, confirmPassword } = values;
 
-  const isSubmitEnabled = isValid && (password === confirmPassword);
+  const isSubmitEnabled = isValid && password === confirmPassword;
 
   return (
     <FormikProvider value={formikProps}>
@@ -56,7 +55,11 @@ const SignUp: FC = () => {
               >
                 <LockIcon />
               </Avatar>
-              <Stack direction="row" gap={2} sx={{ alignItems: "center", mb: 3 }}>
+              <Stack
+                direction="row"
+                gap={2}
+                sx={{ alignItems: "center", mb: 3 }}
+              >
                 <Typography component="h1" variant="h5">
                   Sign up
                 </Typography>
@@ -67,7 +70,7 @@ const SignUp: FC = () => {
                 sx={{
                   justifyContent: "space-between",
                   alignItems: "center",
-                  width: "100%"
+                  width: "100%",
                 }}
               >
                 <TextField
@@ -192,7 +195,8 @@ const SignUp: FC = () => {
           </Paper>
         </Box>
       </Form>
-    </FormikProvider>);
+    </FormikProvider>
+  );
 };
 
 export default SignUp;

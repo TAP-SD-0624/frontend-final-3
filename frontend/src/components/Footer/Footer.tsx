@@ -7,18 +7,21 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CopyrightIcon from "@mui/icons-material/Copyright";
+import useCategories from "@src/screens/hooks/useCategories";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
   const footerItems = [
-    "Skincare",
-    "Personal Care",
-    "Handbags",
-    "Apparels",
-    "Watches",
-    "Eye Wear",
-    "Jewellery",
+    { label: "Featured", href: "#handpicked" },
+    { label: "Brands", href: "#brands" },
+    { label: "Trendy", href: "#makeup" },
   ];
-
+  const { categoriesData } = useCategories();
+  const data = categoriesData?.categories;
+  const navigate = useNavigate();
+  const handleOnClickCategory = (category) => {
+    navigate(`/items?category= ${category.name}`, { state: { categoryName: category.name } });
+  }
   return (
     <Box
       sx={{
@@ -38,42 +41,82 @@ const Footer = () => {
           paddingTop="30px"
         >
           <Box>
-            <Stack
-              sx={{
-                gap: "8px",
-                alignItems: "baseline",
-              }}
-            >
-              <Typography
-                noWrap
-                component="a"
-                href="#"
+            <Stack direction="row">
+              <Stack
                 sx={{
-                  color: "var(--bright)",
-                  fontFamily: "Inter",
-                  fontSize: "16px",
-                  fontWeight: 500,
+                  gap: "8px",
+                  alignItems: "baseline",
                 }}
               >
-                Shop by Category
-              </Typography>
-              {footerItems.map((item, index) => (
                 <Typography
-                  key={index}
                   noWrap
                   component="a"
                   href="#"
                   sx={{
-                    color: "var(--footer-text)",
+                    color: "var(--bright)",
                     fontFamily: "Inter",
                     fontSize: "16px",
                     fontWeight: 500,
                   }}
                 >
-                  {item}
+                  Shop by Category
                 </Typography>
-              ))}
+                {data?.map((item, index) => (
+                  <Typography
+                    onClick={() => handleOnClickCategory(item)}
+                    key={index}
+                    noWrap
+                    sx={{
+                      color: "var(--footer-text)",
+                      fontFamily: "Inter",
+                      fontSize: "16px",
+                      fontWeight: 500,
+                      cursor: "pointer",
+                    }}
+                  >
+                    {item.name}
+                  </Typography>
+                ))}
+              </Stack>
+              <Stack
+                sx={{
+                  gap: "8px",
+                  alignItems: "baseline",
+                }}
+              >
+                <Typography
+                  noWrap
+                  component="a"
+                  href="#"
+                  sx={{
+                    color: "var(--bright)",
+                    fontFamily: "Inter",
+                    fontSize: "16px",
+                    fontWeight: 500,
+                  }}
+                >
+                  Shop by products
+                </Typography>
+                {footerItems?.map((item, index) => (
+                  <Typography
+                    key={index}
+                    noWrap
+                    component="a"
+                    href={item.href}
+                    sx={{
+                      color: "var(--footer-text)",
+                      fontFamily: "Inter",
+                      fontSize: "16px",
+                      fontWeight: 500,
+                      cursor: "pointer",
+                    }}
+                  >
+                    {item.label}
+                  </Typography>
+                ))}
+              </Stack>
             </Stack>
+
           </Box>
           <Box
             paddingTop="15px"

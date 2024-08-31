@@ -15,6 +15,19 @@ const useLogic = () => {
     const openCetagories = Boolean(anchorElCetagories);
 
     const { onLogout } = useAccountContext();
+    const handleClose = () => {
+        console.log(!Boolean(anchorEl))
+        console.log(open)
+        setAnchorEl(prev => {
+            // If prev is not null, close the menu
+            if (prev) {
+                return null;
+            }
+            // If prev is already null, do nothing
+            return prev;
+        });
+    };
+    ;
 
     const handleClick = (event: { currentTarget: React.SetStateAction<HTMLElement | null>; }) => {
         setAnchorEl(event.currentTarget);
@@ -33,20 +46,10 @@ const useLogic = () => {
         setAnchorElCetagories(event.currentTarget);
     };
 
-    const handleClose = () => {
-        console.log(anchorEl)
-        setAnchorEl(prev => {
-            // If prev is not null, close the menu
-            if (prev) {
-                return null;
-            }
-            // If prev is already null, do nothing
-            return prev;
-        });
-    };
-    ;
+
 
     const handleCLickLogin = () => {
+        setAnchorEl(null)
         navigate("/login");
     }
 
@@ -61,11 +64,18 @@ const useLogic = () => {
     }
 
     const handleCLickOnProfile = () => {
+        handleClose();
         navigate("/user-profile");
-        setAnchorEl(null);
     }
 
+   
+
     const [theme, toggleTheme] = useTheme();
+    const handleToggleTheme = () => {
+        handleClose();
+        toggleTheme();
+    }
+
     const isLGUp = useMediaQuery((theme: Theme) => theme.breakpoints.up("lg"));
     const isEmptyToken = (token: string | null): boolean => {
         return !token || token === "";
@@ -90,6 +100,8 @@ const useLogic = () => {
         openCetagories,
         handleCLickLogin,
         handleClickOnCart,
+        handleToggleTheme,
+        setAnchorEl,
     }
 }
 

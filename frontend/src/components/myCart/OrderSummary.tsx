@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Typography, Divider, Stack, Button } from "@mui/material";
 import OrderDetailsAmount from "@components/shared/OrderDetailsAmount";
 import useCartContext from "@src/hooks/useCartContext";
+import { useNavigate } from "react-router-dom";
 
 interface OrderDetailsProps {
   subTotal: number;
@@ -16,8 +17,9 @@ const OrderSummary: React.FC<OrderDetailsProps> = ({
   discount,
   deliveryFee,
   grandTotal,
-  onClick = () => {},
+  onClick = () => { },
 }) => {
+  const navigate = useNavigate();
   return (
     <Box p={2}>
       <Typography
@@ -58,6 +60,7 @@ const OrderSummary: React.FC<OrderDetailsProps> = ({
           Place Order
         </Button>
         <Button
+          onClick={() => navigate("/home")}
           variant="outlined"
           sx={{
             borderColor: "var(--primary)",

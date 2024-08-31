@@ -24,6 +24,9 @@ interface NewArrivalsResponse {
         name: string;
         id: string;
       };
+      ProductImages: [{
+        path: string;
+      }]
     }
   ];
 }

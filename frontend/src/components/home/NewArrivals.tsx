@@ -6,15 +6,19 @@ import { productsMock } from "@src/mocks";
 import ImageCarousel from "@components/shared/ImageCarousel";
 import { useNavigate } from "react-router-dom";
 import { productType } from "@src/types";
+import useNewArrivals from "@src/screens/hooks/useNewArrivals";
 
 export default function NewArrivals() {
   const navigate = useNavigate();
   const handleOnClickViewMore = () => {
     navigate('/items?newArrivals= New Arrivals', { state: { newArrivals: "New Arrivals" } });
   }
-  const handleOnClickProduct = (product: productType) => {
-    navigate(`/product?Id= ${product.slug} && Name=${product.name}`, { state: { productName: product.name } });
+  const handleOnClickProduct = (product) => {
+    navigate(`/product?Id= ${product.id} && Name=${product.name}`, { state: { productId: product.id, category: product?.Category?.name, brand: product?.Brand?.name } });
   }
+
+  const { newArrivalsData } = useNewArrivals();
+  const data = newArrivalsData?.products;
 
 
   return (
@@ -31,9 +35,9 @@ export default function NewArrivals() {
             gap: 3,
           }}
         >
-          {productsMock.slice(0, 4).map((product) => (
+          {data?.slice(0, 4).map((product) => (
             <Product onClick={() => handleOnClickProduct(product)}
-              key={product.slug} product={product} />
+              key={product.id} product={product} />
           ))}
         </Box>
       </Container>
@@ -46,10 +50,10 @@ export default function NewArrivals() {
         }}
       >
         <ImageCarousel>
-          {productsMock.slice(0, 4).map((product) => (
+          {data?.slice(0, 4).map((product) => (
             <Product
               onClick={() => handleOnClickProduct(product)}
-              key={product.slug}
+              key={product.id}
               product={product}
               style={{
                 width: "92%",

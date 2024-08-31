@@ -4,42 +4,39 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from "react-responsive-carousel";
 import image from "../../assets/product-image.png";
 import base from "../../assets/base.png";
+import { useLocation } from "react-router-dom";
+import useProduct from "@src/screens/hooks/useProduct";
 
 const ImageCarousel = () => {
   const [img, setImg] = useState(image);
+  const location = useLocation();
+  const productId = location?.state?.productId;
+  const { productData } = useProduct(productId);
 
   const arr = [
     {
-      src: image,
-      alt: "bag",
+      src: productData?.product?.ProductImages[0]?.path,
+      alt: productData?.product?.name,
     },
     {
-      src: base,
-      alt: "bag",
+      src: productData?.product?.ProductImages[0]?.path,
+      alt: productData?.product?.name,
     },
     {
-      src: image,
-      alt: "bag",
+      src: productData?.product?.ProductImages[0]?.path,
+      alt: productData?.product?.name,
     },
     {
-      src: image,
-      alt: "bag",
-    },
-    {
-      src: image,
-      alt: "bag",
-    },
-    {
-      src: image,
-      alt: "bag",
+      src: productData?.product?.ProductImages[0]?.path,
+      alt: productData?.product?.name,
     },
   ];
 
   return (
     <Stack sx={{ width: { xs: "100%", sm: "50%" } }}>
       <img
-        src={img}
-        alt="bag"
+        src={productData?.product?.ProductImages[0]?.path}
+        alt={productData?.product?.name}
         width="100%"
         height="500px"
         style={{ borderRadius: "16px", objectFit: "cover" }}

@@ -15,8 +15,11 @@ import { mockOrders } from '@src/mocks';
 import TabsSection from '@components/TabsSection';
 import "./table.css"
 import { useNavigate } from 'react-router-dom';
+import useOrders from './hooks/useOrders';
 const MyOrders = () => {
     const [tabIndex, setTabIndex] = useState(0);
+    const { ordersData } = useOrders();
+    const data = ordersData?.orders;
 
     //@ts-ignore
     const handleChange = (event, newValue) => {
@@ -26,8 +29,9 @@ const MyOrders = () => {
     //@ts-ignore
     const isXs = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
     const navigate = useNavigate();
-    const handleOnClick = () => {
-        navigate("/user-profile/order")
+    const handleOnClick = (order) => {
+        navigate(`/user-profile/order?orderId= ${order.id}`, { state: { orderId: order.id } });
+
     }
 
     const orderTabs = ["Completed", "Processing", "Cancelled"];
@@ -53,7 +57,7 @@ const MyOrders = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody >
-                    {mockOrders.map((item) => (
+                    {data?.map((item) => (
                         <TableRow key={item.id} sx={{ borderBottom: "none" }}>
                             <TableCell sx={{ paddingRight: '0px', verticalAlign: "top", borderBottom: "none", backgroundColor: "var(--grey)" }}>
                                 <Checkbox sx={{ width: "18px", height: "18px", color: "var(--low-emphasis)" }} />
@@ -65,33 +69,33 @@ const MyOrders = () => {
                                     sx={{ fontFamily: "Inter", fontWeight: "500", fontSize: "16px" }}
                                     color="var(--high-emphasis)"
                                 >
-                                    {item.orderId}
+                                    {item.id}
                                 </Typography>
 
                             </TableCell>
                             <TableCell sx={{ verticalAlign: "top", borderBottom: "none", backgroundColor: "var(--grey)" }}>
                                 <Typography sx={{ fontFamily: "Inter", fontWeight: "500", fontSize: "16px" }}
                                     color="var(--high-emphasis)">
-                                    {item.date}
+                                    {item.createdAt}
                                 </Typography>
                             </TableCell>
 
                             <TableCell sx={{ verticalAlign: "top", borderBottom: "none", backgroundColor: "var(--grey)" }}>
                                 <Typography color="var(--high-emphasis)" sx={{ fontFamily: "Inter", fontWeight: "500", fontSize: "16px" }}
                                 >
-                                    {item.price}
+                                    ${item.totalAmount}
                                 </Typography>
 
                             </TableCell>
                             <TableCell sx={{ verticalAlign: "top", borderBottom: "none", backgroundColor: "var(--grey)" }}>
                                 <Typography color="var(--primary)" sx={{ fontFamily: "Inter", fontWeight: "500", fontSize: "16px" }}
                                 >
-                                    {item.status}
+                                    {item.orderStatus}
                                 </Typography>
 
                             </TableCell>
                             <TableCell sx={{ verticalAlign: "top", borderBottom: "none", backgroundColor: "var(--grey)" }}>
-                                <IconButton onClick={handleOnClick} sx={{ width: "24px", height: "24px" }}>
+                                <IconButton onClick={() => handleOnClick(item)} sx={{ width: "24px", height: "24px" }}>
                                     <ArrowForwardIosIcon sx={{ width: "fit-content", height: "15px", color: "var(--low-emphasis)" }} />
                                 </IconButton>
 

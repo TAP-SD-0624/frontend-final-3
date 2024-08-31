@@ -2,28 +2,26 @@ import React from "react";
 import axiosInstance from "@src/api";
 import { User } from "src/types";
 
-export interface LoginRequestBody {
-  email: string;
-  password: string;
+export interface UpdateUserDataRequestBody {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  mobileNumber?: string;
+  currentPassword?: string;
+  password?: string;
+  confirmPassword?: string;
 }
 
-export interface LoginResponse {
+export interface UpdateUserDataResponse {
   message: string;
-  token: string;
-  user: {
-    id: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    mobileNumber: string;
-    role: string;
-    balance: string;
-    createdAt: string;
-    password: string;
-  };
 }
 
-export const login = async (body: LoginRequestBody) => {
-  const url = "/auth/login";
-  return axiosInstance.post<LoginResponse>(url, body).then((res) => res.data);
+export const updateUserData = async (
+  id: string,
+  body: UpdateUserDataRequestBody
+) => {
+  const url = `/users/${id}`;
+  return axiosInstance
+    .put<UpdateUserDataResponse>(url, body)
+    .then((res) => res.data);
 };

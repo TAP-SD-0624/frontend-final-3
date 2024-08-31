@@ -27,9 +27,9 @@ interface ProductResponse {
   }]
 }};
 
-const product = async (id: string) => {
-  const url = `/products/${id}`;
+const getOrder = async (id: string) => {
+  const url = `/orders/${id}`;
   return axiosInstance.get<ProductResponse>(url).then((res) => res.data);
 };
 
-export default product;
+export default getOrder;

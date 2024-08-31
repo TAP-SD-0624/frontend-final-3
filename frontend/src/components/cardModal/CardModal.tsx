@@ -22,9 +22,9 @@ interface CartModalProps {
 export default function CartModal({ open, onClose }: CartModalProps) {
   const { getCart } = useCartContext();
   const cart = getCart();
-  const navigat = useNavigate();
+  const navigate = useNavigate();
   const handleOnClick = () => {
-    navigat("/checkout");
+    navigate("/checkout");
   }
 
   return (
@@ -71,7 +71,7 @@ export default function CartModal({ open, onClose }: CartModalProps) {
           justifyContent: "space-between"
         }}
       >
-        <Box sx={{flex: 1, overflowY: "scroll"}}>
+        <Box sx={{ flex: 1, overflowY: "scroll" }}>
           {cart.map((item) => (
             <>
               <Item item={item} />
@@ -104,6 +104,7 @@ export default function CartModal({ open, onClose }: CartModalProps) {
           </Box>
           <Box mt={2} textAlign="center">
             <Button
+              onClick={() => navigate("/home")}
               variant="text"
               sx={{
                 color: "var(--primary)",

@@ -3,6 +3,8 @@ import { Stack, Typography, IconButton, Theme, useMediaQuery } from '@mui/materi
 import { Search, StyledInputBase } from '@components/Search';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import React from 'react'
+import { useLocation } from 'react-router-dom';
+import useLogic from '@components/Navbar/useLogic';
 
 interface HeaderProps {
     pageName: string;
@@ -11,12 +13,14 @@ interface HeaderProps {
 const Header = ({ pageName }: HeaderProps) => {
     let title = '';
     let button = <></>;
-    const isMyOrders = pageName === "/user-profile/myOrders" ? true : false;
     const isXs = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
+    const location = useLocation();
+    const orderId = location?.state?.orderId;
+    const { handleLogout } = useLogic();
 
     switch (pageName) {
         case '/user-profile/order':
-            title = 'Order#874522648';
+            title = `Order ${orderId}`;
             break;
         case '/user-profile/myOrders':
             title = 'My Orders';
@@ -33,6 +37,7 @@ const Header = ({ pageName }: HeaderProps) => {
         case '/user-profile':
             title = 'Personal Information';
             button = <IconButton
+                onClick={handleLogout}
                 sx={{
                     border: "1px solid var(--primary)",
                     borderRadius: "8px",
@@ -52,7 +57,7 @@ const Header = ({ pageName }: HeaderProps) => {
                     fontSize="small"
                 />
                 <Typography
-                display={isXs ? "none" : "block"}
+                    display={isXs ? "none" : "block"}
                     sx={{
                         fontFamily: "Inter",
                         fontWeight: "600",
@@ -76,7 +81,7 @@ const Header = ({ pageName }: HeaderProps) => {
         <Stack
             direction="row"
             alignItems="center"
-            justifyContent= "space-between"
+            justifyContent="space-between"
             width="100%"
         >
             <Typography

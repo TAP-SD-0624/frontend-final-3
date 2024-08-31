@@ -3,7 +3,7 @@ import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
 import RemoveIcon from "@mui/icons-material/Remove";
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useCartContext from "@src/hooks/useCartContext";
 
 export default function Item({ item }) {
@@ -12,7 +12,7 @@ export default function Item({ item }) {
   return (
     <Box key={item.id} display="flex" alignItems="flex-start" mb={2} pb="16px">
       <img
-        src={item.imageUrl}
+        src={item?.ProductImages[0]?.path}
         alt={item.name}
         style={{
           width: "75px",
@@ -28,14 +28,14 @@ export default function Item({ item }) {
             fontWeight="bold"
             color="var(--high-emphasis)"
           >
-            {item.brand}
+            {item.name}
           </Typography>
           <IconButton onClick={() => removeFromCart(item.id)} size="small" sx={{ ml: 2, color: "var(--low-emphasis)" }}>
             <CloseIcon />
           </IconButton>
         </Stack>
         <Typography variant="subtitle1" color="var(--low-emphasis)">
-          {item.name}
+          {item.brife}
         </Typography>
         <Stack
           direction="row"
@@ -81,7 +81,7 @@ export default function Item({ item }) {
             fontWeight="bold"
             color="var(--high-emphasis)"
           >
-            ${item.price.toFixed(2)}
+          ${item?.price}
           </Typography>
         </Stack>
       </Box>

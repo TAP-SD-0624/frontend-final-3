@@ -14,7 +14,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ children }) => {
       showStatus={false}
       infiniteLoop={true}
       emulateTouch={true}
-      autoPlay={false}
+      autoPlay={true}
       swipeable={true}
       className="carousel"
     >

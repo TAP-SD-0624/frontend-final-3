@@ -7,8 +7,6 @@ export interface SignUpRequestBody {
   lastName: string;
   email: string;
   password: string;
-  confirmPassword: string;
-  dateOfBirth?: string;
 }
 
 

@@ -21,6 +21,7 @@ export default function HeroSection({
           sm: "250px",
           md: "400px",
         },
+        mt: "-20px"
       }}
     >
       <img src={imageUrl} alt="Hero" />

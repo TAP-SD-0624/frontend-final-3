@@ -16,8 +16,9 @@ interface AccountMenuProps {
     toggleTheme: () => void;
     handleClickOnCart: () => void;
 }
+const AccountMenu: FC<AccountMenuProps> = ({anchorEl, toggleTheme, handleClickOnCart, handleCLickOnProfile, handleLogout, isLoggedIn, handleClose, open }) => {
+    console.log(open)
 
-const AccountMenu: FC<AccountMenuProps> = ({ anchorEl, toggleTheme, handleClickOnCart, handleCLickOnProfile, handleLogout, isLoggedIn, handleClose, open }) => {
     return (
         <Menu
             anchorEl={anchorEl}
@@ -55,7 +56,8 @@ const AccountMenu: FC<AccountMenuProps> = ({ anchorEl, toggleTheme, handleClickO
             anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
         >
             {isLoggedIn &&
-                <MenuItem onClick={handleCLickOnProfile}>
+                <MenuItem onClick={() => { handleCLickOnProfile(); handleClose() }
+                }>
                     <Avatar /> Profile
                 </MenuItem>
             }
@@ -65,7 +67,8 @@ const AccountMenu: FC<AccountMenuProps> = ({ anchorEl, toggleTheme, handleClickO
                 </ListItemIcon>
                 Switch Theme
             </MenuItem>
-            <MenuItem onClick={handleClickOnCart}>
+            <MenuItem onClick={() => { handleClickOnCart(); handleClose() }
+            }>
                 <ListItemIcon>
                     <ShoppingBagOutlined fontSize="small" />
                 </ListItemIcon>

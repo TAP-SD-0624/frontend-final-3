@@ -5,6 +5,8 @@ import React, { useState } from 'react'
 import { useMediaQuery } from "@mui/material";
 import OrderInformation from '@components/OrderInformation';
 import TabsSection from '@components/TabsSection';
+import useOrder from './hooks/useOrder';
+import { useLocation } from 'react-router-dom';
 
 const Order = () => {
     const [tabIndex, setTabIndex] = useState(0);
@@ -13,6 +15,10 @@ const Order = () => {
     const handleChange = (event, newValue) => {
         setTabIndex(newValue);
     };
+
+    const location = useLocation();
+    const orderId = location?.state?.orderId;
+    const { orderData } = useOrder(orderId);
 
     //@ts-ignore
     const isXs = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
@@ -32,13 +38,13 @@ const Order = () => {
                 </TableRow>
             </TableHead>
             <TableBody>
-                {order.map((item) => (
-                    <TableRow key={item.id} sx={{ borderBottom: "none" }}>
+                {orderData?.order?.OrderItems?.map((item) => (
+                    <TableRow key={item.Product.id} sx={{ borderBottom: "none" }}>
                         <TableCell sx={{ verticalAlign: "top", borderBottom: "none" }}>
                             <Box display="flex" alignItems="flex-start">
                                 <img
-                                    src={item.imageUrl}
-                                    alt={item.name}
+                                    src={item?.Product?.ProductImages[0]?.path}
+                                    alt={item.Product.name}
                                     style={{
                                         width: "75px",
                                         height: "80px",
@@ -52,28 +58,28 @@ const Order = () => {
                                         fontWeight="bold"
                                         color="var(--high-emphasis)"
                                     >
-                                        {item.brand}
+                                        {item.Product.name}
                                     </Typography>
                                     <Typography variant="body2" color="var(--low-emphasis)">
-                                        {item.name}
+                                        {item.Product.brief}
                                     </Typography>
                                     <Typography variant="body2" color="var(--low-emphasis)">
-                                        Qty- {item.qty}
+                                        Qty- {item.quantity}
                                     </Typography>
                                 </Box>
                             </Box>
                         </TableCell>
                         <TableCell sx={{ verticalAlign: "top", borderBottom: "none" }}>
                             <Typography fontSize="14px" color="var(--high-emphasis)">
-                                ${item.price.toFixed(2)}
+                                ${item.unitPrice.toFixed(2)}
                             </Typography>
                         </TableCell>
                         <TableCell sx={{ verticalAlign: "top", borderBottom: "none" }}>
-                            <Typography color="var(--high-emphasis)">{item.qty}</Typography>
+                            <Typography color="var(--high-emphasis)">{item.quantity}</Typography>
                         </TableCell>
                         <TableCell sx={{ verticalAlign: "top", borderBottom: "none" }}>
                             <Typography color="var(--high-emphasis)" fontSize="14px">
-                                ${(item.price * item.qty).toFixed(2)}
+                                ${item.totalPrice}
                             </Typography>
 
                         </TableCell>

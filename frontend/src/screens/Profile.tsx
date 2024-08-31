@@ -3,27 +3,123 @@ import {
   Avatar,
   Box,
   Button,
-  Container,
   Divider,
   Grid,
   IconButton,
   Stack,
   Typography,
 } from "@mui/material";
-import { Logout } from "@mui/icons-material";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import avatar from "../assets/avatar.png";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import TextField from "@src/components/shared/TextField";
-import { FormikProvider, Form } from "formik";
+import { FormikProvider, Form, useFormik } from "formik";
 import useLoginForm from "./SignIn/useLoginForm";
 import classes from "./Profile.module.css";
 import { useLocation } from "react-router-dom";
 import useUserData from "./hooks/useUserData";
+import {
+  validationSchema,
+  validationSchemaPassword,
+} from "./hooks/Profile/schema";
+import { useMutation } from "@tanstack/react-query";
+import { updateUserData, UpdateUserDataRequestBody } from "./hooks/Profile/api";
+import useSnackbar from "@src/hooks/useSnackbar";
+import LoadingButton from "@mui/lab/LoadingButton";
+import {
+  updatePassword,
+  UpdatePasswordRequestBody,
+} from "@src/api/updatePassword";
+const UpdateUserDataMutationKey = ["UpdateUserData"];
+const UpdatePasswordMutationKey = ["UpdateUserPassword"];
+import { queryClient } from "@src/queryClient";
+import useLogic from "@components/Navbar/useLogic";
 
 const Profile = () => {
-  const { formikProps, id } = useLoginForm();
-  const { userData } = useUserData("b78222e0-64db-49bc-8fb4-e26a6bde4d57");
+  const { id } = useLoginForm();
+  const mockId = "b78222e0-64db-49bc-8fb4-e26a6bde4d57";
+
+  const updateUserDataWrapper = (values: UpdateUserDataRequestBody) => {
+    return updateUserData(mockId, values);
+  };
+
+  const updateUserPassword = (values: UpdatePasswordRequestBody) => {
+    return updatePassword(mockId, values);
+  };
+
+  const { userData } = useUserData(mockId);
+  const { showSnackbar } = useSnackbar();
+
+  const INITIAL_FORM_STATE = {
+    firstName: userData?.user?.firstName,
+    lastName: userData?.user?.lastName,
+    mobileNumber: userData?.user?.mobileNumber,
+  };
+
+  const INITIAL_FORM_STATE_Password = {
+    currentPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  };
+
+  const { mutate: updateUserDataMutate, isPending } = useMutation({
+    mutationKey: UpdateUserDataMutationKey,
+    mutationFn: updateUserDataWrapper,
+    onSuccess: (data) => {
+      showSnackbar({ severity: "success", message: data.message });
+      useUserData(mockId);
+    },
+    onError: (error) => {
+      const errorMessage =
+        error.response?.data?.message.includs("Phone number");
+      errorMessage;
+      showSnackbar({ severity: "warning", message: errorMessage });
+
+      showSnackbar({
+        severity: "success",
+        message: "User's data updated successfuly",
+      });
+      console.log(error);
+    },
+  });
+
+  const { mutate: updateFormPassword, isPending: isUpdatePasswordPending } =
+    useMutation({
+      mutationKey: UpdatePasswordMutationKey,
+      mutationFn: updateUserPassword,
+      onSuccess: (data) => {
+        showSnackbar({ severity: "success", message: data.message });
+        useUserData(mockId);
+      },
+      onError: () => {
+        useUserData(mockId);
+      },
+    });
+
+  const formikProps = useFormik({
+    initialValues: INITIAL_FORM_STATE,
+    onSubmit: (values, { resetForm }) => {
+      return updateUserDataMutate(values, {
+        onError: () => resetForm(),
+      });
+    },
+    validationSchema,
+    validateOnMount: true,
+  });
+
+  const formikprops = useFormik({
+    initialValues: INITIAL_FORM_STATE_Password,
+    onSubmit: (values) => {
+      return updateFormPassword(values);
+    },
+    validationSchemaPassword,
+    validateOnMount: true,
+  });
+
+  const { isValid, values } = formikprops;
+  const { newPassword, confirmPassword } = values;
+
+  const isSubmitEnabled = isValid && newPassword === confirmPassword;
 
   return (
     <Box>
@@ -193,6 +289,7 @@ const Profile = () => {
                           border: "transparent",
                         },
                       },
+                      readOnly: true,
                     }}
                   />
                 </Stack>
@@ -201,42 +298,26 @@ const Profile = () => {
             <Stack gap="8px" mt="8px">
               <label className={classes.label}>Mobile Number</label>
 
-              <Grid container spacing={1}>
-                <Grid item xs={3} sm={2} md={1.5}>
-                  <TextField
-                    className={classes.textField}
-                    name="mobile"
-                    placeholder={userData?.user.mobileNumber.substring(0, 4)}
-                    type="tel"
-                    id="tel"
-                    fullWidth
-                    InputProps={{
-                      sx: {
-                        "& .MuiOutlinedInput-notchedOutline": {
-                          border: "transparent",
+              <Stack direction="row">
+                <Grid container gap="8px">
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      name="mobileNumber"
+                      placeholder={userData?.user.mobileNumber}
+                      id="mobileNumber"
+                      fullWidth
+                      className={classes.textField}
+                      InputProps={{
+                        sx: {
+                          "& .MuiOutlinedInput-notchedOutline": {
+                            border: "transparent",
+                          },
                         },
-                      },
-                    }}
-                  />
+                      }}
+                    />
+                  </Grid>
                 </Grid>
-                <Grid item xs={9} sm={6}>
-                  <TextField
-                    name="mobile"
-                    placeholder={userData?.user.mobileNumber.substring(4)}
-                    type="tel"
-                    id="nobile"
-                    fullWidth
-                    className={classes.textField}
-                    InputProps={{
-                      sx: {
-                        "& .MuiOutlinedInput-notchedOutline": {
-                          border: "transparent",
-                        },
-                      },
-                    }}
-                  />
-                </Grid>
-              </Grid>
+              </Stack>
             </Stack>
             <Grid container>
               <Grid item xs={12} sm={6}>
@@ -264,133 +345,12 @@ const Profile = () => {
                 </Stack>
               </Grid>
             </Grid>
-            <Stack marginTop="40px" width="inhirit"></Stack>
-            <Typography
-              className={classes.header}
-              sx={{
-                fontSize: {
-                  xs: "16px",
-                  sm: "17px",
-                  md: "18px",
-                  lg: "20px",
-                },
-              }}
-            >
-              Change Password
-            </Typography>
-            <Divider />
-            <Grid container>
-              <Grid item xs={12} sm={6}>
-                <Stack mt="37px" gap="8px">
-                  <label className={classes.label}>Current Password</label>
-                  <TextField
-                    name="password"
-                    placeholder="********"
-                    type="password"
-                    id="password"
-                    fullWidth
-                    sx={{
-                      fontFamily: "Inter",
-                      fontSize: "16px",
-                      fontWeight: "500",
-                      color: "var(--low-emphasis)",
-                      backgroundColor: "var(--grey)",
-                      margin: "0px",
-                      borderColor: "var(--grey)",
-                    }}
-                    InputProps={{
-                      sx: {
-                        "& .MuiOutlinedInput-notchedOutline": {
-                          border: "transparent",
-                        },
-                      },
-                    }}
-                  />
-                </Stack>
-              </Grid>
-            </Grid>
-            <Grid container>
-              <Grid item xs={12} sm={6}>
-                <Stack mt="16px" gap="8px">
-                  <label className={classes.label}>New Password</label>
-                  <Stack
-                    direction="row"
-                    alignItems="center"
-                    justifyContent="space-between"
-                    sx={{
-                      backgroundColor: "var(--grey)",
-                      borderColor: "var(--grey)",
-                    }}
-                  >
-                    <TextField
-                      name="newPassword"
-                      placeholder="******"
-                      type="password"
-                      id="newPassword"
-                      fullWidth
-                      sx={{
-                        fontFamily: "Inter",
-                        fontSize: "16px",
-                        fontWeight: "500",
-                        color: "var(--low-emphasis)",
-                        margin: "0px",
-                        backgroundColor: "var(--grey)",
-                        border: "none",
-                      }}
-                      InputProps={{
-                        sx: {
-                          "& .MuiOutlinedInput-notchedOutline": {
-                            border: "transparent",
-                          },
-                        },
-                      }}
-                    />
 
-                    <IconButton>
-                      <VisibilityIcon
-                        sx={{
-                          width: "24px",
-                          height: "24px",
-                          color: "var(--dark)",
-                        }}
-                      />
-                    </IconButton>
-                  </Stack>
-                </Stack>
-              </Grid>
-            </Grid>
-            <Grid container>
-              <Grid item xs={12} sm={6}>
-                <Stack mt="16px" gap="8px">
-                  <label className={classes.label}>Confirm Password</label>
-                  <TextField
-                    name="confirmPassword"
-                    placeholder="******"
-                    type="password"
-                    id="confirmPassword"
-                    fullWidth
-                    sx={{
-                      fontFamily: "Inter",
-                      fontSize: "16px",
-                      fontWeight: "500",
-                      color: "var(--low-emphasis)",
-                      backgroundColor: "var(--grey)",
-                      margin: "0px",
-                      borderColor: "var(--grey)",
-                    }}
-                    InputProps={{
-                      sx: {
-                        "& .MuiOutlinedInput-notchedOutline": {
-                          border: "transparent",
-                        },
-                      },
-                    }}
-                  />
-                </Stack>
-              </Grid>
-            </Grid>
+            <Stack marginTop="40px" width="inhirit"></Stack>
             <Stack direction="row" justifyContent="flex-end" marginTop="28px">
-              <Button
+              <LoadingButton
+                type="submit"
+                loading={isPending}
                 sx={{
                   fontFamily: "Inter",
                   fontSize: "16px",
@@ -403,12 +363,165 @@ const Profile = () => {
                   padding: "8px",
                   textTransform: "none",
                   alignItems: "center",
+                  "&:hover": {
+                    backgroundColor: "var(--primary)",
+                  },
+                  "&:click": {
+                    backgroundColor: "var(--primary)",
+                  },
                 }}
               >
                 Save Changes
-              </Button>
+              </LoadingButton>
             </Stack>
           </Box>
+        </Form>
+      </FormikProvider>
+      <Typography
+        className={classes.header}
+        sx={{
+          fontSize: {
+            xs: "16px",
+            sm: "17px",
+            md: "18px",
+            lg: "20px",
+          },
+        }}
+      >
+        Change Password
+      </Typography>
+      <Divider />
+      <FormikProvider value={formikprops}>
+        <Form autoComplete="off">
+          <Grid container>
+            <Grid item xs={12} sm={6}>
+              <Stack mt="37px" gap="8px">
+                <label className={classes.label}>Current Password</label>
+                <TextField
+                  name="currentPassword"
+                  placeholder="********"
+                  type="password"
+                  id="password"
+                  fullWidth
+                  sx={{
+                    fontFamily: "Inter",
+                    fontSize: "16px",
+                    fontWeight: "500",
+                    color: "var(--low-emphasis)",
+                    backgroundColor: "var(--grey)",
+                    margin: "0px",
+                    borderColor: "var(--grey)",
+                  }}
+                  InputProps={{
+                    sx: {
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        border: "transparent",
+                      },
+                    },
+                  }}
+                />
+              </Stack>
+            </Grid>
+          </Grid>
+          <Grid container>
+            <Grid item xs={12} sm={6}>
+              <Stack mt="16px" gap="8px">
+                <label className={classes.label}>New Password</label>
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                  justifyContent="space-between"
+                  sx={{
+                    backgroundColor: "var(--grey)",
+                    borderColor: "var(--grey)",
+                  }}
+                >
+                  <TextField
+                    name="newPassword"
+                    placeholder="******"
+                    type="password"
+                    id="newPassword"
+                    fullWidth
+                    sx={{
+                      fontFamily: "Inter",
+                      fontSize: "16px",
+                      fontWeight: "500",
+
+                      color: "var(--low-emphasis)",
+                      margin: "0px",
+                      backgroundColor: "var(--grey)",
+                      border: "none",
+                    }}
+                    InputProps={{
+                      sx: {
+                        "& .MuiOutlinedInput-notchedOutline": {
+                          border: "transparent",
+                        },
+                      },
+                    }}
+                  />
+                </Stack>
+              </Stack>
+            </Grid>
+          </Grid>
+          <Grid container>
+            <Grid item xs={12} sm={6}>
+              <Stack mt="16px" gap="8px">
+                <label className={classes.label}>Confirm Password</label>
+                <TextField
+                  name="confirmPassword"
+                  placeholder="******"
+                  type="password"
+                  id="confirmPassword"
+                  fullWidth
+                  sx={{
+                    fontFamily: "Inter",
+                    fontSize: "16px",
+                    fontWeight: "500",
+                    color: "var(--low-emphasis)",
+                    backgroundColor: "var(--grey)",
+                    margin: "0px",
+                    borderColor: "var(--grey)",
+                  }}
+                  InputProps={{
+                    sx: {
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        border: "transparent",
+                      },
+                    },
+                  }}
+                />
+              </Stack>
+            </Grid>
+          </Grid>
+          <Stack direction="row" justifyContent="flex-end" marginTop="28px">
+            <LoadingButton
+              type="submit"
+              loading={isUpdatePasswordPending}
+              disabled={!isSubmitEnabled}
+              sx={{
+                fontFamily: "Inter",
+                fontSize: "16px",
+                fontWeight: "500",
+                color: "var(--bright)",
+                backgroundColor: "var(--primary)",
+                width: "180px",
+                height: "36px",
+                borderRadius: "8px",
+                padding: "8px",
+                textTransform: "none",
+                alignItems: "center",
+                "&:hover": {
+                  backgroundColor: "var(--primary)",
+                },
+                "&:click": {
+                  backgroundColor: "var(--primary)",
+                },
+              }}
+            >
+              Change Password
+            </LoadingButton>
+          </Stack>
         </Form>
       </FormikProvider>
     </Box>

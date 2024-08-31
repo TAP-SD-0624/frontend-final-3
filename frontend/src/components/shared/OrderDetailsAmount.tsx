@@ -21,7 +21,7 @@ export default function OrderDetailsAmount({
           Sub Total
         </Typography>
         <Typography variant="body2" color="var(--high-emphasis)">
-          ${subTotal.toFixed(2)}
+          ${subTotal}
         </Typography>
       </Box>
       <Box display="flex" justifyContent="space-between" mb={1}>
@@ -29,7 +29,7 @@ export default function OrderDetailsAmount({
           Discount
         </Typography>
         <Typography variant="body2" color="var(--high-emphasis)">
-          -${discount.toFixed(2)}
+          -${discount}
         </Typography>
       </Box>
       <Box display="flex" justifyContent="space-between" mb={1}>
@@ -37,7 +37,7 @@ export default function OrderDetailsAmount({
           Delivery Fee
         </Typography>
         <Typography variant="body2" color="var(--high-emphasis)">
-          ${deliveryFee.toFixed(2)}
+          ${deliveryFee}
         </Typography>
       </Box>
       <Box display="flex" justifyContent="space-between" fontWeight="medium">
@@ -53,7 +53,7 @@ export default function OrderDetailsAmount({
           color="var(--high-emphasis)"
           fontWeight="bold"
         >
-          ${grandTotal.toFixed(2)}
+          ${grandTotal}
         </Typography>
       </Box>
     </Box>

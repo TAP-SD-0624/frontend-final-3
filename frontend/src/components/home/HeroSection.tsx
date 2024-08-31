@@ -5,8 +5,12 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ImageCarousel from "@components/shared/ImageCarousel";
 import glasses from "@src/assets/about3.png";
 import watches from "@src/assets/about2.png";
+import useCarouselSlides from "@src/screens/hooks/useCarouselSlides";
 
 export default function HeroSection() {
+  const { carousalData } = useCarouselSlides();
+  const data = carousalData?.carouselSlides;
+
   return (
     <Container>
       <ImageCarousel>
@@ -44,7 +48,7 @@ export default function HeroSection() {
               },
             }}
           >
-            <Stack spacing={2}>
+            <Stack spacing={2} alignItems="start">
               <Typography
                 variant="h1"
                 sx={{
@@ -71,6 +75,7 @@ export default function HeroSection() {
                   },
                   fontWeight: "500",
                   color: "var(--primary)",
+                  textAlign:"left"
                 }}
               >
                 Trendy handbags collection for your party animal
@@ -142,8 +147,8 @@ export default function HeroSection() {
               },
             }}
           >
-            <Stack spacing={2}>
-              <Typography
+            <Stack spacing={2} alignItems="start">
+            <Typography
                 variant="h1"
                 sx={{
                   fontSize: {
@@ -169,6 +174,7 @@ export default function HeroSection() {
                   },
                   fontWeight: "500",
                   color: "var(--primary)",
+                  textAlign:"left"
                 }}
               >
                 Trendy handbags collection for your party animal
@@ -240,8 +246,8 @@ export default function HeroSection() {
               },
             }}
           >
-            <Stack spacing={2}>
-              <Typography
+            <Stack spacing={2} alignItems="start">
+            <Typography
                 variant="h1"
                 sx={{
                   fontSize: {
@@ -267,6 +273,7 @@ export default function HeroSection() {
                   },
                   fontWeight: "500",
                   color: "var(--primary)",
+                  textAlign:"left"
                 }}
               >
                 Trendy handbags collection for your party animal

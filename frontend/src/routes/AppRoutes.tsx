@@ -26,7 +26,7 @@ const AppRoutes: FC = () => {
     <Suspense fallback={<BlockUI isBlocked />}>
       <Routes>
         <Route path="/" element={<Layout breadcrumbs={breadcrumbs} />}>
-          <Route path="about" element={<About />} />
+          <Route path="" element={<About />} />
           <Route path="*" element={<NotFound />} />
           <Route path="login" element={<SignIn />} />
           <Route path="signUp" element={<SignUp />} />

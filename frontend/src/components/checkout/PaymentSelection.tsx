@@ -6,7 +6,6 @@ import {
   FormControlLabel,
   FormControl,
   FormLabel,
-  TextField,
   Checkbox,
   Paper,
   Avatar,
@@ -16,6 +15,7 @@ import {
   Stack,
 } from "@mui/material";
 import { paymentMethods, upiOptions } from "@src/mocks";
+import TextField from "@components/shared/TextField";
 
 const PaymentSelection = () => {
   const [selectedPayment, setSelectedPayment] = useState("");
@@ -168,6 +168,7 @@ const PaymentSelection = () => {
                         {selectedUPI === option.value && (
                           <Stack mt={2}>
                             <TextField
+                              name="cardNumber"
                               label="Enter your UPI Id"
                               placeholder="Eg: 1234567890@upi"
                               InputProps={{

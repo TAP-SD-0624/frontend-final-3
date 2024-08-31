@@ -1,8 +1,15 @@
 import React from 'react'
 import { Stack, Typography, Divider, Button } from '@mui/material'
 import OrderDetailsAmount from './shared/OrderDetailsAmount'
+import { useLocation } from 'react-router-dom';
+import useOrder from '@src/screens/hooks/useOrder';
 
 const OrderInformation = () => {
+    const location = useLocation();
+    const orderId = location?.state?.orderId;
+    const { orderData } = useOrder(orderId);
+    const data = orderData?.order;
+
     return (
         <Stack mt="42px">
             <Typography sx={{ fontFamily: "Inter", fontWeight: "600", fontSize: "20px" }}
@@ -17,42 +24,42 @@ const OrderInformation = () => {
                         Order Details
                     </Typography>
                     <OrderDetailsAmount
-                        subTotal={119.69}
-                        discount={-13.40}
-                        deliveryFee={-0.00}
-                        grandTotal={106.29}
+                        subTotal={data?.subtotal}
+                        discount={data?.totalDiscount}
+                        deliveryFee={data?.deliveryFees}
+                        grandTotal={data?.grandtotal}
                     />
                 </Stack>
                 <Stack mt="16px">
-                    <Typography sx={{mb:"16px", fontFamily: "Inter", fontWeight: "500", fontSize: "16px" }}
+                    <Typography sx={{ mb: "16px", fontFamily: "Inter", fontWeight: "500", fontSize: "16px" }}
                         color="var(--low-emphasis)">
                         Payment Details
                     </Typography>
                     <Typography sx={{ fontFamily: "Inter", fontWeight: "500", fontSize: "16px" }}
                         color="var(--high-emphasis)">
-                        Cash on Delivery
+                        {data?.paymentDetails}
                     </Typography>
                 </Stack>
                 <Stack mt="16px">
-                    <Typography sx={{mb: "16px", fontFamily: "Inter", fontWeight: "500", fontSize: "16px" }}
+                    <Typography sx={{ mb: "16px", fontFamily: "Inter", fontWeight: "500", fontSize: "16px" }}
                         color="var(--low-emphasis)">
                         Address Details
                     </Typography>
                     <Typography sx={{ fontFamily: "Inter", fontWeight: "500", fontSize: "16px" }}
                         color="var(--high-emphasis)">
-                        Vincent Lobo
+                        {data?.Address.state}
                     </Typography>
                     <Typography sx={{ fontFamily: "Inter", fontWeight: "500", fontSize: "16px" }}
                         color="var(--high-emphasis)">
-                        3068  Woodlawn Drive
+                        {data?.Address.street}
                     </Typography>
                     <Typography sx={{ fontFamily: "Inter", fontWeight: "500", fontSize: "16px" }}
                         color="var(--high-emphasis)">
-                        Milwaukee
+                        {data?.Address.city}
                     </Typography>
                     <Typography sx={{ fontFamily: "Inter", fontWeight: "500", fontSize: "16px" }}
                         color="var(--high-emphasis)">
-                        414-672-5388
+                        {data?.Address.pin}
                     </Typography>
                 </Stack>
             </Stack>

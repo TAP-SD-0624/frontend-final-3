@@ -2,9 +2,14 @@ import React from "react";
 import axiosInstance from "./index";
 
 interface CategoriesResponse {
-  id: string;
-  name: string;
-  description: string;
+  categories: [
+    {
+      id: string;
+      name: string;
+      description: string;
+      imagePath: string;
+    }
+  ];
 }
 
 const categories = async () => {

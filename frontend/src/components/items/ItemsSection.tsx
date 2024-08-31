@@ -6,13 +6,14 @@ import { breadcrumbs, productsMock } from "@src/mocks";
 import usePagination from "@mui/material/usePagination";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import UsePagination from "@components/shared/Pagination";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useBrand from "@src/screens/hooks/useBrand";
 import useLimitedEdition from "@src/screens/hooks/useLimitedEdition";
 import useNewArrivals from "@src/screens/hooks/useNewArrivals";
 import useCategory from "@src/screens/hooks/useCategory";
 import usePopularProducts from "@src/screens/hooks/usePopularProducts";
 import usedDiscountedProducts from "@src/screens/hooks/usedDiscountedProducts";
+import useHandpickedCollections from "@src/screens/hooks/useHandpickedCollections";
 
 export default function ItemsSection() {
   const location = useLocation();
@@ -22,6 +23,8 @@ export default function ItemsSection() {
   const limitedEdition = location?.state?.limitedEdition;
   const discountedProducts = location?.state?.discountedProducts;
   const popularProducts = location?.state?.popularProducts;
+  const collectionName = location?.state?.collectionName;
+  const index = location?.state?.index;
 
   const { categoryData } = useCategory(categoryName);
   const { newArrivalsData } = useNewArrivals();
@@ -29,6 +32,8 @@ export default function ItemsSection() {
   const { popularProductsData } = usePopularProducts();
   const { brandData } = useBrand(brandName);
   const { limitedEditionData } = useLimitedEdition();
+  const { handpickedCollectionsData } = useHandpickedCollections();
+
 
 
   let name = categoryName ? categoryName
@@ -38,13 +43,21 @@ export default function ItemsSection() {
           : discountedProducts ? discountedProducts
             : popularProducts;
 
-  let data = categoryName ? categoryData
-    : brandName ? brandData
-      : newArrivals ? newArrivalsData
-        : limitedEdition ? limitedEditionData
-          : discountedProducts ? discountedProductsData
-            : popularProductsData;
+  let data = categoryName ? categoryData?.products
+    : brandName ? brandData?.products
+      : newArrivals ? newArrivalsData?.products
+        : limitedEdition ? limitedEditionData?.products
+          : discountedProducts ? discountedProductsData?.products
+            : popularProducts ? popularProductsData?.products : [];
 
+  if (collectionName) {
+    data = handpickedCollectionsData?.categories[index]?.products;
+  }
+
+  // Ensure `data` is always an array to avoid issues with rendering
+  data = data || [];
+  console.log(data.length)
+  console.log(data)
 
   return (
     <>
@@ -89,9 +102,14 @@ export default function ItemsSection() {
             gap: 3,
           }}
         >
-          {productsMock.map((product) => (
-            <Product key={product.slug} product={product} showDetails />
-          ))}
+          {data.length !== 18 ?
+            data?.map((product) => (
+              <Product key={product.id} product={product} showDetails />
+            ))
+            : <Typography>
+              Sorry, there is no data for this selection!
+            </Typography>
+          }
         </Box>
         <Box
           sx={{
@@ -113,18 +131,22 @@ export default function ItemsSection() {
         }}
       >
         <ImageCarousel>
-          {productsMock.slice(0, 4).map((product) => (
-            <Product
-              key={product.slug}
-              product={product}
-              style={{
-                width: "92%",
-                margin: "0 auto",
-                paddingBottom: "24px",
-              }}
-              showDetails
-            />
-          ))}
+          {data.length !== 18 ?
+            data.slice(0, 4).map((product) => (
+              <Product
+                key={product.id}
+                product={product}
+                style={{
+                  width: "92%",
+                  margin: "0 auto",
+                  paddingBottom: "24px",
+                  cursor: "pointer"
+                }}
+                showDetails
+              />
+            ))
+            : null
+          }
         </ImageCarousel>
       </Box>
     </>

@@ -8,19 +8,30 @@ import useCategories from "./hooks/useCategories";
 import useBrands from "./hooks/useBrands";
 import useProducts from "./hooks/useProducts";
 import useOrders from "./hooks/useOrders";
-
+import handpickedCollections from "@src/api/handpickedCollections";
+import useHandpickedCollections from "./hooks/useHandpickedCollections";
+import newArrivals from "@src/api/newArrivals";
+import useNewArrivals from "./hooks/useNewArrivals";
 export default function Home() {
   const { categoriesData } = useCategories();
   const { brandsData } = useBrands();
   const { productsData } = useProducts();
-  const { ordersData } = useOrders();
+  const { newArrivalsData } = useNewArrivals()
+  const {handpickedCollectionsData} = useHandpickedCollections();
+  
   return (
     <>
       <HeroSection />
       <NewArrivals />
-      <Handpicked />
-      <Brands />
-      <Makeup />
+      <div id="handpicked">
+        <Handpicked />
+      </div>
+      <div id="brands">
+        <Brands />
+      </div>
+      <div id="makeup">
+        <Makeup />
+      </div>
     </>
   );
 }

@@ -31,15 +31,13 @@ const useLoginForm = () => {
     // onSubmit: (values) => {
     //   return signupMutate(values);
     // },
-    onSubmit: (values, { resetForm }) => {
-      // Add the dare field to the values object
-      const updatedValues = {
-        ...values,
-        // dateOfBirth: "1990-01-01T00:00:00.000Z", // Replace with the actual value you want to add
-        phoneNumber: "1234567890",
-      };
-      // resetForm();
-      return signupMutate(updatedValues);
+    onSubmit: (values) => {
+      return signupMutate({
+        firstName: values.firstName,
+        lastName: values.lastName,
+        password: values.password,
+        email: values.email,
+      });
     },
     validationSchema,
     validateOnMount: true,

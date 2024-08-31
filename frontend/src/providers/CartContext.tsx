@@ -4,30 +4,37 @@ import { noop } from '@src/utils';
 import bagImage from "@src/assets/pink-bag-small.png";
 import useSnackbar from '@src/hooks/useSnackbar';
 
-const initialCart: CartItem[] = [
-  {
-    id: '1',
-    name: "Leather Coach Bag",
-    brand: "Channel",
-    price: 54.69,
-    qty: 1,
-    stock: 7,
-    imageUrl: bagImage,
-  },
-  {
-    id: '2',
-    name: "Leather Coach Bag",
-    brand: "Coach",
-    price: 54.69,
-    qty: 3,
-    stock: 10,
-    imageUrl: bagImage,
-  },
-];
+
+interface product {
+  isLimitedEdition: boolean;
+  id: string;
+  name: string;
+  brief: string;
+  description: string;
+  price: number;
+  stock: number;
+  discountRate: number;
+  rating: number;
+  createdAt: string;
+  qty: number;
+  Category: {
+    name: string;
+    id: string;
+  };
+  Brand: {
+    name: string;
+    id: string;
+  };
+  ProductImages: [
+    {
+      path: string;
+    }
+  ];
+}
 
 export interface CartContextValues {
-  getCart: () => CartItem[];
-  addToCart: (item: CartItem) => void;
+  getCart: () => product[];
+  addToCart: (item: product) => void;
   increaseQuantity: (id: string) => void;
   decreaseQuantity: (id: string) => void;
   removeFromCart: (id: string) => void;
@@ -61,9 +68,9 @@ export const CartProvider: FC<CartProviderProps> = ({ children }) => {
   // useEffect(() => {
   //   localStorage.setItem('cart', JSON.stringify(cart));
   // }, [cart]);
-  const [cart, setCart] = useState<CartItem[]>(() => {
+  const [cart, setCart] = useState<product[]>(() => {
     const storedCart = localStorage.getItem('cart');
-    return storedCart ? JSON.parse(storedCart) : initialCart;
+    return storedCart ? JSON.parse(storedCart) : [];
   });
 
   useEffect(() => {
@@ -76,8 +83,8 @@ export const CartProvider: FC<CartProviderProps> = ({ children }) => {
 
   const { showSnackbar } = useSnackbar();
 
-  const addToCart = (item: CartItem) => {
-    setCart((prevCart: CartItem[]) => {
+  const addToCart = (item: product) => {
+    setCart((prevCart: product[]) => {
       const existingItem = prevCart.find(cartItem => cartItem.id === item.id);
       const beginning = item.stock === 0;
       if (existingItem) {

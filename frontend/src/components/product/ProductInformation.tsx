@@ -17,24 +17,27 @@ import bagImage from "@src/assets/product-image.png";
 import Remove from "@mui/icons-material/Remove";
 import Item from "@components/cardModal/Item";
 import useLogic from "@components/Navbar/useLogic";
+import useProduct from "@src/screens/hooks/useProduct";
+import { useLocation } from "react-router-dom";
+import useCategories from "@src/screens/hooks/useCategories";
+import useBrands from "@src/screens/hooks/useBrands";
 
 const ProductInformation = () => {
-  const initialCart: CartItem =
-  {
-    id: '5',
-    name: "Leather Coach Bag",
-    brand: "Desil",
-    price: 60.80,
-    qty: 1,
-    stock: 5,
-    imageUrl: bagImage,
-  }
-
   const { isLoggedIn } = useLogic();
   const { addToCart, increaseQuantity, decreaseQuantity, getCart, removeFromCart } = useCartContext();
+  
+  const location = useLocation();
+  const productId = location?.state?.productId;
+  const { productData } = useProduct(productId);
+  const productWithQuantity = {
+    ...productData?.product,
+    qty: 0, 
+  };
+  console.log(productWithQuantity)
+  console.log(productData)
   const cart = getCart();
-  const cartItem = cart.find((item) => item.id === initialCart.id);
-  console.log(cartItem);
+  const cartItem = cart.find((item) => item.id === productWithQuantity.id);
+  const data = productData?.product;
 
   return (
     <Stack
@@ -59,7 +62,7 @@ const ProductInformation = () => {
           },
         }}
       >
-        Coach{" "}
+        {productWithQuantity?.name}
       </Typography>
       <Typography
         sx={{
@@ -74,12 +77,13 @@ const ProductInformation = () => {
           },
         }}
       >
-        Leather Coach Bag with adjustable straps.
+        {productWithQuantity?.brief}
       </Typography>
       <Stack direction="row" gap="14px">
+        
         <Rating
           name="rating-controlled"
-          value={2}
+          value={+productWithQuantity?.rating}
           readOnly
           sx={{ gap: "8px", color: "var(--stars)" }}
         />
@@ -91,7 +95,7 @@ const ProductInformation = () => {
             color: "var(--light-text)",
           }}
         >
-          (250) Ratings
+          {productWithQuantity.rating} Ratings
         </Typography>
       </Stack>
       <Stack direction="row" gap="16px" alignItems="center">
@@ -108,7 +112,7 @@ const ProductInformation = () => {
             color: "var(--high-emphasis)",
           }}
         >
-          $54.69
+          ${(productWithQuantity?.price - (productWithQuantity?.price * productWithQuantity?.discountRate)).toFixed(2)}
         </Typography>
         <Typography
           sx={{
@@ -124,7 +128,7 @@ const ProductInformation = () => {
             textDecoration: "line-through",
           }}
         >
-          $78.66
+          ${productWithQuantity?.price}
         </Typography>
         <Typography
           sx={{
@@ -139,7 +143,7 @@ const ProductInformation = () => {
             color: "var(--vibrant)",
           }}
         >
-          50% OFF
+          {productWithQuantity?.discountRate * 100}% OFF
         </Typography>
       </Stack>
       <Divider />
@@ -166,7 +170,7 @@ const ProductInformation = () => {
         >
           <IconButton
             disabled={!isLoggedIn}
-            onClick={() => decreaseQuantity(initialCart.id)}
+            onClick={() => decreaseQuantity(productWithQuantity.id)}
             sx={{
               width: "24px",
               height: "24px",
@@ -190,7 +194,7 @@ const ProductInformation = () => {
           </Typography>
           <IconButton
             disabled={!isLoggedIn}
-            onClick={() => increaseQuantity(initialCart.id)}
+            onClick={() => increaseQuantity(productWithQuantity.id)}
             sx={{
               width: "24px",
               height: "24px",
@@ -211,8 +215,8 @@ const ProductInformation = () => {
         gap="24px"
       >
         <Button
-          disabled={initialCart.stock === 0 || !isLoggedIn}
-          onClick={!cartItem ? () => addToCart(initialCart) : () => removeFromCart(initialCart.id)}
+          disabled={productWithQuantity.stock === 0 || !isLoggedIn}
+          onClick={!cartItem ? () => addToCart(productWithQuantity) : () => removeFromCart(productWithQuantity.id)}
           variant="contained"
           sx={{
             backgroundColor: cartItem ? "var(--error)" : "var(--primary)",

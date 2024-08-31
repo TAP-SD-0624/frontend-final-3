@@ -2,9 +2,16 @@ import React from "react";
 import axiosInstance from "./index";
 
 interface OrdersResponse {
-  id: string;
-  name: string;
-  description: string;
+  status: string;
+  orders: [
+    {
+      id: string;
+      createdAt: string;
+      totalDiscount: number;
+      totalAmount: number;
+      orderStatus: string;
+    }
+  ];
 }
 
 const orders = async () => {

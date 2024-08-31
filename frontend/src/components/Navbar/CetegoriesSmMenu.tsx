@@ -1,5 +1,7 @@
 import { Menu, MenuItem, Typography } from '@mui/material'
+import useCategories from '@src/screens/hooks/useCategories';
 import React, { FC } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 interface CetegoriesSmMenuProps {
     anchorElCetagories: null | HTMLElement;
@@ -7,7 +9,19 @@ interface CetegoriesSmMenuProps {
     navItems: string[];
     openCetagories: boolean;
 }
+interface category {
+    id: string;
+    name: string;
+    description: string;
+    imagePath: string;
+}
 const CetegoriesSmMenu: FC<CetegoriesSmMenuProps> = ({ anchorElCetagories, onClick, navItems, openCetagories }) => {
+    const { categoriesData } = useCategories();
+    const data = categoriesData?.categories;
+    const navigate = useNavigate();
+    const handleOnClickCategory = (category: category) => {
+        navigate(`/items?category= ${category.name}`, { state: { categoryName: category.name } });
+    }
     return (
         <Menu
             anchorEl={anchorElCetagories}
@@ -47,20 +61,20 @@ const CetegoriesSmMenu: FC<CetegoriesSmMenuProps> = ({ anchorElCetagories, onCli
             transformOrigin={{ horizontal: "right", vertical: "top" }}
             anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
         >
-            {navItems.map((item, index) => (
+            {data?.map((item, index) => (
                 <MenuItem key={index}>
                     <Typography
+                        onClick={() => handleOnClickCategory(item)}
                         noWrap
-                        component="a"
-                        href="#"
                         sx={{
                             color: "var(--high-emphasis)",
                             fontFamily: "Inter",
                             fontSize: "14px",
                             fontWeight: 500,
+                            cursor: "pointer",
                         }}
                     >
-                        {item}
+                        {item.name}
                     </Typography>
                 </MenuItem>
             ))}

@@ -3,27 +3,37 @@ import axiosInstance from "./index";
 
 interface HandpickedCollectionsResponse {
   status: string;
-  totalProducts: number;
-  products: [
+  totalCategories: number;
+  categories: [
     {
-      isLimitedEdition: boolean;
       id: string;
       name: string;
-      brief: string;
       description: string;
-      price: number;
-      stock: number;
-      discountRate: number;
-      rating: number;
+      imagePath: string;
       createdAt: string;
-      Category: {
-        name: string;
-        id: string;
-      };
-      Brand: {
-        name: string;
-        id: string;
-      };
+
+      products: [
+        {
+          isLimitedEdition: boolean;
+          id: string;
+          name: string;
+          brief: string;
+          description: string;
+          price: number;
+          stock: number;
+          discountRate: number;
+          rating: number;
+          createdAt: string;
+          Category: {
+            name: string;
+            id: string;
+          };
+          Brand: {
+            name: string;
+            id: string;
+          };
+        }
+      ];
     }
   ];
 }
@@ -31,7 +41,9 @@ interface HandpickedCollectionsResponse {
 const handpickedCollections = async () => {
   const url = "/products/handpickedCollections";
 
-  return axiosInstance.get<HandpickedCollectionsResponse>(url).then((res) => res.data);
+  return axiosInstance
+    .get<HandpickedCollectionsResponse>(url)
+    .then((res) => res.data);
 };
 
 export default handpickedCollections;

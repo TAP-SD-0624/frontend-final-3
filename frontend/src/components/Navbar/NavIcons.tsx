@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { Stack, IconButton, Badge, Tooltip } from '@mui/material'
 import AccountMenu from './AccountMenu'
 import CetagoriesSmScreens from './CetagoriesSmScreens'
@@ -10,6 +10,7 @@ import useLogic from './useLogic'
 import LoginIcon from '@mui/icons-material/Login';
 import { useNavigate } from 'react-router-dom'
 import useCartContext from '@src/hooks/useCartContext'
+import { boolean } from 'yup'
 
 interface NavIconsProps {
     onCartOpen: () => void;
@@ -18,13 +19,14 @@ interface NavIconsProps {
 const NavIcons: FC<NavIconsProps> = ({ onCartOpen }) => {
     const navigate = useNavigate();
 
-    const { handleCLickOnProfile, handleLogout, handleClick, open, isLGUp, isLoggedIn, anchorEl,
-        anchorElCetagories, handleClickOnCart, handleClose, handleCLickLogin, toggleTheme, handleClickCetagories, handleCloseCetagories, navItems, openCetagories } = useLogic();
+    const { handleCLickOnProfile, handleLogout, isLGUp, isLoggedIn,
+        anchorElCetagories,setAnchorEl, handleClickOnCart,anchorEl,open,handleClick, handleToggleTheme, handleClose, handleCLickLogin, toggleTheme, handleClickCetagories, handleCloseCetagories, navItems, openCetagories } = useLogic();
 
     const { getCart } = useCartContext();
     const cart = getCart();
     const length = cart.length;
     console.log(length)
+
 
     return (
         <Stack

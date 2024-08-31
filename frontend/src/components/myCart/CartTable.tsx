@@ -47,7 +47,7 @@ const CartTable = () => {
               <TableCell sx={{ verticalAlign: "top", borderBottom: "none" }}>
                 <Box display="flex" alignItems="flex-start">
                   <img
-                    src={item.imageUrl}
+                    src={item.ProductImages[0]?.path}
                     alt={item.name}
                     style={{
                       width: "75px",
@@ -75,7 +75,7 @@ const CartTable = () => {
               </TableCell>
               <TableCell sx={{ verticalAlign: "top", borderBottom: "none" }}>
                 <Typography fontSize="14px" color="var(--high-emphasis)">
-                  ${item.price.toFixed(2)}
+                  ${item?.price}
                 </Typography>
               </TableCell>
               <TableCell sx={{ verticalAlign: "top", borderBottom: "none" }}>

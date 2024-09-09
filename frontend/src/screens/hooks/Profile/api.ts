@@ -10,6 +10,7 @@ export interface UpdateUserDataRequestBody {
   currentPassword?: string;
   password?: string;
   confirmPassword?: string;
+  image?: string;
 }
 
 export interface UpdateUserDataResponse {

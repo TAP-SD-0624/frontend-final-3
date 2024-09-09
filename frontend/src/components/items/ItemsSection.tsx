@@ -41,7 +41,7 @@ export default function ItemsSection() {
       : newArrivals ? newArrivals
         : limitedEdition ? limitedEdition
           : discountedProducts ? discountedProducts
-            : popularProducts;
+            : popularProducts ? popularProducts : collectionName;
 
   let data = categoryName ? categoryData?.products
     : brandName ? brandData?.products

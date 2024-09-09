@@ -17,7 +17,7 @@ const Layoutwithsidebar = lazy(() => import("@components/Layout/Layoutwithsideba
 const Profile = lazy(() => import('@src/screens/Profile'));
 const MyOrders = lazy(() => import('@src/screens/MyOrders'));
 const Order = lazy(() => import('@src/screens/Order'));
-const Welcome = lazy(() => import('@src/screens/Welcome'));
+const Search = lazy(() => import('@src/screens/Search'));
 
 const AppRoutes: FC = () => {
   const { breadcrumbs } = useBreadcrumbs();
@@ -31,10 +31,10 @@ const AppRoutes: FC = () => {
           <Route path="login" element={<SignIn />} />
           <Route path="signUp" element={<SignUp />} />
           <Route path="home" element={<Home />} />
-          {/* <Route path="" element={<Home />} /> */}
           <Route path="items" element={<Items />} />
           <Route path="product" element={<Product />} />
-      
+          <Route path="search" element={<Search />} />
+
           {/* Protected routes */}
           <Route element={<ProtectedRoute />}>
             <Route path="checkout" element={<Checkout />} />

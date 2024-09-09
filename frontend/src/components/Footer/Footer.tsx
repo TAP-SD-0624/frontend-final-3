@@ -41,43 +41,49 @@ const Footer = () => {
           paddingTop="30px"
         >
           <Box>
-            <Stack direction="row">
-              <Stack
-                sx={{
-                  gap: "8px",
-                  alignItems: "baseline",
-                }}
-              >
-                <Typography
-                  noWrap
-                  component="a"
-                  href="#"
+            <Stack gap={2} direction={{
+              xs: "column",
+              md: "row",
+            }}
+            >
+              {data &&
+                <Stack
                   sx={{
-                    color: "var(--bright)",
-                    fontFamily: "Inter",
-                    fontSize: "16px",
-                    fontWeight: 500,
+                    gap: "8px",
+                    alignItems: "baseline",
                   }}
                 >
-                  Shop by Category
-                </Typography>
-                {data?.map((item, index) => (
                   <Typography
-                    onClick={() => handleOnClickCategory(item)}
-                    key={index}
                     noWrap
+                    component="a"
+                    href="#"
                     sx={{
-                      color: "var(--footer-text)",
+                      color: "var(--bright)",
                       fontFamily: "Inter",
                       fontSize: "16px",
                       fontWeight: 500,
-                      cursor: "pointer",
                     }}
                   >
-                    {item.name}
+                    Shop by Category
                   </Typography>
-                ))}
-              </Stack>
+                  {data?.map((item, index) => (
+                    <Typography
+                      onClick={() => handleOnClickCategory(item)}
+                      key={index}
+                      noWrap
+                      sx={{
+                        color: "var(--footer-text)",
+                        fontFamily: "Inter",
+                        fontSize: "16px",
+                        fontWeight: 500,
+                        cursor: "pointer",
+                      }}
+                    >
+                      {item.name}
+                    </Typography>
+                  ))}
+                </Stack>
+              }
               <Stack
                 sx={{
                   gap: "8px",

@@ -17,7 +17,7 @@ export const Search = styled("div")<SearchProps>(({ theme, width }) => ({
     padding: theme.spacing(1),
     alignItems: "center",
     justifyContent: "flex-start",
-    pointerEvents: "none",
+    // pointerEvents: "none",
     gap: "8px",
     borderRadius: "4px",
 }));

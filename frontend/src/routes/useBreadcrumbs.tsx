@@ -67,6 +67,7 @@ const useCustomBreadcrumbs = (): { breadcrumbs: BreadcrumbData[] } => {
         { path: '/checkout', breadcrumb: 'Checkout' },
         { path: '/myCart', breadcrumb: 'My Cart' },
         { path: '/welcome', breadcrumb: 'Welcome' },
+        { path: '/search', breadcrumb: 'Search' },
         { path: '/user-profile', breadcrumb: 'User Profile' },
         { path: '/user-profile/myOrders', breadcrumb: 'My Orders' },
         { path: '/user-profile/order', breadcrumb: DynamicCategoryBreadcrumb },
